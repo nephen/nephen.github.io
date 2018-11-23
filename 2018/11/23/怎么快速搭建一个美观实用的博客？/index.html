@@ -96,7 +96,7 @@
 <meta property="og:image" content="http://nephen.cn/images/diggui.png">
 <meta property="og:image" content="http://nephen.cn/images/digout.png">
 <meta property="og:image" content="http://nephen.cn/images/nslookup.png">
-<meta property="og:updated_time" content="2018-11-23T03:35:49.337Z">
+<meta property="og:updated_time" content="2018-11-23T04:43:23.025Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="怎么快速搭建一个美观实用的博客？">
 <meta name="twitter:description" content="Hexo环境搭建 安装参照https://hexo.io/zh-cn/docs/ 网站，主要包括Node.js、Hexo和Git安装，Node.js、Git可以直接下载安装包安装，Hexo可以在Git Bash命令行里面安装：  1$ npm install -g hexo-cli  建站环境搭建好后就可以开始建站了，同样在Git Bash里面输入命令行进行：  123$ hexo init &amp;l">
@@ -413,7 +413,7 @@
 <h3 id="Hexo本地配置"><a href="#Hexo本地配置" class="headerlink" title="Hexo本地配置"></a>Hexo本地配置</h3><ol>
 <li><p>主题配置<br>打开站点配置文件_config.yml，位于跟目录下，可以选择使用Next作为主题，参照<a href="https://hexo.io/zh-cn/docs/index.html" target="_blank" rel="noopener">官网</a>进行配置就好。</p>
 </li>
-<li><p>部署配置<br>部署其实就是怎么把生成的静态网站上传到服务器端，把部署方式和地址说明一下，我这里采用的是自己搭建的git服务器，也可以是github（那就要在github上新建 博客-github-io 仓库）</p>
+<li><p>部署配置<br>部署其实就是怎么把生成的静态网站上传到服务器端，把部署方式和地址说明一下，我这里采用的是自己搭建的git服务器，也可以是github（那就要在github上新建 blogname-github-io 仓库）</p>
  <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy: </span><br><span class="line"><span class="built_in">type</span>: git</span><br><span class="line">repo: git@你的服务器IP:/home/git/blog.git</span><br><span class="line">branch: master</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
@@ -431,7 +431,7 @@
 <p>重点说一下Nginx的配置部分</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#配置之前备份一下</span></span><br><span class="line">cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.bak</span><br><span class="line"><span class="comment">#修改默认端口号</span></span><br><span class="line">vi /etc/nginx/conf.d/default.conf</span><br><span class="line"><span class="comment">#修改配置文件</span></span><br><span class="line">vim /etc/nginx/nginx.conf</span><br></pre></td></tr></table></figure>
 <p><img src="/images/Nginx.png" alt=""></p>
-<p>这样配置好后就可以通过<a href="http://vps服务器地址:端口号来访问站点了。" target="_blank" rel="noopener">http://vps服务器地址:端口号来访问站点了。</a></p>
+<p>这样配置好后就可以通过<a href="http://vps服务器地址:端口号" target="_blank" rel="noopener">http://vps服务器地址:端口号</a> 来访问站点了。</p>
 </li>
 </ul>
 </li>
@@ -447,7 +447,7 @@
 </li>
 </ul>
 </li>
-<li><p>dnspot设置<br>使用dnspos进行设定，注册账号就可以，这就是一个dns服务器，在国内，解析的比较快，设定如下：<br><img src="/images/dnspot.png" alt=""><br>由于我是用godaddy购买的域名，还要在godaddy里面告诉它我使用了第三方的dns服务器，不适用dodaddy自带的了，因为自带的服务器在国外，解析肯定会慢些。<br><img src="/images/godaddyset.png" alt=""></p>
+<li><p>dnspot设置<br>使用dnspos进行设定，注册账号就可以，这就是一个dns服务器，在国内，解析的比较快，设定如下：<br><img src="/images/dnspot.png" alt=""><br>由于我是用godaddy购买的域名，还要在godaddy里面告诉它我使用了第三方的dns服务器，不使用dodaddy自带的了，因为自带的服务器在国外，解析肯定会慢些。<br><img src="/images/godaddyset.png" alt=""></p>
 </li>
 <li><p>深扒dns<br>可能你还是不理解什么叫dns，它是怎么工作的？我们使用dig工具来深入解读一下域名nephen.cn是怎么解析出它具体的服务器地址的？<br>如果你使用的是linux系统，本身就自带了dig命令，如果是windows系统，使用网页版工具<a href="https://www.diggui.com" target="_blank" rel="noopener">diggui</a>就好了。<br>输入如下：<br><img src="/images/diggui.png" alt=""><br>得出输出结果：<br><img src="/images/digout.png" alt=""><br>再一一解读一下：</p>
 </li>
@@ -461,7 +461,7 @@
 <li>递归服务器8.8.8.8从权威名称服务器检索dyn.com的A记录，并将记录存储在其本地缓存中，缓存TTL时间更新一次。<br>如果有其他人请求nephen.cn的主机记录，递归服务器将已经有了答案，不需要再次进行查找过程<br>DNS解析器在查询DNS服务器之前始终检查本地缓存，包括当前DNS解析器缓存内容和从Hosts文件预加载的条目<br>相关命令：C:> ipconfig /displaydns、C:> ipconfig /flushdns</li>
 <li>递归服务器会将A记录返回给您的计算机。您的计算机将记录存储在其缓存中，从记录中读取IP地址，然后将此信息传递给您的浏览器。</li>
 </ul>
-<p>当然windows也有自带的nslookup可以查询<br><img src="/images/nslookup.png" alt=""></p>
+<p>当然windows也有自带的nslookup可以查询，直接就能查出解析后的地址，其中208.67.222.222为手动选择的递归服务器，跟上面例子中的8.8.8.8是一个性质的。<br><img src="/images/nslookup.png" alt=""></p>
 
       
     </div>
