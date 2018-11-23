@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="pixhawk,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="本文将一个新手学习px4入门，装机，PID调节过程，以及试飞注意事项陈述如下：  器件准备硬件一套，包括DJI F450机架、Pixhawk 2.4.6 mini飞控、好盈乐天20A电调、1045正反桨、银燕电机2216、天地飞6通道遥控器。详情见淘宝链接里的套餐方案。 这些是PX4自动驾驶仪的元件要求：     1x Pixhawk 或者 FMU + IO Kit (Pixhawk 和FMU +">
+<meta name="keywords" content="pixhawk">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pixhawk试飞报告">
+<meta property="og:url" content="http://nephen.cn/2017/06/16/pixhawk试飞报告/index.html">
+<meta property="og:site_name" content="来风的官方网站">
+<meta property="og:description" content="本文将一个新手学习px4入门，装机，PID调节过程，以及试飞注意事项陈述如下：  器件准备硬件一套，包括DJI F450机架、Pixhawk 2.4.6 mini飞控、好盈乐天20A电调、1045正反桨、银燕电机2216、天地飞6通道遥控器。详情见淘宝链接里的套餐方案。 这些是PX4自动驾驶仪的元件要求：     1x Pixhawk 或者 FMU + IO Kit (Pixhawk 和FMU +">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://nephen.cn/images/前排插针.png">
+<meta property="og:image" content="http://nephen.cn/images/后排插针.png">
+<meta property="og:image" content="http://nephen.cn/images/buzzer.jpg">
+<meta property="og:image" content="http://nephen.cn/images/pm.jpg">
+<meta property="og:image" content="http://nephen.cn/images/ppm.png">
+<meta property="og:image" content="http://nephen.cn/images/safeswitch.png">
+<meta property="og:image" content="http://nephen.cn/images/osd.jpg">
+<meta property="og:image" content="http://nephen.cn/images/gpsmag.jpg">
+<meta property="og:image" content="http://nephen.cn/images/3dr.png">
+<meta property="og:image" content="http://nephen.cn/images/b6.jpg">
+<meta property="og:image" content="http://nephen.cn/images/quadrotor_x_assignment.png">
+<meta property="og:image" content="http://nephen.cn/images/mainout.jpg">
+<meta property="og:image" content="http://nephen.cn/images/finished.jpg">
+<meta property="og:image" content="http://nephen.cn/images/3apm.png">
+<meta property="og:image" content="http://nephen.cn/images/hc06.jpg">
+<meta property="og:image" content="http://nephen.cn/images/pidtune.png">
+<meta property="og:image" content="http://nephen.cn/images/taoff.jpg">
+<meta property="og:image" content="http://nephen.cn/images/high.jpg">
+<meta property="og:updated_time" content="2018-11-23T01:38:49.381Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="pixhawk试飞报告">
+<meta name="twitter:description" content="本文将一个新手学习px4入门，装机，PID调节过程，以及试飞注意事项陈述如下：  器件准备硬件一套，包括DJI F450机架、Pixhawk 2.4.6 mini飞控、好盈乐天20A电调、1045正反桨、银燕电机2216、天地飞6通道遥控器。详情见淘宝链接里的套餐方案。 这些是PX4自动驾驶仪的元件要求：     1x Pixhawk 或者 FMU + IO Kit (Pixhawk 和FMU +">
+<meta name="twitter:image" content="http://nephen.cn/images/前排插针.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://nephen.cn/2017/06/16/pixhawk试飞报告/">
+
+
+
+
+
+  <title>pixhawk试飞报告 | 来风的官方网站</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">来风的官方网站</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://nephen.cn/2017/06/16/pixhawk试飞报告/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nephen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="来风的官方网站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">pixhawk试飞报告</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-16T07:43:37+08:00">
+                2017-06-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/飞控/" itemprop="url" rel="index">
+                    <span itemprop="name">飞控</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文将一个新手学习px4入门，装机，PID调节过程，以及试飞注意事项陈述如下：</p>
+<p><br></p>
+<h1 id="器件准备"><a href="#器件准备" class="headerlink" title="器件准备"></a>器件准备</h1><p>硬件一套，包括DJI F450机架、Pixhawk 2.4.6 mini飞控、好盈乐天20A电调、1045正反桨、银燕电机2216、天地飞6通道遥控器。详情见淘宝链接里的<a href="https://item.taobao.com/item.htm?spm=a1z10.5-c.w4002-8717792970.38.rv3aHa&amp;id=41190426449" target="_blank" rel="noopener">套餐方案</a>。</p>
+<p>这些是PX4自动驾驶仪的元件要求：   </p>
+<ul>
+<li>1x Pixhawk 或者 FMU + IO Kit (Pixhawk 和FMU + IO是一样的)</li>
+<li>1x u-blox GPS模块</li>
+<li>1x RC 接收器</li>
+<li>1x 无线数传</li>
+<li>多块3300 mAh LiPo电池，至少能提供25A/30A电流。最好是买几个相同的电池为了保持直升飞机更换电池的重量恒定。</li>
+</ul>
+<p><br></p>
+<h1 id="装机"><a href="#装机" class="headerlink" title="装机"></a>装机</h1><p> 这里有多达200页的超详细图文<a href="http://pan.baidu.com/s/1gdnUmZ5" target="_blank" rel="noopener">教程</a>，一步一步教您装机，学不会都很难！<br> 更多查询EXUAV-mini测评报告<a href="http://www.moz8.com/forum.php?mod=viewthread&amp;tid=43424&amp;extra=p" target="_blank" rel="noopener">产品介绍</a>、<a href="http://www.moz8.com/forum.php?mod=viewthread&amp;tid=43476&amp;ex" target="_blank" rel="noopener">产品开箱</a>、<a href="http://www.moz8.com/forum.php?mod=viewthread&amp;tid=43479&amp;extra=page%3D1" target="_blank" rel="noopener">飞控接线与安装</a>、飞行测试（视频来源：EXUAV）如下</p>
+ <embed src="http://cloud.video.taobao.com/play/u/2228740069/e/1/t/3/p/2/27399435.swf" quality="high" width="100%" height="100%" align="middle" allowscriptaccess="never" allowfullscreen="true" type="application/x-shockwave-flash">        
+
+<p> pix4 mini主要装机图文概览（注：图片来源于模友之吧，如有不妥，请提出）：<br> <input type="button" value="显示图片" onclick="showme()"></p>
+<div id="showpic" style="display:none"><br> <hr><br><center><p><code>前排插针</code> </p></center><br> <img src="/images/前排插针.png"><br> <hr><br><center><p><code>后排插针</code> </p></center><br><img src="/images/后排插针.png"><br><hr><br><center><p><code>蜂鸣器</code></p></center><br><img src="/images/buzzer.jpg"><br><hr><br><center><p><code>PM 电源电压电流计</code> </p></center><br><img src="/images/pm.jpg"><br><hr><br> <center><p><code>PPM 转接板</code> </p></center><br><img src="/images/ppm.png"><br><hr><br><center><p><code>安全开关</code> </p></center><br><img src="/images/safeswitch.png"><br><hr><br><center><p><code>迷你OSD</code> </p></center><br><img src="/images/osd.jpg"><br><hr><br><center><p><code>GPS 和罗盘</code> </p></center><br><img src="/images/gpsmag.jpg"><br><hr><br><center><p><code>数传</code> <a href="http://planner.ardupilot.com/wiki/common-3dr-radio-version-2/" target="_blank" rel="noopener">使用说明</a></p></center><br><img src="/images/3dr.png"><br><hr><br><center><p><code>b6平衡充</code> </p></center><br><img src="/images/b6.jpg"><br><hr><br><center><p><code>电机转向</code></p></center><br><center><a href="https://pixhawk.org/_detail/airframes/quadrotor_x_assignment.png?id=platforms%3Amulticopters%3Astart" target="_blank" rel="noopener"><img src="/images/quadrotor_x_assignment.png"></a></center><br><hr><br><center><p><code>电机实际连接图：装浆的时候按住浆不动，按照上图所示电机转向旋转电机即可</code> </p></center><br><img src="/images/mainout.jpg"><br><hr><br><center><p><code>装机完成</code> </p></center><br><img src="/images/finished.jpg"><br></div> 
+
+<p>你也可以看如下的视频教程：<br>分为几个视频<br>第一个为安装（分电板焊接，电机香蕉头焊接，整机组装，飞控以及配件的安装）<br>第二个为遥控器设置（混控，失控保护设置）<br>第三个为地面站使用（固件刷写，reset，校准）</p>
+<p><embed src="http://player.youku.com/player.php/sid/XMTI2MjA2MTI4NA==/v.swf" allowfullscreen="true" quality="high" width="100%" height="100%" align="middle" allowscriptaccess="always" type="application/x-shockwave-flash"><br>关于APM版的pixhawk参考<a href="http://www.moz8.com/thread-41095-1-1.html" target="_blank" rel="noopener">泡泡老师教程</a>，注意电压电流校准，及低电压报警设置，不然会飞不久自动降落。</p>
+<blockquote>
+<p><code>注意</code>：   </p>
+</blockquote>
+<blockquote>
+<ul>
+<li>上电测试：检查焊点的极性(黑色/红色)。卸载螺旋桨，准备新的电池到室外去。不要压在四轴上，连接电池，随时准备拔掉电池。四个电机将同时响。这个测试的目的是确保在装配没有导致短路或反极性。</li>
+<li>连接电机：根据上面电机转向的图片，经过转向测试后连接电机。</li>
+<li>电源线路连接：详细请见<a href="http://planner.ardupilot.com/wiki/common-powering-the-pixhawk/" target="_blank" rel="noopener">Powering the Pixhawk</a></li>
+<li>主控板接口说明：详情见<a href="https://pixhawk.org/modules/pixhawk#connectors" target="_blank" rel="noopener">pixhawk模块</a></li>
+</ul>
+</blockquote>
+<p><br></p>
+<h1 id="安装QGC"><a href="#安装QGC" class="headerlink" title="安装QGC"></a>安装QGC</h1><p>QGroundControl地面站简称QGC，通过<a href="http://qgroundcontrol.org/downloads" target="_blank" rel="noopener">官网</a><a href="https://github.com/mavlink/qgroundcontrol/releases/" target="_blank" rel="noopener">下载</a>安装，普通用户应该下载稳定版本，如果是开发人员，可以参考<a href="http://www.nephen.com/2015/12/%E5%88%9D%E5%AD%A6PX4%E4%B9%8B%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA#%E5%9C%B0%E9%9D%A2%E6%8E%A7%E5%88%B6%E7%AB%99qgc" target="_blank" rel="noopener">这里</a>安装daily build版本。</p>
+<p><br></p>
+<h1 id="更新固件-amp-校准"><a href="#更新固件-amp-校准" class="headerlink" title="更新固件&amp;校准"></a>更新固件&amp;校准</h1><p>按照下面<a href="https://www.youtube.com/embed/91VGmdSlbo4" target="_blank" rel="noopener">视频</a>里的步骤进行。</p>
+<iframe src="https://www.youtube.com/embed/91VGmdSlbo4" height="394" width="700" class="vshare__none" allowfullscreen frameborder="0" scrolling="no"></iframe>
+
+<p>这里注意的有：   </p>
+<p>方位角都设为0, gps的方向与主控方向相同。</p>
+<p><img src="/images/3apm.png"></p>
+<p><br></p>
+<h1 id="系统提示"><a href="#系统提示" class="headerlink" title="系统提示"></a>系统提示</h1><p>请观看下面的<a href="https://www.youtube.com/embed/4R3XEESGdI8" target="_blank" rel="noopener">视频</a>了解如何锁定,解除系统。注意音频和视觉信号。</p>
+<iframe width="700" height="394" src="https://www.youtube.com/embed/4R3XEESGdI8" frameborder="0" allowfullscreen></iframe>
+
+<p><br></p>
+<h1 id="测试手动模式"><a href="#测试手动模式" class="headerlink" title="测试手动模式"></a>测试手动模式</h1><p>试飞的第一步就是测试手动（直通）模式。就是直接通过遥控器控制飞行器，所有的飞行都必须这一步。   </p>
+<h2 id="电池连接"><a href="#电池连接" class="headerlink" title="电池连接"></a><strong>电池连接</strong></h2><p>当系统进入手动状态时，动力只有通过USB将无法驱动伺服系统。你必须连接一个电池，飞行模式才能正常运行。</p>
+<h2 id="手动模式"><a href="#手动模式" class="headerlink" title="手动模式"></a><strong>手动模式</strong></h2><p>确保你已经完成了遥控器的校准。<br>按照如下方式进入手动模式：   </p>
+<ul>
+<li>开启QGC(可选)</li>
+<li>打开遥控器</li>
+<li>给px4供电</li>
+<li>连接px4 USB(可选)</li>
+<li>按下安全开关直到快速闪动</li>
+<li>将遥控器的油门杆打到右下角</li>
+<li>你能听得px4代表armed的声音警报</li>
+<li>移动油门杆可以看到电机转动</li>
+</ul>
+<p><br></p>
+<h1 id="飞行模式"><a href="#飞行模式" class="headerlink" title="飞行模式"></a>飞行模式</h1><p>就飞行练习来说，主要是要熟悉飞控的各种飞行模式及其切换，在这里首先要做的是设置遥控器5通道，以达到能使用遥控器切换多种飞行模式的效果，具体可参考自己购买的遥控器说明。   </p>
+<p>另外对于各个飞行模式的特点及其需要注意的地方建议查看<a href="http://ardupilot.org/copter/docs/flight-modes.html#recommended-flight-modes" target="_blank" rel="noopener">官网</a>或者<a href="http://copter.ardupilot.cn/wiki/flight-modes/" target="_blank" rel="noopener">中文网</a>wiki，较熟悉后可以大大程度减少炸机的几率。</p>
+<p><br></p>
+<h1 id="手机控制-可选"><a href="#手机控制-可选" class="headerlink" title="手机控制(可选)"></a>手机控制(可选)</h1><p>可以自己买一个蓝牙从机模块如hc-06，按照串口的连接方式连接到pixhawk的数传接口TELEM1，注意蓝牙的波特率设为57600，然后下载手机端地面站如<a href="http://fir.im/fishDroneGCS" target="_blank" rel="noopener">飞鱼地面站</a>或<a href="http://www.playuav.com/article/53" target="_blank" rel="noopener">playUAV</a>进行蓝牙连接即可。如果只是想查看地面站信息，这样可以省掉一个数传哦。</p>
+<p>连接方式如下图：   </p>
+<p><img src="/images/hc06.jpg"></p>
+<p><br></p>
+<h1 id="PID调节-可选"><a href="#PID调节-可选" class="headerlink" title="PID调节(可选)"></a>PID调节(可选)</h1><p>调参请装至QGC界面参数窗口！<br><img src="/images/pidtune.png" alt="pidtune"><br>或者找到System Parameters &gt; SYS_AUTOSTART，如果为4011，则找到/src/Firmware/ROMFS/px4fmu_common/init.d里的4011_dji_f450进行更改，当然也可自行添加，例子如下：     </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!nsh</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># @name DJI Flame Wheel F450</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># @type Quadrotor x</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># @output AUX1 feed-through of RC AUX1 channel</span></span><br><span class="line"><span class="comment"># @output AUX2 feed-through of RC AUX2 channel</span></span><br><span class="line"><span class="comment"># @output AUX3 feed-through of RC AUX3 channel</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># @maintainer Lorenz Meier &lt;lorenz@px4.io&gt;</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"></span><br><span class="line">sh /etc/init.d/4001_quad_x</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$AUTOCNF</span> == yes ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">	param <span class="built_in">set</span> MC_ROLL_P 7.0</span><br><span class="line">	param <span class="built_in">set</span> MC_ROLLRATE_P 0.15</span><br><span class="line">	param <span class="built_in">set</span> MC_ROLLRATE_I 0.05</span><br><span class="line">	param <span class="built_in">set</span> MC_ROLLRATE_D 0.01</span><br><span class="line">	param <span class="built_in">set</span> MC_PITCH_P 7.0</span><br><span class="line">	param <span class="built_in">set</span> MC_PITCHRATE_P 0.15</span><br><span class="line">	param <span class="built_in">set</span> MC_PITCHRATE_I 0.05</span><br><span class="line">	param <span class="built_in">set</span> MC_PITCHRATE_D 0.01</span><br><span class="line">	param <span class="built_in">set</span> MC_YAW_P 2.8</span><br><span class="line">	param <span class="built_in">set</span> MC_YAWRATE_P 0.3</span><br><span class="line">	param <span class="built_in">set</span> MC_YAWRATE_I 0.1</span><br><span class="line">	param <span class="built_in">set</span> MC_YAWRATE_D 0.0</span><br><span class="line">	<span class="comment"># DJI ESCs do not support calibration and need a higher min</span></span><br><span class="line">	param <span class="built_in">set</span> PWM_MIN 1230</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Transitional support: ensure suitable PWM min/max param values</span></span><br><span class="line"><span class="keyword">if</span> param compare PWM_MIN 1075</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">	param <span class="built_in">set</span> PWM_MIN 1230</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a><strong>介绍</strong></h2><p>PX4 multirotor_att_control应用程序执行一个外循环的方向控制器，相关参数为：    </p>
+<ul>
+<li>翻滚角(MC_ROLL_P)</li>
+<li>俯仰角(MC_PITCH_P)</li>
+<li>航向角(MC_YAW_P)</li>
+</ul>
+<p>和一个内部循环，有三个独立的控制角度变化率PID控制器：   </p>
+<ul>
+<li>翻滚角率(MC_ROLLRATE_P, MC_ROLLRATE_I, MC_ROLLRATE_D)</li>
+<li>俯仰角率(MC_PITCHRATE_P, MC_PITCHRATE_I, MC_PITCHRATE_D)</li>
+<li>航向角率(MC_YAWRATE_P, MC_YAWRATE_I, MC_YAWRATE_D)     </li>
+</ul>
+<p>外部循环的输出是机体的目标速率（eg. 如果四轴目标角度为0，而目前左右倾斜30度，那么控制输出将可以是这样的：翻滚速率为60度每秒）。内部速率控制回路改变电机输出，这样四轴能按所需的角速度旋转。</p>
+<p>这些参数的大小实际上有一个直观的意义，eg. 如果MC_ROLL_P的值为6.0，四轴将补偿的角度偏差值为0.5弧度(30度)，那么目标角速率将为3 弧度/秒。然后如果内环MC_ROLLRATE_P的值为0.1，最后输出给翻滚角的油门控制量将为3 * 0.1 = 0.3。这意味着它将降低电机一边30%的速度，增加另一边30%速度来诱导角动量回到水平。   </p>
+<p>这里还有一个MC_YAW_FF参数，它控制用户输入反馈给航向速率控制器的灵敏度。0代表非常慢的控制，只有航向位置错误的时候控制器才会响应，1代表灵敏的控制，但是可能有些过调，由于控制器移动航向迅速，导致很难保持航向为0。   </p>
+<h2 id="第一步：准备"><a href="#第一步：准备" class="headerlink" title="第一步：准备"></a><strong>第一步：准备</strong></h2><p>首先，把所有的参数设为初始值：   </p>
+<ol>
+<li>设置MC_XXX_P为0(ROLL, PITCH, YAW)</li>
+<li>设置所有的MC_XXXRATE_P, MC_XXXRATE_I, MC_XXXRATE_D为0，除了MC_ROLLRATE_P 和 MC_PITCHRATE_P。</li>
+<li>设置MC_ROLLRATE_P 和 MC_PITCHRATE_P为一个比较小的值，比如. 0.02</li>
+<li>设置MC_YAW_FF为0.5   </li>
+</ol>
+<p>所有的参数应该慢慢的增大，每次增大20%到30%，甚至最后10%，注意：参数过大会导致非常危险的震荡，即使只有理想参数的1.5到2倍。   </p>
+<h2 id="第二步：稳定横滚和俯仰率"><a href="#第二步：稳定横滚和俯仰率" class="headerlink" title="第二步：稳定横滚和俯仰率"></a><strong>第二步：稳定横滚和俯仰率</strong></h2><p><code>P调优</code><br>参数：MC_ROLLRATE_P, MC_PITCHRATE_P   </p>
+<p>如果四轴是对称的，那么ROLL和PITCH的值应该相等，否则应该独立的调整。    </p>
+<p>把四轴拿到手上，然后增大油门到大约50%，这样四轴重量可以视为0。使它在翻滚角或者俯仰角方向倾斜，观察起反应。它应该温和的转动，但是它不会回到水平。如果出现震荡，把RATE_P调小。一旦控制响应缓慢但正确，增加RATE_P直到它开始振荡。然后减小RATE_P直到它只有轻微摆动或不再摆动（大约减少10%）,稍微有点过调。典型的值大约是0.1。   </p>
+<p><code>D调优</code><br>参数：MC_ROLLRATE_D, MC_PITCHRATE_D   </p>
+<p>假设P参数是一个使电机震荡的状态，RATE_P略小。慢慢的增大RATE_D，从0.01开始，直到震荡停止之前。如果电机出现颠簸，RATE_D太大了，减小它。通过RATE_P和RATE_D可以调优四轴的响应。典型值为0.01到0.02。      </p>
+<p>在QGC中，可以绘出roll和pitch的变化速率图(ATTITUDE.rollspeed/pitchspeed)。它不能震荡，可以有10%到20%的过调。    </p>
+<p><code>I调优</code>   </p>
+<p>如果横滚速率和俯仰速率没有达到设定值，但有一个偏移量，加上MC_ROLLRATE_I和MC_PITCHRATE_I参数。从MC_ROLLRATE_P值的5-10%开始调。   </p>
+<h2 id="第三步：稳定横滚和俯仰角度"><a href="#第三步：稳定横滚和俯仰角度" class="headerlink" title="第三步：稳定横滚和俯仰角度"></a><strong>第三步：稳定横滚和俯仰角度</strong></h2><p><code>P调优</code><br>参数：MC_ROLL_P, MC_PITCH_P     </p>
+<ol>
+<li>设置 MC_ROLL_P 和 MC_PITCH_P到一个比较小的值，比如. 3   </li>
+</ol>
+<p>把四轴拿到手上，然后增大油门到大约50%，这样四轴重量可以视为0。使它在翻滚角或者俯仰角方向倾斜，观察起反应。它应该缓慢回到水平。如果出现震荡，调整P。只要控制响应缓慢但正确，继续增大P直到出现震荡。最优的响应是10-20%的过调。得到稳定的响应后重新调整RATE_P, RATE_D参数。    </p>
+<p>在QGC上位机里，你能绘出roll和pitch的图像(ATTITUDE.roll/pitch)及control(ctrl0,ctrl1)。姿态角如果过调不能超过10-20%。    </p>
+<h2 id="第四步：稳定航向速率"><a href="#第四步：稳定航向速率" class="headerlink" title="第四步：稳定航向速率"></a><strong>第四步：稳定航向速率</strong></h2><p><code>P调优</code><br>参数：MC_YAWRATE_P。   </p>
+<ol>
+<li>设置MC_YAWRATE_P为一个比较小的值，比如. 0.1   </li>
+</ol>
+<p>把四轴拿到手上，然后增大油门到大约50%，这样四轴重量可以视为0。然后绕Z轴旋转，观察其响应。电机的声音听起来改变了，系统有阻止旋转的趋势。响应将大大低于横滚和俯仰，这是可以的。如果出现震荡或者颠簸，调小RATE_P。如果很小的移动出现很大的响应（大油门和小油门时），减小RATE_P。典型值为0.2到0.3。    </p>
+<p>航向速率控制如果非常强烈甚至震荡，会恶化横滚和俯仰的响应。扭转横滚、俯仰和偏航检查总反应。   </p>
+<h2 id="第五步：稳定航向角"><a href="#第五步：稳定航向角" class="headerlink" title="第五步：稳定航向角"></a><strong>第五步：稳定航向角</strong></h2><p><code>P调优</code><br>参数：MC_YAW_P。    </p>
+<ol>
+<li>设置MC_YAW_P为一个比较小的值，比如1。   </li>
+</ol>
+<p>把四轴拿到手上，然后增大油门到大约50%，这样四轴重量可以视为0。然后绕Z轴旋转，观察其响应。它应该慢慢回到起始方向。如果出现震荡，调小P。只要控制响应缓慢但正确，继续增大P，直到响应稳定，但是不震荡。典型值是2到3。   </p>
+<p>可以在QGC里查看ATTITUDE.yaw。航向角过调不能超过2-5%(比姿态角要小)。</p>
+<p><code>反馈调优</code><br>参数：MC_YAW_FF。   </p>
+<p>这个参数不是关键，可以在飞行时调整，在最差情况下是偏航角响应迟缓或太快。调整FF参数得到一个合适的响应。有效范围为0到1。典型值为0.8到0.9。（如果用于航拍，建议将值调小以得到更加圆滑的反应）     </p>
+<p>可以在QGC里查看ATTITUDE.yaw。航向角过调不能超过2-5%(比姿态角要小)。</p>
+<p><hr></p>
+<h1 id="飞行注意事项及效果"><a href="#飞行注意事项及效果" class="headerlink" title="飞行注意事项及效果"></a>飞行注意事项及效果</h1><center><p>起飞阶段</p></center>
+
+<p><img src="/images/taoff.jpg" alt="taoff"> </p>
+<center><p>定高阶段</p></center>
+
+<p><img src="/images/high.jpg" alt="high"></p>
+<p>官方测试视频：</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/RF0wnQv3aAc" frameborder="0" allowfullscreen></iframe>
+
+<h2 id="防炸机经验总结"><a href="#防炸机经验总结" class="headerlink" title="防炸机经验总结"></a>防炸机经验总结</h2><ol>
+<li>当使用gps进行留待模式loiter飞行时，注意方向档响应慢，随时准备打到自稳自救。</li>
+</ol>
+<h2 id="飞行记录分析"><a href="#飞行记录分析" class="headerlink" title="飞行记录分析"></a>飞行记录分析</h2><p>飞行log分析：<a href="http://logs.uaventure.com/view/dgz379gyc72broL4k6TQHL" target="_blank" rel="noopener">http://logs.uaventure.com/view/dgz379gyc72broL4k6TQHL</a><br>apm数据分析：<a href="http://ardupilot.org/dev/docs/using-mavexplorer-for-log-analysis.html" target="_blank" rel="noopener">http://ardupilot.org/dev/docs/using-mavexplorer-for-log-analysis.html</a><br>简单来说命令就是：MAVExplorer.py *.BIN<br>或者使用FlightPlot：<a href="https://github.com/DrTon/FlightPlot" target="_blank" rel="noopener">https://github.com/DrTon/FlightPlot</a>   </p>
+<p><hr><br>参考文献：<a href="https://pixhawk.org/users/start" target="_blank" rel="noopener">用户文档</a>/<a href="https://pixhawk.org/users/tutorials" target="_blank" rel="noopener">用户教程</a>/<a href="https://pixhawk.org/users/first_steps" target="_blank" rel="noopener">快速学习</a>/<a href="https://pixhawk.org/platforms/multicopters/start" target="_blank" rel="noopener">多轴飞行器教程</a>/<a href="https://pixhawk.org/platforms/multicopters/dji_flamewheel_450" target="_blank" rel="noopener">F450安装</a>/<a href="https://pixhawk.org/users/multirotor_pid_tuning" target="_blank" rel="noopener">PID调试</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/pixhawk/" rel="tag"># pixhawk</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/16/初学PX4之飞控算法/" rel="next" title="初学PX4之飞控算法">
+                <i class="fa fa-chevron-left"></i> 初学PX4之飞控算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/30/初学PX4之环境搭建/" rel="prev" title="初学PX4之环境搭建">
+                初学PX4之环境搭建 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="nephen">
+            
+              <p class="site-author-name" itemprop="name">nephen</p>
+              <p class="site-description motion-element" itemprop="description">学而不思则罔，思而不学则殆。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#器件准备"><span class="nav-number">1.</span> <span class="nav-text">器件准备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#装机"><span class="nav-number">2.</span> <span class="nav-text">装机</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装QGC"><span class="nav-number">3.</span> <span class="nav-text">安装QGC</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#更新固件-amp-校准"><span class="nav-number">4.</span> <span class="nav-text">更新固件&amp;校准</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#系统提示"><span class="nav-number">5.</span> <span class="nav-text">系统提示</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#测试手动模式"><span class="nav-number">6.</span> <span class="nav-text">测试手动模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#电池连接"><span class="nav-number">6.1.</span> <span class="nav-text">电池连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#手动模式"><span class="nav-number">6.2.</span> <span class="nav-text">手动模式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#飞行模式"><span class="nav-number">7.</span> <span class="nav-text">飞行模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#手机控制-可选"><span class="nav-number">8.</span> <span class="nav-text">手机控制(可选)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PID调节-可选"><span class="nav-number">9.</span> <span class="nav-text">PID调节(可选)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">9.1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一步：准备"><span class="nav-number">9.2.</span> <span class="nav-text">第一步：准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二步：稳定横滚和俯仰率"><span class="nav-number">9.3.</span> <span class="nav-text">第二步：稳定横滚和俯仰率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三步：稳定横滚和俯仰角度"><span class="nav-number">9.4.</span> <span class="nav-text">第三步：稳定横滚和俯仰角度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第四步：稳定航向速率"><span class="nav-number">9.5.</span> <span class="nav-text">第四步：稳定航向速率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第五步：稳定航向角"><span class="nav-number">9.6.</span> <span class="nav-text">第五步：稳定航向角</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#飞行注意事项及效果"><span class="nav-number">10.</span> <span class="nav-text">飞行注意事项及效果</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#防炸机经验总结"><span class="nav-number">10.1.</span> <span class="nav-text">防炸机经验总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#飞行记录分析"><span class="nav-number">10.2.</span> <span class="nav-text">飞行记录分析</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">nephen</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

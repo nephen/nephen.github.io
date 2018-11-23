@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="C++,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="资源：http://www.cplusplus.com   阅读笔记 C语言是面向过程的语言，支持模块化、结构化的方法。C++融合了OOP、通用编程和传统的过程性方法，这表明C++强调的是实用价值，而不是意识形态方法，这也是该语言获得成功的原因之一。 才发现CC为标准UNIX C++编译器，而cc为标准UNIX C编译器。g++为GNU C++编译器，而GNU C++编译器的MS-DOS版本名为">
+<meta name="keywords" content="C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C Plus学习笔记">
+<meta property="og:url" content="http://nephen.cn/2017/06/16/C-Plus学习笔记/index.html">
+<meta property="og:site_name" content="来风的官方网站">
+<meta property="og:description" content="资源：http://www.cplusplus.com   阅读笔记 C语言是面向过程的语言，支持模块化、结构化的方法。C++融合了OOP、通用编程和传统的过程性方法，这表明C++强调的是实用价值，而不是意识形态方法，这也是该语言获得成功的原因之一。 才发现CC为标准UNIX C++编译器，而cc为标准UNIX C编译器。g++为GNU C++编译器，而GNU C++编译器的MS-DOS版本名为">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://nephen.cn/images/cpoiter.png">
+<meta property="og:image" content="http://nephen.cn/images/forc.png">
+<meta property="og:image" content="http://nephen.cn/images/getch.png">
+<meta property="og:image" content="http://nephen.cn/images/cctype.png">
+<meta property="og:image" content="http://nephen.cn/images/filegood.png">
+<meta property="og:image" content="http://nephen.cn/images/yy.png">
+<meta property="og:image" content="http://nephen.cn/images/ref.png">
+<meta property="og:image" content="http://nephen.cn/images/setf.png">
+<meta property="og:image" content="http://nephen.cn/images/guide.png">
+<meta property="og:image" content="http://nephen.cn/images/static.png">
+<meta property="og:image" content="http://nephen.cn/images/smqy.png">
+<meta property="og:image" content="http://nephen.cn/images/zyy.png">
+<meta property="og:image" content="http://nephen.cn/images/namespace.png">
+<meta property="og:image" content="http://nephen.cn/images/show.png">
+<meta property="og:image" content="http://nephen.cn/images/this.png">
+<meta property="og:image" content="http://nephen.cn/images/consthis.png">
+<meta property="og:image" content="http://nephen.cn/images/cz.png">
+<meta property="og:image" content="http://nephen.cn/images/randt.png">
+<meta property="og:image" content="http://nephen.cn/images/strbad.png">
+<meta property="og:image" content="http://nephen.cn/images/cpy.png">
+<meta property="og:image" content="http://nephen.cn/images/depcp.png">
+<meta property="og:image" content="http://nephen.cn/images/objectpoint.png">
+<meta property="og:image" content="http://nephen.cn/images/newpoint.png">
+<meta property="og:image" content="http://nephen.cn/images/1210.png">
+<meta property="og:image" content="http://nephen.cn/images/enqueue.png">
+<meta property="og:image" content="http://nephen.cn/images/1211.png">
+<meta property="og:image" content="http://nephen.cn/images/outqueue.png">
+<meta property="og:image" content="http://nephen.cn/images/jl.png">
+<meta property="og:image" content="http://nephen.cn/images/ps.png">
+<meta property="og:image" content="http://nephen.cn/images/xu.png">
+<meta property="og:image" content="http://nephen.cn/images/table.png">
+<meta property="og:image" content="http://nephen.cn/images/contain.png">
+<meta property="og:image" content="http://nephen.cn/images/private.png">
+<meta property="og:updated_time" content="2018-11-23T01:38:49.376Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C Plus学习笔记">
+<meta name="twitter:description" content="资源：http://www.cplusplus.com   阅读笔记 C语言是面向过程的语言，支持模块化、结构化的方法。C++融合了OOP、通用编程和传统的过程性方法，这表明C++强调的是实用价值，而不是意识形态方法，这也是该语言获得成功的原因之一。 才发现CC为标准UNIX C++编译器，而cc为标准UNIX C编译器。g++为GNU C++编译器，而GNU C++编译器的MS-DOS版本名为">
+<meta name="twitter:image" content="http://nephen.cn/images/cpoiter.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://nephen.cn/2017/06/16/C-Plus学习笔记/">
+
+
+
+
+
+  <title>C Plus学习笔记 | 来风的官方网站</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">来风的官方网站</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://nephen.cn/2017/06/16/C-Plus学习笔记/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nephen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="来风的官方网站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">C Plus学习笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-16T07:43:37+08:00">
+                2017-06-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/C语言/" itemprop="url" rel="index">
+                    <span itemprop="name">C语言</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p><code>资源</code>：<a href="http://www.cplusplus.com" target="_blank" rel="noopener">http://www.cplusplus.com</a></p>
+</blockquote>
+<p><hr></p>
+<h1 id="阅读笔记"><a href="#阅读笔记" class="headerlink" title="阅读笔记"></a>阅读笔记</h1><ul>
+<li>C语言是面向过程的语言，支持模块化、结构化的方法。C++融合了OOP、通用编程和传统的过程性方法，这表明C++强调的是实用价值，而不是意识形态方法，这也是该语言获得成功的原因之一。</li>
+<li>才发现CC为标准UNIX C++编译器，而cc为标准UNIX C编译器。g++为GNU C++编译器，而GNU C++编译器的MS-DOS版本名为gpp。comeau编译器最为严格、标准。都是先生成.o文件，在生成.out文件。</li>
+<li>在C中，main函数括号为空表示对是否接受参数保持沉默，而在C++中为空与跟void一样。C++中main函数默认返回0。</li>
+<li>C++预处理器对添加的头文件去掉了.h格式，当然也兼容以前的C格式。</li>
+<li>如果省略using编译指令，必须这样编码std::cout，如果单独使用这个函数，可以这样：using std::cout，using指令可以根据应用的范围放在合适的位置。</li>
+<li>标记与空白的概念。</li>
+<li>C++允许使用连续赋值。</li>
+<li><p>cout是可扩展的，允许自行开发新的数据类型。</p>
+</li>
+<li><p>C++允许在函数的任何地方声明新变量。</p>
+</li>
+<li>在C中，有返回值的函数称为函数，没有返回值的函数称为过程。C++中，这两种变体都是函数。</li>
+<li>类是用户定义的数据类型规范。面向对象编程(OPP)的本质是设计并扩展自己的数据类型。内置的C++内型分为基本类型和复合类型。</li>
+<li>在C++中，以两个下划线或下划线和大写字母大头的名称被保留给实现使用，以一个下划线开头的名称被保留实现，用作全局标识符，但他们都是有效的。</li>
+<li>short至少16位；int至少和short一样长；long至少32位，且至少与int一样长。</li>
+<li>sizeof对类型名使用时，必须加上括号。</li>
+<li>C++使用前一(两)位来标识数字常量的基数。如果第一位是1～9，则基数为10；如果第一位为0，第二位为1～7，则基数为8；如果前两位为0x或0X，则基数为16。</li>
+<li>数据后缀标识存储的类型，如2344L，默认情况下为int型，除非太大，int装不下。</li>
+<li>转义序列和通用字符(以\u和\U打头)。</li>
+<li>char在默认情况下既不是有符号，也不是没符号。在符号很重要的情况下，一定要特别声明。</li>
+<li>存在一种wchar_t的宽字符类型。</li>
+<li>C++中存在bool类型，任何非零值都被转换为true，任何零被转换为false。</li>
+<li>关键字const叫做限定符。</li>
+<li>E表示法适合于非常大和非常小的浮点数。如：+3.45E+6指的是3.45与1000000相乘的结果，E后为负数代表除以10的乘方。</li>
+<li>cout.setf(ios_base::fixed, ios_base::floatfield);，这样可以显示浮点数多余的零。</li>
+<li>操作符重载：int除法、float除法和double除法。</li>
+<li>赋值计算在类型转换时，较大的数转换为较小的数时，原来的值可能超过目标类型的取值范围，这种情况结果将是不可确定的。将浮点型转换为整形时，C++采取截取(丢弃小数部分)，而不是四舍五入。</li>
+<li>true被转换为1，false被转换为0，这些转换称为整形提升(int 类型计算速度更快)。</li>
+<li>传统C语言总是将float提升为double，即使两个操作数都是float。</li>
+<li>强制类型转换的格式为：(typeName)value/typeName(value)，第一种来自C语言，第二种来自C++语言。</li>
+<li>用引号括起的字符串隐式的包括了结尾的空字符。如“S”表示两个字符，而‘S’单表示一个字符，更糟糕的是，“S”表示的是一个内存的地址。</li>
+<li>strlen函数返回的是存储在数组中字符串的长度，而不是数组本身的长度。另外strlen不会计算空字符。</li>
+<li>为了能够输入多个单词，可以使用cin.getline()函数和cin.get()函数，getline丢弃了换行符，存储时用空字符替换，而get保留在了输入序列中，所以在使用这种方法时，需要不带任何参数的cin.get()调用读取下一个字符，也可以连续调用，如cin.get(name,ArSize).get()。</li>
+<li><p>string在C++中是作为类出现。string类具有自动调整大小的功能。输入字符串的方法为getline(cin,str)。</p>
+  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; SIZE; i++)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; i + <span class="number">1</span> &lt;&lt; <span class="string">": "</span>;</span><br><span class="line">	getline(<span class="built_in">cin</span>, <span class="built_in">list</span>[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>C++允许在结构声明中省略关键字struct，结构体成员中也能进行赋值操作。</p>
+</li>
+<li>结构中的位字段：字段的类型应该为整形或枚举型，接下来是冒号，冒号后面是一个数字，它指定了使用的位数。通常用在低级编程中。</li>
+<li>匿名共用体：将共用体用于结构体中，它们的地址相同，所以不需要中间标识符。</li>
+<li>枚举、枚举量：默认情况，第一个枚举量为0。另外枚举变量只定义了赋值运算，没有定义算术运算。可自动转换为int型。如果只打算使用常量，而不创建枚举类型的变量，则可以省略枚举类型的名称。可以创建多个值相同的枚举量。可以将在取值范围内的任意整数赋给枚举量。</li>
+<li>面向对象编程和传统的过程性编程的区别在于，OOP强调的是在运行阶段(而不是编译阶段)进行决策。动态联编/静态联编。</li>
+<li>指针声明必须指定指针指向的数据类型。创建指针时，只会分配存储地址的内存，如int一般是一个4个字节的值,64位系统为8。创建指针时返回值为0表示空置指针。</li>
+<li>如果内存泄漏严重，则程序将由于不断寻找更多内存而终止。</li>
+<li><p><img src="/images/cpoiter.png"></p>
+<p>  <code>警告</code>：delete对空指针使用是安全的。不能释放同一个内存块两次。</p>
+</li>
+<li>对于数组的创建与删除：int* psome = new int[10]/delete [] psome。指针加减一表示向前后移动一个元素。C++将数组名解释为数组第一个元素的地址。</li>
+<li>数组与指针的一些区别：数组名是常量，而指针值是可以修改的。sizeof取数组为数组的长度，这种情况不会把数组名解释为地址。</li>
+<li>指针运算：两个指针的差将得到一个整数。</li>
+<li>“flower”传递的是字符串第一个字符的地址。</li>
+<li>如果给cout提供一个地址，如果指针的类型为char <em>，则cout将显示字符串，如果要显示字符串的地址，应该使用int </em>。</li>
+<li><p>如果结构标识符是结构名，则使用句点操作符；如果标识符是指向结构的指针，则使用箭头操作符。</p>
+<p>  <code>注意</code>：ps-&gt;volume与(*ps).volume等价。</p>
+</li>
+<li>管理数据内存的方式：自动存储、静态存储、动态存储。</li>
+<li>内存泄漏：如果没有调用delete，包含指针的内存由于作用域规则和对象生命周期的原因而被释放，在自由存储空间上动态分配的变量或结构也将继续存在，但由于无法继续访问，因为指向这些内存的指针无效，这将导致内存泄漏。</li>
+<li><p>C++常在for和括号之间加上一个空格，而省略函数名与括号之间的空格。</p>
+<p>  <img src="/images/forc.png"></p>
+<p>  在设计循环时，请记住下面几条知道原则：   </p>
+<ul>
+<li>确定循环终止的条件</li>
+<li>在首次测试之前初始化条件</li>
+<li>在条件再次测试之前更新条件</li>
+</ul>
+</li>
+<li><p>cout.setf(ios::boolalpha)函数调用设置了一个标记，该标记命令cout显示true和false，而不是1和0。</p>
+</li>
+<li>顺序点是程序执行过程中的一个点，进入下一步之前确保对所有的副作用都进行评估。赋值操作符、递增操作符和递减操作符执行的所有修改是在顺序点完成。应避免这样的语句：y = (4 + x++) + (6 + x++);</li>
+<li>后缀递增版本首先需要复制一个版本，再将其加1，然后将复制的拷贝返回，因此前缀版本的效率比后缀版本高。</li>
+<li>C++规定，逗号表达式的值是第二部分的值。如cats = (17,24)为24。</li>
+<li>C-风格字符串是通过结尾的空值字符定义的，而不是由其所在数组的长度定义的。这意味着两个字符串即使被存储在长度不同的数组中，也可能是相同的。</li>
+<li>for循环里可以重新定义变量，这个变量可能只能在这个循环体里有效，但是循环体里定义的变量只能在循环体里使用。</li>
+<li>C-风格字符串大小比较需要使用strcmp()函数，而C++风格可直接进行比较。</li>
+<li>cin将忽略空格和换行，如需读取，请使用cin.get(ch)，其返回的是cin对象，在需要bool值的地方可以自动转换。相当于C规则的getchar(ch)</li>
+<li>ctrl + D/Z相当于EOF，可以使用cin.eof()/cin.fail()返回的boo值进行检测，输入错误和EOF都将导致cin返回false，可以用cin.clear()进行清除然后重新输入。<br>  <img src="/images/getch.png"></li>
+<li>从存储空间的角度来讲，指针数组比char数组的数组更为经济。</li>
+<li>C++规定，||等逻辑操作符是一个顺序点。另外，冒号和逗号操作符也是顺序点。</li>
+<li>if(17 &lt; age &lt; 35)的含义为if((17 &lt; age) &lt; 35)，所以一直为真。</li>
+<li>&amp;&amp;的优先级高于||。</li>
+<li><img src="/images/cctype.png"></li>
+<li>C++的switch语句中，default标签是可选的，如果被省略，又没有匹配的标签，则程序将跳到switch语句后面的语句执行。</li>
+<li>文本文件：对于输入，将执行相反的转换。即整数将被转换为数字字符序列，浮点数转换为数字字符和其他字符组成的字符序列，字符数据不需要做任何转换。</li>
+<li><p>iostream 提供了一个预先定义好的名为cout的ostream对象，而我们必须声明自己的ofstream对象。如：</p>
+  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ofstream outFile;</span><br><span class="line">outFile.open(<span class="string">"fish.txt"</span>);</span><br><span class="line"></span><br><span class="line">ofstream fout;</span><br><span class="line"><span class="built_in">cin</span> &gt;&gt; filename;</span><br><span class="line">fout.open(filename);</span><br><span class="line"></span><br><span class="line"><span class="keyword">double</span> wt = <span class="number">125.9</span>;</span><br><span class="line">outFile &lt;&lt; wt;</span><br></pre></td></tr></table></figure>
+<p>  总之，使用文件输出的主要步骤如下：   </p>
+<ol>
+<li>包含头文件fstream。</li>
+<li>创建一个ofstream对象。</li>
+<li>将该ofstream对象同一个文件关联起来。</li>
+<li>就像使用cout那样使用ofstream对象。</li>
+</ol>
+</li>
+<li><p>inFile.good()在输入没有发生错误的时候返回true。表达式inFile&gt;&gt;value的结果为inFile，而在需要一个bool值的情况下，inFile的结果为inFile.good()，即true或false。</p>
+<p>  <img src="/images/filegood.png"></p>
+</li>
+<li><p>在C++原型中，不指定参数列表时应使用省略号:</p>
+  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">say_bye</span><span class="params">(...)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>  通常，仅当与接受可变参数的C函数(如printf())交互时才需要这样做。</p>
+</li>
+<li>函数原型的检查称为静态类型检查。</li>
+<li>cin &gt;&gt; total &gt;&gt; choices，如果输入4 2，那么total为4，choice为2。</li>
+<li>在C++中，当且仅当用于函数头或函数原型中，int *arr 和int arr[]的含义才相同。</li>
+<li><p>循环输入数组，显示数组</p>
+  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fill_array</span><span class="params">(<span class="keyword">double</span> ar[], <span class="keyword">int</span> limit)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line">	<span class="keyword">double</span> temp;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; limit; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"Enter value #"</span> &lt;&lt; (i + <span class="number">1</span>) &lt;&lt; <span class="string">": "</span>;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; temp;</span><br><span class="line">		<span class="keyword">if</span> (!<span class="built_in">cin</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cin</span>.clear();</span><br><span class="line">			<span class="keyword">while</span> (<span class="built_in">cin</span>.get() != <span class="string">'\n'</span>)</span><br><span class="line">				<span class="keyword">continue</span>;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"Bad input : input process terminated.\n"</span>;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (temp &lt; <span class="number">0</span>)</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		ar[i] = temp;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> i;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">show_array</span><span class="params">(<span class="keyword">const</span> <span class="keyword">double</span> ar[], <span class="keyword">int</span> limit)</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>关于const的两种情况：</p>
+  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">float</span> g_earth = <span class="number">9.80</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">float</span> * pe = &amp;g_earth;	<span class="comment">//VALID</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">float</span> g_moon = <span class="number">1.63</span>;</span><br><span class="line"><span class="keyword">float</span> * pm = &amp;g_moon;		<span class="comment">//INVALID</span></span><br></pre></td></tr></table></figure>
+<p>  只能将非const数据的地址赋给非const指针，如不能将const数组名作为参数传递给非常量形参的函数。所以加上const，能够处理const和非const实参。</p>
+</li>
+<li><p>二维数组函数定义：</p>
+  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> ar2[][<span class="number">4</span>], <span class="keyword">int</span> size)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> total = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> r = <span class="number">0</span>; r &lt; size; r++)</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> c = <span class="number">0</span>; c &lt; <span class="number">4</span>; c++)</span><br><span class="line">			total += ar2[r][c];</span><br><span class="line">	<span class="keyword">return</span> total;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>当结构较小时，按值传递最合理。较大时使用按址传递。</p>
+</li>
+<li>递归案例：<a href="https://github.com/nephen/cPrimerPlus/tree/master/chapter7/ruler.cpp" target="_blank" rel="noopener">ruler.cpp</a></li>
+<li><p>函数指针基础知识</p>
+<ul>
+<li>函数名即为函数地址。</li>
+<li><p>函数指针声明。</p>
+<pre><code>&lt;img src=&quot;/images/funstr.png&quot;&gt;
+
+例如 void estimate(int lines, double (*pf) (int));
+</code></pre></li>
+<li><p>使用指针来调用函数，见<a href="https://github.com/nephen/cPrimerPlus/tree/master/chapter7/fun_ptr.cpp" target="_blank" rel="noopener">例子</a>。</p>
+<pre><code><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">pam</span><span class="params">(<span class="keyword">int</span>)</span></span>;</span><br><span class="line"><span class="keyword">double</span> (*pf) (<span class="keyword">int</span>);</span><br><span class="line">pf = pam;</span><br><span class="line"><span class="keyword">double</span> x = pam(<span class="number">4</span>);</span><br><span class="line"><span class="keyword">double</span> y = (*pf)(<span class="number">4</span>);</span><br><span class="line"><span class="keyword">double</span> z = pf(<span class="number">4</span>);</span><br></pre></td></tr></table></figure>
+</code></pre></li>
+</ul>
+</li>
+<li><p>内联函数不能递归。与C语言的宏类似。只需在定义和声明前加上inline即可。</p>
+</li>
+<li><p>必须在声明引用时将其初始化。<code>注意</code>：在C++中，使用const，当形参的类型不对或不是左值时，将会自动创建临时变量，这样将不能修改作为参数传递的变量。</p>
+<p>  <img src="/images/yy.png"></p>
+<p>  引用可以用来交换数据。<br>  void swapr(int &amp;a, int &amp;b);</p>
+</li>
+<li><p>结构引用：const sysop &amp; use(sysop &amp; sysopref);，请见<a href="https://github.com/nephen/cPrimerPlus/tree/master/chapter8/strtref.cpp" target="_blank" rel="noopener">例程</a>/<a href="https://github.com/nephen/cPrimerPlus/tree/master/chapter8/strquote.cpp" target="_blank" rel="noopener">类对象</a>，应避免返回函数终止时不再存在的内存单元引用。通过传递引用而不是整个数据对象，可以提供程序的运行速度。</p>
+<p>  <img src="/images/ref.png"></p>
+<p>  注意在返回值加上const，意味着不能使用返回的引用直接修改它指向的引用。参数类型为ostream &amp;的函数可以接受ostream对象或声明的ofstream对象作为参数，见<a href="https://github.com/nephen/cPrimerPlus/tree/master/chapter8/filefunc.cpp" target="_blank" rel="noopener">文件类</a>。设置类如下</p>
+<p>  <img src="/images/setf.png"></p>
+<p>  指导原则：</p>
+<p>  <img src="/images/guide.png"></p>
+</li>
+<li><p>默认参数指的是当函数调用中省略了实参时，自动使用的一个值。方法只是将值赋给原型中的参数。如</p>
+  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">char</span> * <span class="title">left</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> * str, <span class="keyword">int</span> n = <span class="number">1</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>  对于带参数列表的函数，必须从右向左添加默认值。实参按从左到右的顺序依次被赋给相应的形参，而不能跳过任何参数。<a href="https://github.com/nephen/cPrimerPlus/tree/master/chapter8/left.cpp" target="_blank" rel="noopener">&lt;例子&gt;</a></p>
+</li>
+<li>函数重载的关键是函数的参数列表—也称为函数特征标。注意，类型引用和类型本身视为同一个特征标。匹配函数时，并不区分const和非const变量。对于函数重载，C++内部进行了名称修饰，也称为C++语言链接。<a href="https://github.com/nephen/cPrimerPlus/tree/master/chapter8/leftover.cpp" target="_blank" rel="noopener">&lt;例子&gt;</a></li>
+<li><p>C++函数模板允许以任意类型的方式来定义函数。例如，建立一个交换模板。这样使生成的函数定义更简单、可靠。<a href="https://github.com/nephen/cPrimerPlus/tree/master/chapter8/funtemp.cpp" target="_blank" rel="noopener">&lt;例子&gt;</a></p>
+  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">Any</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">Swap</span>(<span class="title">Any</span> &amp;<span class="title">a</span>, <span class="title">Any</span> &amp;<span class="title">b</span>)</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	Any temp;</span><br><span class="line">	temp = a;</span><br><span class="line">	a = b;</span><br><span class="line">	b = temp;</span><br><span class="line">&#125;</span><br><span class="line"># =&gt; 或使用<span class="keyword">typename</span>代替class</span><br></pre></td></tr></table></figure>
+<p>  另外，模板也能进行重载。如void Swap(Any [], Any [], int)，并非所有的模板参数都必须为模板参数类型。<a href="https://github.com/nephen/cPrimerPlus/tree/master/chapter8/twotemps.cpp" target="_blank" rel="noopener">&lt;例子&gt;</a></p>
+</li>
+<li>显示具体化的原型和定义应以template&lt;&gt;打头，并通过名称来指出类型，这样可以只交换结构体中的一部分成员。不要使用Swap()模板来生成函数定义，而应使用独立的、专门的函数显式的为job类型生成函数定义，如<code>template &lt;&gt; void Swap&lt;job&gt;(job&amp;, job&amp;);</code>，其中<code>Swap&lt;job&gt;</code>中的<code>&lt;job&gt;</code>是可选的。<a href="https://github.com/nephen/cPrimerPlus/tree/master/chapter8/twoswap.cpp" target="_blank" rel="noopener">&lt;例子&gt;</a></li>
+<li>编译器使用模板为特地类型生成函数定义时，得到的是模板实例，有隐式实例化和显式实例化。显式实例化如template void Swap<int>(int, int);，它与显式具体化不同，template后面没有&lt;&gt;。而隐式实例化指的是一般的模板调用。<code>警告</code>：试图在同一编程单元中使用同一类型的显式实例和显式具体化将出错。</int></li>
+<li>隐式实例化、显式实例化和显式具体化统称为具体化，它们都使用具体类型的函数调用，而不是通用描述。</li>
+<li>在重载解析中，哪一种执行的转换最少，将被优先得到执行。如果出现多个匹配或没有，都将出现错误。<a href="https://github.com/nephen/cPrimerPlus/tree/master/chapter8/temptempover.cpp" target="_blank" rel="noopener">&lt;例子&gt;</a></li>
+<li>头文件常包含的内容：<ul>
+<li>函数原型</li>
+<li>使用#define或const定义的符号常量</li>
+<li>结构声明</li>
+<li>类声明</li>
+<li>模板声明</li>
+<li>内联函数</li>
+</ul>
+</li>
+<li>多个库的链接由于编译器名称修饰问题可能无法正确的连接。</li>
+<li><p>变量的一些特性：存储持续性、作用域和链接性。寄存器变量也是auto变量，只是它是用寄存器而不是堆栈来处理变量。链接分为：外链接、内链接和无链接。<a href="https://github.com/nephen/cPrimerPlus/tree/master/chapter9/static.cpp" target="_blank" rel="noopener">包含字符串输入的static例子</a></p>
+<p>  <img src="/images/static.png"></p>
+<p>  ::为作用域解析操作符。</p>
+</li>
+<li>mutable可以指出，即使结构或类为const，其某个成员也可以被修改。</li>
+<li>在C++看来，全局const定义就像使用了static说明符一样。如果链接为外部的，extern const int states = 50;</li>
+<li>布局new操作符、常规new操作符。布局操作符如：p1 = new (placement) int;，或pd2 = new (buffer + N*sizeof(double)) double[N];。布局操作符不需delete。<a href="https://github.com/nephen/cPrimerPlus/tree/master/chapter9/newplace.cpp" target="_blank" rel="noopener">&lt;例子&gt;</a></li>
+<li><p>声明区域</p>
+<p>  <img src="/images/smqy.png"></p>
+<p>  作用域</p>
+<p>  <img src="/images/zyy.png"></p>
+</li>
+<li><p>名称空间：namespace，其链接性是外部的，可以将名称空间声明进行嵌套。</p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> myth</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">using</span> Jill::fetch;</span><br><span class="line">	<span class="keyword">using</span> <span class="keyword">namespace</span> elements;</span><br><span class="line">	<span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cout</span>;</span><br><span class="line">	<span class="keyword">using</span> <span class="built_in">std</span>::<span class="built_in">cin</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  使用using编译指令和using声明。</p>
+<p>  <img src="/images/namespace.png"></p>
+<p>  可以给名称空间创建别名：namespace mvft = my_very_favorite_things {…};<br>  简化：namespace MEF = myth::elements::fire;    using MEF::flame;<br>  可以使用未命名的名称空间来代替C++文件静态变量。</p>
+</li>
+<li>OOP特性：抽象、封装和数据隐藏、多态、继承、代码的可重用性。在C++中，用户定义类型指的是实现抽象接口的类设计。</li>
+<li>类规范由两部分组成：类声明、类方法定义。类声明提供了类的蓝图，而方法定义则提供了细节。在类中，成员函数可以就地定义，也可以声明原型。由于隐藏数据是OOP主要目标之一，因此数据项通常放在私有部分，将数据封装到私有部分可以保护数据的完整性，这被称为数据隐藏，私有部分也可以包含私有成员函数，组成类接口的成员函数放在公有部分。不必在类声明中使用关键字private，因为这是类对象的默认访问控制。结构的默认访问类型是public，因此结构限制为没有私有部分的类。</li>
+<li>类成员函数特征：定义成员函数时，使用作用域解析操作符(::)来标识函数所属的类。类方法可以访问类的private组件。</li>
+<li>在UNIX系统中，可以分别对cout和cerr进行重定向，命令行操作符&gt;用于对cout进行重定向，操作符2&gt;对cerr进行重定向。</li>
+<li>定义位于类声明中的函数都被自动称为内联函数。当然在类声明之外，只需加上inline即可。</li>
+<li><p>对象、数据和成员函数<a href="https://github.com/nephen/cPrimerPlus/tree/master/chapter10/stocks.cpp" target="_blank" rel="noopener">&lt;例子&gt;</a></p>
+<p>  <img src="/images/show.png"></p>
+</li>
+<li>OOP程序员常依照客户/服务器模型来讨论程序设计。</li>
+<li>类不能像初始化结构一样初始化类，因为数据部分的访问状态是私有的，必须使用类构造函数，构造函数没有声明类型，位于类声明的公有部分。构造函数在完成其工作之前，对象并不存在。<code>注意</code>：构造函数的参数表示的不是类成员，而是赋给类成员的值，因此参数名不能与类成员相同，一般在数据成员中使用m_前缀。</li>
+<li>C++提供了两种使用构造函数来初始化对象的方式。第一种为显式调用：Stock food = Stock(“World Cabbage”, 250, 1.25)，第二种为隐式调用：Stock garment(“Furry Masson”, 50, 2.5)。<code>注意</code>：无法使用对象来像调用成员函数一样调用构造函数，因为在构造函数构造出对象之前，对象是不存在的。</li>
+<li>定义默认构造函数的方式有两种，一种是给已有构造函数的所有参数提供默认值：Stock (const char * co = “Error”, int n = 0, double pr = 0.0);，当类中含义指针类型时，必须显式的定义默认构造函数。另一种是通过重载来定义另外一个构造函数——一个没有参数的构造函数：Stock();。构造函数还能实现重载，构造函数没有声明类型。<code>记住</code>：接收一个参数的构造函数允许使用赋值句法来将对象初始化为一个值，也可以看作为强制类型转换，可以使用explicit 关闭隐式转换，但仍然可以进行显式转换：myCat = Stonewt(19.6);，当然19.6也可以是int型，会自动转换为double型。<a href="https://github.com/nephen/cPrimerPlus/tree/master/chapter11/stone.cpp" target="_blank" rel="noopener">&lt;例子&gt;</a></li>
+<li><p>如何将类类型转换为其它内置类型？使用特殊的C++操作符函数——转换函数。如：Stonewt::operator int() const;，其返回类型可以是被声明为目标类型的类成员函数：Star::Star double();。<a href="https://github.com/nephen/cPrimerPlus/tree/master/chapter11/stonewt.h#L19" target="_blank" rel="noopener">&lt;例子&gt;</a> 注意一下几点：</p>
+<ul>
+<li>转换函数必须是类方法。</li>
+<li>转换函数不能指定返回类型，但也能返回所需的值。</li>
+<li><p>转换函数不能有参数。</p>
+<p> 如果不想被隐式的转换，可以换成int Stonewt::Stone_to_Int();，然后作为方法调用即可。</p>
+</li>
+</ul>
+</li>
+<li>与构造函数不同的是，析构函数没有参数。如果采用构造函数创建一个临时对象，则会临时调用析构函数。<a href="https://github.com/nephen/cPrimerPlus/tree/master/chapter10/usestock1.cpp" target="_blank" rel="noopener">&lt;复合例子&gt;</a></li>
+<li>类是用户定义的类型，对象是类的实例。</li>
+<li>const成员函数：void Stock::show()const，不会修改对象的值，这里的const表示const Stock *this，this指向调用的对象。</li>
+<li><p>所有的类方法都将this指针设置为调用它的对象的地址。</p>
+<p>  <img src="/images/this.png"></p>
+<p>  例如</p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Stock &amp; Stock::topval(<span class="keyword">const</span> Stock &amp; s)<span class="keyword">const</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (s.total_val &gt; total_val)</span><br><span class="line">		<span class="keyword">return</span> s;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//这里的返回值必须为const</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>对象数组初始化像普通的数组一样。要创建对象数组，则这个类必须有默认的构造函数，但只能有一个默认构造函数，用来设定特定的值，因为如下花括号中的构造函数只是创建临时对象。</p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> STKS = <span class="number">10</span>;</span><br><span class="line">Stock stocks[STKS] = &#123;</span><br><span class="line">	Stock(<span class="string">"NanoSmart"</span>, <span class="number">12.5</span>, <span class="number">20</span>),</span><br><span class="line">	Stock(),</span><br><span class="line">	Stock(<span class="string">"Monolithic Obelisks"</span>, <span class="number">130</span>, <span class="number">3.25</span>),</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><img src="/images/consthis.png"></p>
+</li>
+<li>类作用域：可以在不同类中使用相同的类成员名而不会引起冲突。</li>
+<li>类只是描述了对象的形式，并没有真正创建对象，因此，在被对象创建之前，并没有用于存储值的空间。可以在类声明中声明枚举为整形常量，并且不需要提供枚举名。也可以采用关键字static，如static const int LEN = 30，但这个不能存储double常量;，如果不是const，则应在定义方法时进行初始化，并且应该加上类限定符。</li>
+<li>类很适合描述ADT，使用栈作为类是一个很好的<a href="https://github.com/nephen/cPrimerPlus/tree/master/chapter10/stacker.cpp" target="_blank" rel="noopener">例子</a>。</li>
+<li>操作符函数的格式：operator op (argument-list)。其中op为将要重载的操作符。如<br>district2 = sid + sara，操作数是类对象，可以替换为district2 = sid.operator + (sara)。重载操作符也是重载函数，所以可以多次重载同一个操作符。<a href="https://github.com/nephen/cPrimerPlus/tree/master/chapter11/mytime0.cpp" target="_blank" rel="noopener">&lt;例子&gt;</a></li>
+<li>操作符重载限制：重载后的操作符必须至少有一个操作数是用户定义的类型。不能违反操作符原来的句法。不能修改操作符优先级。不能定义新的操作符。</li>
+<li><img src="/images/cz.png"></li>
+<li>友元有三种：友元函数、友元类和友元成员函数。</li>
+<li>有一类特殊的非成员函数可以访问类的私有成员，它们被称为友元函数。非成员函数可以解决的问题：A = operator(2.75, B);，因为这个时候的第一个操作数即调用者不为自身对象，只能使用非成员函数。另外还有一种方法是，将2.75强制转换为对象。<code>注意</code>：虽然友元函数是在类声明中声明的，但它不是成员函数，因此不能使用成员操作符调用。它不是成员函数，但与成员函数访问权限相同。不要在定义中使用关键字friend，除非定义也是原型。类声明可以控制哪些函数可以访问私有数据，类方法和友元只是表达类接口的两种不同机制。</li>
+<li><p>打印出Time类trip，重载操作符&lt;&lt;</p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="keyword">operator</span> &lt;&lt;(ostream &amp; os, <span class="keyword">const</span> Time &amp; t)</span><br><span class="line">&#123;</span><br><span class="line">	os &lt;&lt; t.hours &lt;&lt; <span class="string">" hours. "</span> &lt;&lt; t.minutes &lt;&lt; <span class="string">" minutes"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  即可使用cout &lt;&lt; trip<br>  如果要实现拼接，如cout &lt;&lt; “Trip Time: “ &lt;&lt; trip &lt;&lt; “ (Tuesday)\n”;<br>  可返回os的引用，如下</p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ostream &amp; <span class="keyword">operator</span> &lt;&lt;(ostream &amp; os, <span class="keyword">const</span> Time &amp; t)</span><br><span class="line">&#123;</span><br><span class="line">	os &lt;&lt; t.hours &lt;&lt; <span class="string">" hours. "</span> &lt;&lt; t.minutes &lt;&lt; <span class="string">" minutes"</span>;</span><br><span class="line">	<span class="keyword">return</span> os;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  由于类继承属性让ostream引用能够指向ostream对象和ofsream对象，所以还可以将其写入文件中。<a href="https://github.com/nephen/cPrimerPlus/tree/master/chapter11/mytime0.cpp" target="_blank" rel="noopener">&lt;例子&gt;</a></p>
+</li>
+<li>加法操作符需要两个操作数。对于成员函数版本来说，一个操作数通过this指针隐式的传递，另一个操作数作为函数参数显式传递；对于友元函数来说，两个操作数都作为参数来传递。</li>
+<li>如果方法通过计算得到一个新的类对象，则应考虑是否可以使用类构造函数来完成这种工作，这样新的对象规则都是一样的，不会出错。</li>
+<li>定义VECTOR命名空间，使Vector类可用。using VECTOR::Vector;<a href="https://github.com/nephen/cPrimerPlus/tree/master/chapter11/randwalk.cpp" target="_blank" rel="noopener">&lt;醉鬼走路例子&gt;</a></li>
+<li><img src="/images/randt.png"></li>
+<li><img src="/images/strbad.png"></li>
+<li>当构造与析构的次数不一样时，考虑自动定义的隐式成员函数，如复制构造函数：<br>假设sailor和sports都为StringBad对象，则StringBad sailor = sports;等效于StringBad sailor = StringBad(sports);，而其原型为StringBad(const StringBad &amp;);，这里可以采用一个显式的复制构造函数来解决一个问题。<a href="https://github.com/nephen/cPrimerPlus/tree/master/chapter12/vegnews.cpp" target="_blank" rel="noopener">&lt;例子&gt;</a></li>
+<li>隐式成员函数包括：默认构造函数、复制构造函数、赋值操作符、默认析构函数和地址操作符。</li>
+<li><p>复制构造函数：新建一个对象并将其初始化为同类现有对象时，复制构造函数都将会调用。即每当程序生成对象副本时，编译器都将使用复制构造函数。如：函数按值传递对象时，因此因该按引用传递对象，这样可以节省调用构造函数的时间以及存储新对象的空间。默认的复制构造函数逐个复制非静态成员，这里是按值进行复制的。所以<a href="https://github.com/nephen/cPrimerPlus/tree/master/chapter12/vegnews.cpp" target="_blank" rel="noopener">例子</a>析构中释放了字符串的地址，而这个地址是由对象复制过来的，再次析构释放时就出现了错误。所以这里应该采用深度复制，而不仅仅复制字符串的地址。</p>
+<p>  <img src="/images/cpy.png"></p>
+<p>  <img src="/images/depcp.png"></p>
+</li>
+<li>赋值操作符：将一个已有的对象赋给另一个对象时，将使用重载的赋值操作符，来实现成员的逐个复制。解决的办法也是进行深复制。<a href="https://github.com/nephen/cPrimerPlus/tree/master/chapter12/strngbad.cpp#L42" target="_blank" rel="noopener">&lt;例子&gt;</a>需要注意几点：<ul>
+<li>由于目标对象可能引用了以前分配的对象，所以应使用delete []释放。</li>
+<li>应该避免将对象赋给自己。</li>
+<li>返回一个指向调用对象的引用。</li>
+</ul>
+</li>
+<li>new对应于delete，delete []与new []初始化的指针和空指针都兼容。如：str = new char[1]比str = new char要好。如果有多个构造函数，则必须以相同的方式使用new，要么都带中括号，要么都不带，因为只有一个析构函数。</li>
+<li>静态类成员函数特征：函数声明中必须包含关键字static(定义处除外)，不能通过对象调用静态成员函数，可以通过类名和作用域解析符调用它，静态成员函数只能访问静态数据成员。<a href="https://github.com/nephen/cPrimerPlus/tree/master/chapter12/vegnews.cpp#L33" target="_blank" rel="noopener">&lt;String类例子&gt;</a></li>
+<li>返回对象将调用复制构造函数，而返回引用不会。返回对象将调用复制构造函数和析构函数，有时候会浪费内存和时间。如：返回类型必须是ostream &amp;，不能使用ostream，因为ostream没有公用的复制构造函数。如果被返回的对象是被调用函数中的局部变量，则应按对象方式返回，通过调用构造函数生成，这样的例子如重载加减运算符。</li>
+<li>将加法重载操作符的返回值设为const，这样force1 + force2 = net;这样的语句将称为非法语句。</li>
+<li><p>使用指向对象的指针。如果对象是由new创建的，仅当显式使用delete删除对象时，析构函数才会被调用。也就是说，类指针可以指向已有类，也可以指向新建类。<a href="https://github.com/nephen/cPrimerPlus/blob/master/chapter12/vegnews.cpp#L73" target="_blank" rel="noopener">&lt;例子&gt;</a></p>
+<p>  <img src="/images/objectpoint.png"><br>  <img src="/images/newpoint.png"></p>
+</li>
+<li><p>使用布局new操作符为对象分配内存时，防止出现内存重叠，可以这样：pc1 = new (buffer) JustTesting; pc3 = new (buffer + sizeof(JustTesting)) JustTesting;，释放内存应该这样：delete [] buffer;，并显式的调用析构函数pc3-&gt;~JustTesting();pc1-&gt;~JustTesting();。<a href="https://github.com/nephen/cPrimerPlus/tree/master/chapter12/placenew1.cpp" target="_blank" rel="noopener">&lt;例子&gt;</a></p>
+</li>
+<li>在类中声明的结构、类或枚举被称为是嵌套在类中，其作用域为整个类。如果是在公有部分声明，也可以在类为通过作用域解析符调用。</li>
+<li>引用和const一样，只能在对象创建时进行初始化。对于简单数据成员，使用成员初始化列表和在函数体中进行赋值并没有什么区别，不过效率更高。成员初始化列表只能用于构造函数。数据成员列表被初始化的顺序与它们在类声明中的顺序相同，与初始化列表的排列顺序无关。这使得初始化内置类型就像初始化类对象一样。</li>
+<li><img src="/images/1210.png"><br>  <img src="/images/enqueue.png"><br>  <img src="/images/1211.png"><br>  <img src="/images/outqueue.png"></li>
+<li><p>为了防止对象未定义深度复制构造函数而造成程序崩溃，可以在私有部分定义空的复制构造函数和重载空的赋值操作符。</p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Queue</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	Queue(<span class="keyword">const</span> Queue &amp; q) : qsize(<span class="number">0</span>) &#123;&#125;</span><br><span class="line">	Queue &amp; <span class="keyword">operator</span> =(<span class="keyword">const</span> Queue &amp; q) &#123; <span class="keyword">return</span> *<span class="keyword">this</span>; &#125;</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>队列的实现。<a href="https://github.com/nephen/cPrimerPlus/tree/master/chapter12/bank.cpp" target="_blank" rel="noopener">&lt;例子&gt;</a></p>
+</li>
+<li>原始类称为基类，继承类称为派生类。</li>
+<li><p>公有派生：派生类对象存储了基类的数据成员。派生类对象可以使用基类的方法。派生类需要自己的构造函数。派生类可以根据需要添加额外的数据成员和成员函数。</p>
+<p>  <img src="/images/jl.png"></p>
+</li>
+<li><p>构造函数必须给新成员（如果有的话）和继承的成员提供数据。由于派生类不能直接访问基类的私有成员，所以，派生类构造函数必须使用基类构造函数。创建派生类对象时，程序首先创建基类对象，使用成员初始化列表。</p>
+<p>  <img src="/images/ps.png"></p>
+<p>  除非要使用默认构造函数，否则应显式调用正确的基类构造函数。<br>  如果没有使用动态内存分配，在派生类构造函数里使用基类的隐式复制构造函数是可以的。<br>  释放对象的顺序与创建对象的顺序相反，即首先执行派生类的析构函数，然后自动调用基类的析构函数。<a href="https://github.com/nephen/cPrimerPlus/tree/master/chapter13/usett0.cpp" target="_blank" rel="noopener">&lt;例子&gt;</a></p>
+</li>
+<li>基类与派生类的关系：<ul>
+<li>派生类对象可以使用基类的方法，条件是方法不是私有的。</li>
+<li>基类指针可以在不进行显示类型转换的情况下指向派生类对象。</li>
+<li>基类引用可以在不进行显示类型转换的情况下引用派生类对象。</li>
+</ul>
+</li>
+<li><p>C++有三种继承关系：公有继承、保护继承和私有继承。</p>
+<ul>
+<li>公有继承是最常用的方式，它建立一种<code>is-a</code>关系，即派生类对象也是一个基类对象，可以对基类对象执行任何操作，也可以对派生类对象执行。注意：is-a关系通常是不可逆的，也就是说，水果不是香蕉。公有继承不能建立<code>has-a</code>、<code>is-like-a</code>、<code>is-implemented-as-a</code>、<code>uses-a</code>关系。</li>
+<li><p>多态公有继承：在派生类中重新定义基类方法。使用虚方法<code>virtual</code>，该关键字只出现在方法原型中。<br>对于虚函数，程序将根据对象类型来确定使用哪个版本。对于两个对象中行为相同的方法，只在基类中声明。如果没有使用关键字virtual，程序将根据引用类型或指针类型选择方法；如果使用了virtual，程序将根据引用或指针指向的对象的类型来选择方法。<br>方法在基类中声明为虚拟的后，它在派生类中将自动成为虚方法，一般也都在派生类中指出。为基类声明一个虚拟析构函数也是一种惯例，可以确保正确的析构函数被调用。一般先调用派生类的析构函数，再调用基类的析构函数。    </p>
+<pre><code>&lt;img src=&quot;/images/jxg.png&quot;&gt;
+&lt;img src=&quot;/images/xxg.png&quot;&gt;
+
+友元不能是虚函数，只有成员才能是虚函数，但可以让友元函数使用虚拟成员函数。
+</code></pre><p>在派生类成员函数定义时，如果调用虚方法，必须加上类限定符，否则会自己调用自己，产生递归。<a href="https://github.com/nephen/cPrimerPlus/tree/master/chapter13/usebrass1.cpp" target="_blank" rel="noopener">&lt;例子&gt;</a><br>可以使用数组来表示多种类型的对象，这就是多态性。</p>
+</li>
+<li><p>访问控制protected：关键字protected与private相似，在类外只能用公有类成员来访问protected部分中的类成员。protected与private的区别只有在基类派生的类中才能表现出来。派生类的成员可以直接访问基类的保护成员，但不能访问基类的私有成员。</p>
+<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TheOnlyInstance</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">static</span> TheOnlyInstance * <span class="title">GetTheOnlyInstance</span><span class="params">()</span></span>;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">	TheOnlyInstance() &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">TheOnlyInstance* TheOnlyInstance::GetTheOnlyInstance()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">static</span> TheOnlyInstance objTheOnlyInstance;</span><br><span class="line">	<span class="keyword">return</span> &amp;objTheOnlyInstance;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	TheOnlyInstance noCanDo;	<span class="comment">//not allowed</span></span><br><span class="line">	TheOnlyInstance * pTheOnlyInstance = TheOnlyInstance::GetTheOnlyInstance();	<span class="comment">//以后调用，将返回同一个静态地址</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre></li>
+<li><p>使用私有继承，基类的公有成员和保护成员都将成为派生类的私有成员。这意味着基类方法将不会成为派生类公有接口的一部分，但可以在派生类的成员函数中使用它们。这种不完全继承是has-a关系的一部分，其特性与包含相同。<br>包含版本提供了两个被显式命名的对象成员，而私有继承提供了两个无名称的子对象成员，这是两种方法的主要区别。<br>成员初始化列表使用std::string(str)，而不是name(str)。这是包含和私有继承之间的第二个主要区别。<br>使用作用域解析操作符可以访问基类方法，但如果要使用基类对象本身，可以使用强制类型转换：</p>
+<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="built_in">string</span> &amp; Student::Name() <span class="keyword">const</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> (<span class="keyword">const</span> <span class="built_in">string</span> &amp;) *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre></li>
+</ul>
+<p>用类名显示地限定函数名不适合于友元函数，这是因为友元不属于类。不过可以显式的转换为基类来调用正确的函数。另一方面，如果不使用类型转换，由于使用的多重继承，编译器将无法确定转换成哪个基类。<a href="https://github.com/nephen/cPrimerPlus/tree/master/chapter14/studenti.cpp" target="_blank" rel="noopener">&lt;例子&gt;</a></p>
+<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ostream &amp; <span class="title">operator</span><span class="params">(ostream &amp; os, <span class="keyword">const</span> Student &amp; stu)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	os &lt;&lt; <span class="string">"Scores for "</span> &lt;&lt; (<span class="keyword">const</span> <span class="built_in">string</span> &amp;) stu &lt;&lt; <span class="string">":\n"</span>;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre><p>私有继承所提供的特性比包含多，但会引发许多问题。<br>私有继承可以重新定义虚函数，但也只能在类中使用。</p>
+<ul>
+<li><p>保护继承是私有继承的变体。基类的公有成员和保护成员都将成为派生类的保护成员，与私有不同，第三代的派生类能使用保护成员。</p>
+<pre><code>&lt;img src=&quot;/images/dif.png&quot;&gt;
+</code></pre></li>
+</ul>
+</li>
+<li><p>如果使用指向对象的引用或指针来调用虚方法，程序将使用为对象类型定义的方法，而不使用为引用或指针类型定义的方法。这称为动态联编或晚期联编。<br>在C++中，动态联编与指针和引用调用的方法相关，从某中程度上说，这是由继承控制的。编译器对非虚函数采用静态编联。也就是说，当我们通过一个具有普通类型（非引用非指针）的表达式调用虚函数时，在编译时就会将调用的版本确定下来。<br>派生类的虚函数的返回类型形参类型必须与基类函数匹配，否则会隐藏同名的基类方法。只有一个例外，当类的虚函数的返回类型是类本身的指针或引用时，这称为返回类型协变。<br>如果基类声明被重载了，则应在派生类中重新定义所有的基类版本，否则其他的版本都将被隐藏。<br>将派生类引用或指针转换为基类引用或指针被称为向上强制转换，这使公有继承不需要进行显式类型转换，这种转换是可以传递的。<br>仅将那些预期将被重新定义的方法声明为虚拟的。构造函数不能是虚函数，析构函数应当是虚函数。</p>
+</li>
+<li><p>编译器处理虚函数的方法：给每个对象添加一个隐藏成员，隐藏成员中保存了一个指向函数地址数组的指针，这种数组称为虚函数表。</p>
+<p>  <img src="/images/xu.png"></p>
+</li>
+<li>抽象基类：当类声明中包含纯虚函数时，则不能创建该类的对象。要真正的成为ABC，则至少应包含一个纯虚函数。原型中的=0使虚函数成为纯虚函数。C++允许纯虚函数有定义，也可以不定义。纯虚方法是定义派生类的通用接口。<br>抽象基类的派生类称为具体类，具体类可以创建对象。<a href="https://github.com/nephen/cPrimerPlus/tree/master/chapter13/useacctabc.cpp" target="_blank" rel="noopener">&lt;例子&gt;</a></li>
+<li><p>如果基类派生类都使用动态内存分配，则必须为派生类定义显式析构函数、复制构造函数和赋值操作符，也就是说，必须使用相应的基类方法处理基类元素。</p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">hasDMA</span> :</span> <span class="keyword">public</span> baseDMA</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">char</span> * style;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">...</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">hasDMA &amp; hasDMA::<span class="keyword">operator</span> =(<span class="keyword">const</span> hasDMA &amp; hs)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">this</span> == &amp;hs)</span><br><span class="line">		<span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">	baseDMA::<span class="keyword">operator</span> =(hs);</span><br><span class="line">	style = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="built_in">std</span>::<span class="built_in">strlen</span>(hs.style) + <span class="number">1</span>];</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">strcpy</span>(style, hs.style);</span><br><span class="line">	<span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>派生类对象的友元函数可以通过基类的友元函数访问基类的成员，由于友元不是成员函数，友元函数不能继承，不能使用作用预解析符，所以可以相应类强制类型转换选择正确的函数。<a href="https://github.com/nephen/cPrimerPlus/tree/master/chapter13/usedma.cpp" target="_blank" rel="noopener">&lt;例子&gt;</a></p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::ostream &amp; <span class="keyword">operator</span> &lt;&lt;(<span class="built_in">std</span>::ostream &amp; os, <span class="keyword">const</span> hasDMA &amp; hs)</span><br><span class="line">&#123;</span><br><span class="line">	os &lt;&lt; (<span class="keyword">const</span> baseDMA &amp;)hs;</span><br><span class="line">	<span class="comment">//也可以：os &lt;&lt; dynamic_cast&lt;const baseDMA &amp;&gt; (hs)</span></span><br><span class="line">	os &lt;&lt; <span class="string">"Style: "</span> &lt;&lt; hs.style &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> os;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><img src="/images/table.png"></p>
+</li>
+<li>通常，包含、私有继承和保护继承用于实现has-a关系，即新的类将包含另一个类的对象。</li>
+<li><p>包含对象成员的类：使用公有继承时，类可以继承接口，可能还有实现。获得接口是is-a关系的组成部分，而使用组合，类可以获得实现，但不能获得接口。不继承接口是has-a关系的组成部分。</p>
+<p>  <img src="/images/contain.png"></p>
+<p>  对比私有继承：</p>
+<p>  <img src="/images/private.png"></p>
+<p>  对于has-a关系来说，类对象不能自动获得被包含对象的接口是一件好事。例如，string类将+操作符重载为将两个字符串连接起来；但从概念上说，将两个Student对象串接起来是没有意义的。<br>  被包含对象的接口不是公有的，但可以在类方法中使用它。<a href="https://github.com/nephen/cPrimerPlus/tree/master/chapter14/studentc.cpp" target="_blank" rel="noopener">&lt;例子&gt;</a>     </p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> Student::Average() <span class="keyword">const</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (scores.size() &gt; <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">return</span> scores.sum() / scores.size();</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  私有辅助方法：</p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#=&gt; 位于<span class="keyword">private</span></span><br><span class="line">ostream &amp; Student::arr_out(ostream &amp; os) <span class="keyword">const</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">int</span> lim = scores.size();</span><br><span class="line">	<span class="keyword">if</span> (lim &gt; <span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; lim; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			os &lt;&lt; scores[i] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">			<span class="keyword">if</span> (i % <span class="number">5</span> != <span class="number">0</span>)</span><br><span class="line">				os &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		os &lt;&lt; <span class="string">" empty array "</span>;</span><br><span class="line">	<span class="keyword">return</span> os;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用using重新定义访问权限：</p>
+<ul>
+<li><p>方法一是定义一个使用该基类方法的派生类方法。</p>
+<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> Student::sum() <span class="keyword">const</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">std</span>::valarray&lt;<span class="keyword">double</span>&gt;::sum();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre></li>
+<li><p>另一种方法是，将函数调用包装在另一个函数调用中，即使用一个using声明(将像名称空间那样)来指出派生类可以使用的特定的基类成员，即使使用的是私有派生。<code>注意</code>：using 声明只使用成员名——没有圆括号、函数特征标和返回类型。using声明只适合继承，而不适用于包含。</p>
+<pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> :</span> <span class="keyword">private</span> <span class="built_in">std</span>::<span class="built_in">string</span>, <span class="keyword">private</span> <span class="built_in">std</span>::valarray&lt;<span class="keyword">double</span>&gt;</span><br><span class="line">&#123;</span><br><span class="line">...</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">using</span> <span class="built_in">std</span>::valarray&lt;<span class="keyword">double</span>&gt;::min;</span><br><span class="line">	<span class="keyword">using</span> <span class="built_in">std</span>::valarray&lt;<span class="keyword">double</span>&gt;::max;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre></li>
+</ul>
+</li>
+<li><p>虚基类：虚基类使得从多个类（它们的基类相同）派生出的对象只继承一个基类对象。例如：通过在类声明中使用关键字virtual, 可以使Worker被用作Singer和Waiter的虚基类</p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singer</span> :</span> <span class="keyword">virtual</span> <span class="keyword">public</span> Worker &#123; ... &#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Waiter</span> :</span> <span class="keyword">public</span> <span class="keyword">virtual</span> Worker &#123; ... &#125;;</span><br></pre></td></tr></table></figure>
+<p>  可以将SingingWaiter类定义为</p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SingingWaiter</span> :</span> pulic Singer, <span class="keyword">public</span> Waiter &#123; ... &#125;;</span><br></pre></td></tr></table></figure>
+<p>  这样，SingingWaiter对象将只包含</p>
+</li>
+<li>友元类：<ul>
+<li>当一个类B成为了另外一个类A的“朋友”时，那么类A的私有和保护的数据成员就可以被类B访问。我们就把类B叫做类A的友元。</li>
+<li>友元类可以通过自己的方法来访问把它当做朋友的那个类的所有成员。但是我们应该注意的是，我们把类B设置成了类A的友元类，但是这并不会是类A成为类B的友元。说白了就是：甲愿意把甲的秘密告诉乙，但是乙不见得愿意把乙自己的秘密告诉甲。</li>
+<li>声明友元类的方法其实很简单，只要我们在类A的成员列表中写下语句：friend class B;这样一来，类B就被声明成了类A的友元。注意，类B虽然是类A的友元，但是两者之间不存在继承关系。这也就是说，友元类和原来那个类之间并没有什么继承关系，也不存在包含或者是被包含的关系。</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"># C++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/16/ArduPilot之代码概述/" rel="next" title="ArduPilot之代码概述">
+                <i class="fa fa-chevron-left"></i> ArduPilot之代码概述
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/16/初学PX4之大体构架/" rel="prev" title="初学PX4之大体构架">
+                初学PX4之大体构架 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="nephen">
+            
+              <p class="site-author-name" itemprop="name">nephen</p>
+              <p class="site-description motion-element" itemprop="description">学而不思则罔，思而不学则殆。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#阅读笔记"><span class="nav-number">1.</span> <span class="nav-text">阅读笔记</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">nephen</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

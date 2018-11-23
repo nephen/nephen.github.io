@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="PX4,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="PX4源代码PX4项目建立在这些主要软件模块:  PX4 Flight Stack (estimation and control, cross-platform) PX4 Middleware (IPC / ORB, *nix (NuttX, Linux, MacOS, etc)) PX4 ESC Firmware (for motor controllers) PX4 Bootloader (">
+<meta name="keywords" content="PX4">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初学PX4之大体构架">
+<meta property="og:url" content="http://nephen.cn/2017/06/16/初学PX4之大体构架/index.html">
+<meta property="og:site_name" content="来风的官方网站">
+<meta property="og:description" content="PX4源代码PX4项目建立在这些主要软件模块:  PX4 Flight Stack (estimation and control, cross-platform) PX4 Middleware (IPC / ORB, *nix (NuttX, Linux, MacOS, etc)) PX4 ESC Firmware (for motor controllers) PX4 Bootloader (">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://static.oschina.net/uploads/space/2012/1102/210924_Gx9w_191887.jpg">
+<meta property="og:image" content="http://nephen.cn/images/findapp.png">
+<meta property="og:image" content="http://nephen.cn/images/define.png">
+<meta property="og:image" content="http://nephen.cn/images/app_run.png">
+<meta property="og:image" content="http://nephen.cn/images/dshen.png">
+<meta property="og:updated_time" content="2018-11-23T01:38:49.385Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="初学PX4之大体构架">
+<meta name="twitter:description" content="PX4源代码PX4项目建立在这些主要软件模块:  PX4 Flight Stack (estimation and control, cross-platform) PX4 Middleware (IPC / ORB, *nix (NuttX, Linux, MacOS, etc)) PX4 ESC Firmware (for motor controllers) PX4 Bootloader (">
+<meta name="twitter:image" content="http://static.oschina.net/uploads/space/2012/1102/210924_Gx9w_191887.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://nephen.cn/2017/06/16/初学PX4之大体构架/">
+
+
+
+
+
+  <title>初学PX4之大体构架 | 来风的官方网站</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">来风的官方网站</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://nephen.cn/2017/06/16/初学PX4之大体构架/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nephen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="来风的官方网站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">初学PX4之大体构架</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-16T07:43:37+08:00">
+                2017-06-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/飞控/" itemprop="url" rel="index">
+                    <span itemprop="name">飞控</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="PX4源代码"><a href="#PX4源代码" class="headerlink" title="PX4源代码"></a>PX4源代码</h1><p>PX4项目建立在这些主要软件模块:</p>
+<ul>
+<li>PX4 Flight Stack (estimation and control, cross-platform)</li>
+<li>PX4 Middleware (IPC / ORB, *nix (NuttX, Linux, MacOS, etc))</li>
+<li>PX4 ESC Firmware (for motor controllers)</li>
+<li>PX4 Bootloader (for STM32 boards)</li>
+<li>Operating System (NuttX or Linux/Mac OS)</li>
+</ul>
+<p>项目地址：</p>
+<ul>
+<li><a href="http://github.com/PX4/Firmware" target="_blank" rel="noopener">PX4 Firmware source</a></li>
+</ul>
+<p><strong>PX4飞行栈</strong></p>
+<p>PX4飞行栈能控制多轴飞行器，航模，直升机，实验飞机和地面车辆的飞行。它由一组单独的应用程序/节点组成。</p>
+<ul>
+<li><a href="http://github.com/PX4/Firmware/tree/master/src/modules" target="_blank" rel="noopener">flight control modules</a></li>
+</ul>
+<p><strong>PX4中间件</strong></p>
+<p>PX4中间件提供了硬件接口和进程间通信。</p>
+<ul>
+<li><a href="http://github.com/PX4/Firmware/tree/master/src/drivers" target="_blank" rel="noopener">drivers</a></li>
+<li><a href="http://github.com/PX4/Firmware/tree/master/src/modules/uORB" target="_blank" rel="noopener">uORB</a></li>
+</ul>
+<p><strong>PX4电调固件</strong></p>
+<p>PX4电调固件控制无刷电机，可以通过UAV CAN进行交互。</p>
+<ul>
+<li><a href="http://github.com/PX4/px4esc" target="_blank" rel="noopener">PX4 ESC source</a></li>
+</ul>
+<p><strong>PX4 Bootloader</strong></p>
+<p>PX4引导装载程序是用于STM32微控制器新飞行软件加载到闪存。用于Pixhawk。</p>
+<ul>
+<li><a href="http://github.com/PX4/Bootloader" target="_blank" rel="noopener">PX4 Bootloader source</a></li>
+</ul>
+<p><strong>操作系统</strong></p>
+<p>PX4飞行栈和中间件可以在微控制器Nuttx小型操作系统上执行，或者在全面POSIX系统，如Linux，Mac OS 或 BSD。</p>
+<ul>
+<li><a href="http://github.com/PX4/NuttX" target="_blank" rel="noopener">NuttX OS</a></li>
+</ul>
+<blockquote>
+<p><code>Tip</code>:px4编译系统使用的是<a href="http://www.cnblogs.com/coderfenghc/archive/2013/01/20/2846621.html" target="_blank" rel="noopener">cmake</a>，关于cmake与make的区别见<a href="http://blog.csdn.net/shaoxiaohu1/article/details/9179715" target="_blank" rel="noopener">CMake与Make </a><br><img src="http://static.oschina.net/uploads/space/2012/1102/210924_Gx9w_191887.jpg" alt="cmake"></p>
+</blockquote>
+<p><br></p>
+<h1 id="代码运行分析"><a href="#代码运行分析" class="headerlink" title="代码运行分析"></a>代码运行分析</h1><blockquote>
+<p>关于系统的启动过程请查看我之前文章里的<a href="/2015/12/RTOS-of-px4#1-3">系统启动</a>。   </p>
+</blockquote>
+<p>知道了系统的启动过程，那么就知道代码运行的思路基本上就是脚本<a href="https://github.com/PX4/Firmware/blob/master/ROMFS/px4fmu_common/init.d/rcS" target="_blank" rel="noopener">rcS</a>的写法了，如果你想深入了解NSH启动脚本的自定义，可以参考<a href="/2015/12/RTOS-of-NuttX#1-5-4">定制NSH初始化</a>，所以下面就从脚本开始看起。</p>
+<p>首先通过sercon开启串口驱动CDC/ACM，这样才能打印出下面echo出的串口信息。</p>
+<p>设置模式为自动启动。</p>
+<p>再设置文件路径如下</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> FRC /fs/microsd/etc/rc.txt</span><br><span class="line"><span class="built_in">set</span> FCONFIG /fs/microsd/etc/config.txt</span><br><span class="line"><span class="built_in">set</span> LOG_FILE /fs/microsd/bootlog.txt</span><br><span class="line"><span class="comment">#=&gt; 运行出错时会发出下面的声音</span></span><br><span class="line"><span class="built_in">set</span> TUNE_ERR ML&lt;&lt;CP4CP4CP4CP4CP4</span><br></pre></td></tr></table></figure>
+<p>挂载microSD卡<code>&quot;mount -t vfat /dev/mmcsd0 /fs/microsd&quot;</code>，如果/dev/mmcsd0不存在，还要创建文件系统<code>&quot;mkfatfs /dev/mmcsd0&quot;</code>，这里边调用了tone_alarm应用来根据声音判断，这个应用可以在源代码里找到，如果你使用了<a href="http://www.nephen.com/2015/12/初学PX4之环境搭建/#qtcreator-ide建立工程" target="_blank" rel="noopener">Qt creator</a>，你可以这样搜到它。<br><img src="/images/findapp.png"></p>
+<p><hr><br>可以看出函数的原定义是这样的，借助于IDE可以很快的查出应用程序的来龙去脉，后面碰到的应用都可以这样去查看。<br><img src="/images/define.png"></p>
+<p><hr><br>接着分析，接下来很关键的一步，检查是否存在<code>/fs/microsd/etc/rc.txt</code>，如果存在，执行它，设置模式被设置为自定义，否则为默认的自动启动。一般情况是没有的，因为etc/rc.txt文件的创建将完全禁用内置启动进程，高级用户可以这样做而已。    </p>
+<p>然后就是自动启动的一些东西。   </p>
+<blockquote>
+<ul>
+<li>由<code>nshterm /dev/ttyACM0 &amp;</code>启用/dev/ttyACM0串口；   </li>
+<li>启动uorb；    </li>
+<li>载入<code>/fs/microsd/params</code>里的参数（一般是由mtd将其载入ram中，然后路径变为/fs/mtd_params），param应用功能比较多，如select select/select load/select compare；   </li>
+<li>对比参数RC_MAP_THROTTLE、RC_MAP_ROLL、RC_MAP_PITCH、RC_MAP_YAW并保存默认值；   </li>
+<li>启动系统状态指示灯；   </li>
+<li>设置这些<a href="https://pixhawk.org/start?id=dev/system_startup#configuration_variables" target="_blank" rel="noopener">参数</a>的默认值，一般为none；   </li>
+<li>判断SYS_AUTOCONFIG，设置AUTOCNF为yes；   </li>
+<li>根据板子型号设置USE_IO；    </li>
+<li>SYS_AUTOSTART设置，启动<code>/etc/init.d/rc.autostart</code>脚本，从nsh里可以看到，在这个脚本里调用机身配置文件；    </li>
+<li>打开用户设置文件<code>etc/config.txt</code>设置参数，如果存在的话；    </li>
+<li>保存参数；   </li>
+<li>crc校验<code>/etc/extras/px4io-v2.bin</code>是否需要更新及启动px4io打开电机是否安全；    </li>
+<li>设置输出模式OUTPUT_MODE；     </li>
+<li>启动航点存储；    </li>
+<li>启动传感器<code>/etc/init.d/rc.sensors</code>、GPS；     </li>
+<li>开始主输出TTYS1_BUSY；</li>
+<li>启动commander；    </li>
+<li>检查UAVCAN是否可用；</li>
+<li>根据OUTPUT_MODE，启动px4io，运行<code>/etc/init.d/rc.io</code>、fmu、mkblctrl、pwm_out_sim；    </li>
+<li>开启mavlink；</li>
+<li>运行<code>/etc/init.d/rc.uavcan</code>；</li>
+<li>运行<code>/etc/init.d/rc.logging</code>；</li>
+<li>根据VEHICLE_TYPE启动设置（如四轴：<code>rc.interface/rc.mc_apps</code>），姿态估计、控制算法在<code>/etc/init.d/rc.interface</code>里，mixer导入在<code>/etc/init.d/rc.mc_apps</code>里；   </li>
+<li>启动导航navigator；</li>
+<li>运行etc/extras.txt； </li>
+</ul>
+</blockquote>
+<p>自启动完后告诉MAVLink app启动完成；启动光流；     </p>
+<p>下面就可以单独的研究应用软件了。</p>
+<p>总个程序运行的框架如下：</p>
+<center><a href="http://dev.px4.io/concept-flight-stack.html#estimation-and-control-architecture" target="_blank" rel="noopener"><img src="/images/app_run.png"></a></center>
+
+<p>下面给出一个大神的图：<br><img src="/images/dshen.png"></p>
+<p><hr><br>参考文件：<a href="https://pixhawk.org/firmware/source_code" target="_blank" rel="noopener">PX4 Source Code</a>/<a href="http://blog.chinaunix.net/uid-29786319-id-4393303.html" target="_blank" rel="noopener">Nuttx系统启动</a>/<a href="http://blog.csdn.net/zhumaill/article/details/24400441" target="_blank" rel="noopener">NuttX 编译系统</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/PX4/" rel="tag"># PX4</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/16/C-Plus学习笔记/" rel="next" title="C Plus学习笔记">
+                <i class="fa fa-chevron-left"></i> C Plus学习笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/16/初学PX4之飞控算法/" rel="prev" title="初学PX4之飞控算法">
+                初学PX4之飞控算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="nephen">
+            
+              <p class="site-author-name" itemprop="name">nephen</p>
+              <p class="site-description motion-element" itemprop="description">学而不思则罔，思而不学则殆。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#PX4源代码"><span class="nav-number">1.</span> <span class="nav-text">PX4源代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码运行分析"><span class="nav-number">2.</span> <span class="nav-text">代码运行分析</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">nephen</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

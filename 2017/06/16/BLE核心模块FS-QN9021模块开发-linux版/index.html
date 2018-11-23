@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="这段时间又参与了一个新的小项目，简单概括为蓝牙、智能、家居吧，虽然时间有点紧，还是希望能把这一些东西记录下来。  BLE什么是BLE？参考这篇文章做如下总结。中文名称为蓝牙低功耗。主要特点为低成本、超低功耗、短距离、标准接口和可互操作性强，并且工作在免许可的2.4GHz ISM射频段，需要支持蓝牙4.0（系统为Android4.3及以上）的主机设备才能与其连接。     目前生产BLE芯片的厂家主">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BLE核心模块FS-QN9021模块开发-linux版">
+<meta property="og:url" content="http://nephen.cn/2017/06/16/BLE核心模块FS-QN9021模块开发-linux版/index.html">
+<meta property="og:site_name" content="来风的官方网站">
+<meta property="og:description" content="这段时间又参与了一个新的小项目，简单概括为蓝牙、智能、家居吧，虽然时间有点紧，还是希望能把这一些东西记录下来。  BLE什么是BLE？参考这篇文章做如下总结。中文名称为蓝牙低功耗。主要特点为低成本、超低功耗、短距离、标准接口和可互操作性强，并且工作在免许可的2.4GHz ISM射频段，需要支持蓝牙4.0（系统为Android4.3及以上）的主机设备才能与其连接。     目前生产BLE芯片的厂家主">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://www.mianfeiwendang.com/pic/e5f0219633d14d7b2d6ac032/2-340-png_6_0_0_0_0_0_0_892.979_1262.879-893-0-312-893.jpg">
+<meta property="og:image" content="http://nephen.cn/images/packin.png">
+<meta property="og:image" content="http://nephen.cn/images/packicon.png">
+<meta property="og:image" content="http://nephen.cn/images/9021db.png">
+<meta property="og:image" content="http://nephen.cn/images/nxpset.png">
+<meta property="og:image" content="http://nephen.cn/images/compile.png">
+<meta property="og:image" content="http://nephen.cn/images/download.png">
+<meta property="og:image" content="http://nephen.cn/images/ble_led.gif">
+<meta property="og:image" content="http://nephen.cn/images/uart_test.png">
+<meta property="og:image" content="http://nephen.cn/images/breath.gif">
+<meta property="og:image" content="http://nephen.cn/images/app_sf.jpg">
+<meta property="og:image" content="http://nephen.cn/images/qtool.png">
+<meta property="og:updated_time" content="2018-11-23T01:38:49.375Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BLE核心模块FS-QN9021模块开发-linux版">
+<meta name="twitter:description" content="这段时间又参与了一个新的小项目，简单概括为蓝牙、智能、家居吧，虽然时间有点紧，还是希望能把这一些东西记录下来。  BLE什么是BLE？参考这篇文章做如下总结。中文名称为蓝牙低功耗。主要特点为低成本、超低功耗、短距离、标准接口和可互操作性强，并且工作在免许可的2.4GHz ISM射频段，需要支持蓝牙4.0（系统为Android4.3及以上）的主机设备才能与其连接。     目前生产BLE芯片的厂家主">
+<meta name="twitter:image" content="http://www.mianfeiwendang.com/pic/e5f0219633d14d7b2d6ac032/2-340-png_6_0_0_0_0_0_0_892.979_1262.879-893-0-312-893.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://nephen.cn/2017/06/16/BLE核心模块FS-QN9021模块开发-linux版/">
+
+
+
+
+
+  <title>BLE核心模块FS-QN9021模块开发-linux版 | 来风的官方网站</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">来风的官方网站</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://nephen.cn/2017/06/16/BLE核心模块FS-QN9021模块开发-linux版/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nephen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="来风的官方网站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">BLE核心模块FS-QN9021模块开发-linux版</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-16T07:43:37+08:00">
+                2017-06-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这段时间又参与了一个新的小项目，简单概括为<code>蓝牙、智能、家居</code>吧，虽然时间有点紧，还是希望能把这一些东西记录下来。</p>
+<p><br></p>
+<h1 id="BLE"><a href="#BLE" class="headerlink" title="BLE"></a>BLE</h1><p>什么是BLE？参考这篇<a href="http://www.mianfeiwendang.com/doc/e5f0219633d14d7b2d6ac032" target="_blank" rel="noopener">文章</a>做如下总结。<br>中文名称为蓝牙低功耗。主要特点为低成本、超低功耗、短距离、标准接口和可互操作性强，并且工作在免许可的2.4GHz ISM射频段，需要支持蓝牙4.0（系统为Android4.3及以上）的主机设备才能与其连接。    </p>
+<p>目前生产BLE芯片的厂家主要有CSR、TI、Nodic和NXP（QN902x），各个厂家芯片对比如下图</p>
+<p><img src="http://www.mianfeiwendang.com/pic/e5f0219633d14d7b2d6ac032/2-340-png_6_0_0_0_0_0_0_892.979_1262.879-893-0-312-893.jpg" alt="s"></p>
+<p>从如上图对比可以看出，NXP的QN902x在功耗方面比CSR和TI更省电，在接收灵敏度和模式方面比Nodic的胜一筹，它的从设备相比其它几家可以连接的更多，共有8个，这也算是蓝牙4.0的一大特色吧，并且NXP的芯片已经过了MFI认证，直接能与苹果设备相连接，因为这种认证也是挺贵的。    </p>
+<p>因为BLE的低功耗、低成本及强大的处理能力，并且随着iPhone的设备支持蓝牙4.0，BLE的终端设备在我们的生活当中将会越来越多，在未来将会有爆发式增长。</p>
+<p>QN902X是一款内核为M0的蓝牙BLE SOC芯片，其SDK对蓝牙BLE的profile都有实现，并提供源码，SDK也提供很多工具以便使用芯片，比如引脚配置，NVDS读写，串口USB Dongle(配合上位机可以调试各profile，没有手机也可以调试)，ISP下载等，但QN902X不提供数据手册，所有的外设操作都以库的方式提供，SDK说明比较全面但全是英文的。      </p>
+<p>与NODRDIC的51822和TI的CC2540不同QN902X的架构是M0+ROM+FLASH+SRAM的方式，其中ROM放的是蓝牙协议和内部一个小的调度核，FLASH放的是用户程序和数据，RAM用于跑程序。其中ROM:96K，SRAM:64K，FLASH:64K/128K。因为QN902X程序是跑到SRAM中，所以它的深度睡眠电流比较大些。</p>
+<p><br></p>
+<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><p>老生长谈，开发一款产品，第一步当然是搭建开发环境咯。</p>
+<h2 id="wine安装"><a href="#wine安装" class="headerlink" title="wine安装"></a>wine安装</h2><p>由<a href="http://www.keil.com/demo/requirements.asp" target="_blank" rel="noopener">这里</a>可知，keil不支持linux环境，所以必须自己想办法了。这是在linux环境下运行windows的程序，本身使用windows的请自动忽略这一步。具体请看<a href="http://wiki.ubuntu.org.cn/Wine" target="_blank" rel="noopener">官网</a>/<a href="http://blog.csdn.net/ropai/article/details/19813767" target="_blank" rel="noopener">博文</a>。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">~ $ sudo add-apt-repository ppa:ubuntu-wine/ppa</span><br><span class="line">~ $ sudo apt-get update</span><br><span class="line"><span class="comment"># =&gt; 我的是64为的系统，所有安装64位版</span></span><br><span class="line">~ $ sudo apt-get install wine1.8-amd64</span><br><span class="line"><span class="comment"># =&gt; 配置</span></span><br><span class="line">~ $ winecfg</span><br><span class="line"><span class="comment"># =&gt; 中文路径：~/ .wine/drive_c/windows/Fonts/</span></span><br><span class="line">~ $ winetricks corefonts</span><br></pre></td></tr></table></figure>
+<h2 id="keil安装"><a href="#keil安装" class="headerlink" title="keil安装"></a>keil安装</h2><p>首先得下载keil，可以自己去<a href="http://www.keil.com/download/" target="_blank" rel="noopener">官网</a>下载最新的，也可以直接点击<a href="http://www.keil.com/fid/1syem9w320dj1w1pcqw1dpsdaw3ocqd1mijw11/files/eval/mdk517.exe" target="_blank" rel="noopener">mdk5.17下载地址</a>，参考这篇<a href="http://www.rationmcu.com/elecjc/1204.html" target="_blank" rel="noopener">博文</a>并实践做如下记录。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># =&gt; 进入下载目录安装</span></span><br><span class="line">~ $ wine mdk517.exe</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>提示</code>：卸载程序可以用wine uninstaller<br>如编译有限制，下载破解注册机Keygen：<a href="http://pan.baidu.com/s/1hqGSRqs" target="_blank" rel="noopener">http://pan.baidu.com/s/1hqGSRqs</a></p>
+</blockquote>
+<p>安装完成后，会弹出来一个安装器件（pack installer）如下的界面，也就是说，你要用它来开发哪个芯片（此项目可以忽略，后面步骤导入DB）。<br><img src="/images/packin.png" alt="packin"></p>
+<p><br><br>或者打开keil界面会看到如下图标<br><img src="/images/packicon.png" alt="packicon"></p>
+<p><br><br>要开发哪一款芯片，点击install即可，或者先网页端下载好在导入，具体参考上面提供的博文地址。</p>
+<h2 id="MCU-DB库安装"><a href="#MCU-DB库安装" class="headerlink" title="MCU DB库安装"></a>MCU DB库安装</h2><p>下载Quintic最新的SDK<a href="http://pan.baidu.com/s/1mgkQF2K#path=%252FFireBLE%252FSource" target="_blank" rel="noopener">QBlue1.3.7</a>，安装：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~ $ wine QBlue-1.3.7.exe</span><br></pre></td></tr></table></figure>
+<p>会弹出窗口如下，点击安装即可，或者打开桌面QBlue里的QN9020DevDBforIDE工具安装。</p>
+<p><img src="/images/9021db.png" alt="sdk"></p>
+<h2 id="keil使用"><a href="#keil使用" class="headerlink" title="keil使用"></a>keil使用</h2><p>首先获取开<a href="https://bitbucket.org/T-Firefly/fireble/downloads" target="_blank" rel="noopener">源代码</a></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~ $ <span class="built_in">cd</span></span><br><span class="line">~ $ git <span class="built_in">clone</span> git@bitbucket.org:T-Firefly/fireble.git</span><br></pre></td></tr></table></figure>
+<p>桌面打开keil，假如我们希望开始proxr工程：</p>
+<ol>
+<li>在keil的Project菜单中选择Open Project…</li>
+<li>弹出文件选择框中，打开/home/xxx/fireble/BLE/prj_proxr/keil/proxr.uvproj工程文件（linux可能在z磁盘里）</li>
+<li><p>配置DB如下，如果没发现库，请重启软件</p>
+<p> <img src="/images/nxpset.png" alt="dbset"></p>
+</li>
+<li><p>编译代码，成功后如下，具体配置选项请参考<a href="http://wiki.t-firefly.com/index.php/FireBLE/Build_development_environment#JLink.E4.BB.BF.E7.9C.9F.E5.99.A8.E7.9A.84.E9.80.89.E6.8B.A9.E5.92.8C.E9.85.8D.E7.BD.AE" target="_blank" rel="noopener">这里</a></p>
+<p> <img src="/images/compile.png" alt="compile"></p>
+</li>
+<li><p>下载程序，下载的时候需要按复位键，如下载出错，可先下载到SRAM。</p>
+<p> <img src="/images/download.png" alt="dl"></p>
+</li>
+</ol>
+<blockquote>
+<p><code>Tip</code>:在ubuntu 上串口识别为ttyS0或ttyUSB0之类，在wine上识别不到，可用：</p>
+</blockquote>
+<blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="comment"># =&gt;将其该为小写的com1，如果不行，将其改为大写的COM1</span></span><br><span class="line">&gt;~ $ sudo ln -s /dev/ttyUSB0 ~/.wine/dosdevices/com1</span><br><span class="line">&gt;~ $ sudo usermod -a -G dialout <span class="variable">$USER</span></span><br><span class="line">&gt;~ $ sudo chmod 777 ~/.wine/dosdevices/com1</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>即可在wine的应用程序使用串口</p>
+</blockquote>
+<p><br></p>
+<h1 id="项目实践"><a href="#项目实践" class="headerlink" title="项目实践"></a>项目实践</h1><h2 id="点亮LED"><a href="#点亮LED" class="headerlink" title="点亮LED"></a>点亮LED</h2><p>对于新的芯片与开发板，从LED实验开始。首先下载该开发板的原理图对该LED部分的电路进行分析。</p>
+<p>本程序非常简单，复制gpio demo代码</p>
+<p>实现让开发板D1灯闪烁如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Set pin D1/P2_7 */</span></span><br><span class="line">gpio_set_direction_field(GPIO_P27, (<span class="keyword">uint32_t</span>)GPIO_OUTPUT);</span><br><span class="line"><span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">&#123;</span><br><span class="line">	gpio_write_pin_field(GPIO_P27, GPIO_LOW);</span><br><span class="line">	delay(<span class="number">100000</span>);</span><br><span class="line">	gpio_write_pin_field(GPIO_P27, GPIO_HIGH);</span><br><span class="line">	delay(<span class="number">100000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>程序流程：系统初始化–&gt;GPIO配置–&gt;各驱动模块初始化–&gt;主循环实现功能<br>效果如下：</p>
+<p><img src="/images/ble_led.gif" alt="led"></p>
+<h2 id="UART实验"><a href="#UART实验" class="headerlink" title="UART实验"></a>UART实验</h2><p>串口通信可以用来打印数据，调试程序，有必要实验一下。<br>同样复制uart demo代码<br>改程序如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Print out "Hello NXP!\n" thought uart.</span></span><br><span class="line">uart_printf(QN_UART0, (<span class="keyword">uint8_t</span> *)<span class="string">"Hello NXP!\n"</span>);</span><br><span class="line">uart_printf(QN_UART0, (<span class="keyword">uint8_t</span> *)<span class="string">"This is nephen's test!\n"</span>);</span><br></pre></td></tr></table></figure>
+<p>波特率设置为115200，现象如下：<br><img src="/images/uart_test.png" alt="uart_tst"></p>
+<h2 id="PWM实验"><a href="#PWM实验" class="headerlink" title="PWM实验"></a>PWM实验</h2><p>由于这个项目会控制到电机什么的，所以pwm少不了，这个实验是通过pwm控制陶瓷蜂鸣器报警和呼吸灯。通过PWM方式调节脉冲频率和占空比，变换LED亮度，渐变亮度实现呼吸灯效果。FireBLE板载的贴片蜂鸣器是压电式陶瓷蜂鸣器，压电陶瓷蜂鸣器要想响起来，需要满足四个条件：多谐振荡器、压电蜂鸣片、阻抗匹配器及共鸣箱，压电蜂鸣片由锆钛酸铅或铌镁酸铅压电陶瓷材料制成，在陶瓷片的两面镀上银电极，经极化和老化处理后，再与黄铜片或不锈钢片粘在一起。板载的蜂鸣器缺少的只是多谢振荡器，这里我们用PWM来代替，输出1.5KHz-2.5KHz的方波信号推动压电蜂鸣片发声，频率在1.5KHz-2.5KHz才会响，太高太低都不响，直接加3.3V更不会响，直接加3.3V响的那是电磁式蜂鸣器，有源和无源。<br>首先看下电路连接  </p>
+<p>同样复制pwm代码，改写如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    SystemInit();</span><br><span class="line"></span><br><span class="line">    pwm_init(PWM_CH0);</span><br><span class="line">    pwm_io_config();</span><br><span class="line">    <span class="comment">//P2.7 will output pwm wave with period for 1000us and pulse for 400us</span></span><br><span class="line">    pwm_config(PWM_CH0, PWM_PSCAL_DIV, PWM_COUNT_US(<span class="number">1000</span>, PWM_PSCAL_DIV), PWM_COUNT_US(<span class="number">500</span>, PWM_PSCAL_DIV));</span><br><span class="line">    pwm_enable(PWM_CH0, MASK_ENABLE);</span><br><span class="line">    pwm_io_dis_config();</span><br><span class="line"></span><br><span class="line">    pwm_init(PWM_CH1);</span><br><span class="line">    pwm_io_config();</span><br><span class="line">    <span class="comment">//P2.6 will output pwm wave with period for 1000us and pulse for 500us</span></span><br><span class="line">    pwm_config(PWM_CH1, <span class="number">119</span>, PWM_COUNT_US(<span class="number">1000</span>, <span class="number">119</span>), PWM_COUNT_US(<span class="number">500</span>, <span class="number">119</span>));</span><br><span class="line">    pwm_enable(PWM_CH1, MASK_ENABLE);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>)                                <span class="comment">/* Loop forever */</span></span><br><span class="line">    &#123;</span><br><span class="line">			<span class="keyword">int</span> i;</span><br><span class="line">			<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;=<span class="number">1000</span>;i++)</span><br><span class="line">			&#123;</span><br><span class="line">				pwm_config(PWM_CH1, <span class="number">119</span>, PWM_COUNT_US(<span class="number">1000</span>-i, <span class="number">119</span>), PWM_COUNT_US(<span class="number">500</span>, <span class="number">119</span>));</span><br><span class="line">				<span class="keyword">if</span>(i%<span class="number">2</span>)</span><br><span class="line">					pwm_config(PWM_CH0, PWM_PSCAL_DIV, PWM_COUNT_US(<span class="number">1000</span>-i, PWM_PSCAL_DIV), PWM_COUNT_US(<span class="number">500</span>, PWM_PSCAL_DIV));</span><br><span class="line">				<span class="keyword">else</span></span><br><span class="line">					pwm_config(PWM_CH0, PWM_PSCAL_DIV, PWM_COUNT_US(i, PWM_PSCAL_DIV), PWM_COUNT_US(<span class="number">500</span>, PWM_PSCAL_DIV));</span><br><span class="line">				delay(<span class="number">2000</span>);</span><br><span class="line">			&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>呼吸灯效果：</p>
+<p><img src="/images/breath.gif" alt="breath"></p>
+<h2 id="按键广播"><a href="#按键广播" class="headerlink" title="按键广播"></a>按键广播</h2><p>看到有些人对买的fireBLE按键广播不懂，其实刚开始我也是这样的，摸不着头脑，现在至少不会太迷糊，就给大家记录下吧。<br>首先按键按下属于gpio中断，找到中断初始化函数：SystemInit(); ——》<br> gpio_init(gpio_interrupt_callback); ——》<br> void gpio_interrupt_callback(enum gpio_pin pin) ——》<br> void usr_button1_cb(void) ——》<br> ke_evt_set(1UL &lt;&lt; EVENT_BUTTON1_PRESS_ID); 找到EVENT_BUTTON1_PRESS_ID对应的事件，搜索<br>EVENT_BUTTON1_PRESS_ID，找到void usr_init(void)里的if(KE_EVENT_OK != ke_evt_callback_set(EVENT_BUTTON1_PRESS_ID, app_event_button1_press_handler))可知为app_event_button1_press_handler ——》<br>ke_timer_set(APP_KEY_SCAN_TIMER,TASK_APP,2); 同样通过搜索APP_KEY_SCAN_TIMER可知定时器事件为app_key_scan_timer_handler ——》<br>app_key_scan_timer_handler，这里进行adc采集，完成后由adc_read(&amp;read_cfg, adc_key_value, KEY_SAMPLE_NUMBER, adc_test_cb);可知进入adc_test_cb，在这里设置了EVENT_ADC_KEY_SAMPLE_CMP_ID，搜索找到对应事件app_event_adc_key_sample_cmp_handler ——》<br>app_event_adc_key_sample_cmp_handler，判断按键朝哪个方向按，定时回调 ——》<br>app_key_process_timer_handler，如下：   </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">app_key_process_timer_handler</span><span class="params">(<span class="keyword">ke_msg_id_t</span> <span class="keyword">const</span> msgid, <span class="keyword">void</span> <span class="keyword">const</span> *param,</span></span></span><br><span class="line"><span class="function"><span class="params">                                  <span class="keyword">ke_task_id_t</span> <span class="keyword">const</span> dest_id, <span class="keyword">ke_task_id_t</span> <span class="keyword">const</span> src_id)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ke_evt_clear(<span class="number">1U</span>L &lt;&lt; EVENT_ADC_KEY_SAMPLE_CMP_ID);</span><br><span class="line">	<span class="keyword">switch</span> (key_value0)</span><br><span class="line">	&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">case</span>	key_up:</span><br><span class="line">		<span class="keyword">if</span> (APP_IDLE == ke_state_get(TASK_APP))</span><br><span class="line">		&#123;</span><br><span class="line"></span><br><span class="line">			<span class="comment">// start adv</span></span><br><span class="line">			<span class="comment">//QPRINTF("you press up key\r\n!");</span></span><br><span class="line">			app_gap_adv_start_req(GAP_GEN_DISCOVERABLE | GAP_UND_CONNECTABLE,</span><br><span class="line">			                      app_env.adv_data, app_set_adv_data(GAP_GEN_DISCOVERABLE),</span><br><span class="line">			                      app_env.scanrsp_data, app_set_scan_rsp_data(app_get_local_service_flag()),</span><br><span class="line">			                      GAP_ADV_FAST_INTV1, GAP_ADV_FAST_INTV2);</span><br></pre></td></tr></table></figure>
+<p>这里一看就明白，向上按时，进入广播。其实在系统上电的时候，已经进行了一系列的gap建立连接的初始话，就差广播了，所以这里只要广播出去就能和别的蓝牙建立连接。</p>
+<h2 id="QTool使用及蓝牙了解"><a href="#QTool使用及蓝牙了解" class="headerlink" title="QTool使用及蓝牙了解"></a>QTool使用及蓝牙了解</h2><p>使用QBlueStudio中QTool工具进行蓝牙开发分析，可以方便的对各个蓝牙操作的过程进行细致的研究，并结合具体的源代码进行查看，能够更加深入的了解到蓝牙协议的实现过程，大部分的API接口在GAP和GATT。具体的使用文档请查看QBlueStudio里的Document。Linux里可以采取这种方法查看：地址见<code>/home/username/.wine/drive_c/QBlue/QN9020/QBlue-1.3.7/Documents</code>，然后使用evince命令打开。     </p>
+<p>在这之前，还需对蓝牙的一些术语做一个大概的了解，比如什么是master，slave，主机。客户端与服务器又是什么。GAP与GATT有什么区边。蓝牙各个协议层都有哪些分工。下面<a href="http://bbs.elecfans.com/forum.php?mod=viewthread&amp;tid=524079&amp;highlight=%E8%93%9D%E7%89%99" target="_blank" rel="noopener">参考</a>做一些归纳：    </p>
+<ol>
+<li><p>BLE规范中定义了GAP（Generic Access Profile）和GATT(Generic Attribute)两个基本配置文件。<br>a.协议中的GAP层负责设备访问模式和进程，包括设备发现，建立连接，终止连接。初始化安全特性和设备配置。<br>b.GATT层用于已连接的蓝牙设备之间的数据通信。GATT通俗理解为用于主从机之间的客户端和服务器端的数据交互，以Attribute Table来体现。    </p>
+</li>
+<li><p>BLE低功耗蓝牙中有四种设备类型，Central主机,Peripheral从机,Observer观察者,Broadcaster广播者。通常Central主机,Peripheral从机一起使用，Observer观察者,Broadcaster广播者一起使用。Central和Peripheral连接交换数据，平时我们使用到的基本上是这种模式。而像多温度采集器，通常使用Observer和Broadcaster这种无连接形式。<br>主机和从机是这样开机工作的:从机开始广播，然后主机扫描广播的从机，当从机收到主机的扫描请求后，会向主机发送扫描回应数据。然后主机发起连接，然后开始通讯。所以从机需要设置广播内容和扫描回应内容。这方面的代码可以查看App_gap.c和App_gap_task.c。 </p>
+<ul>
+<li>profile：可以理解为一种规范，一个标准的通信协议，profile存在于从机中。蓝牙组织规定了一系列的标准profile，如防丢计、心率计。每个profile中包含多个service，每个service代表从机的一种能力。</li>
+<li>Service：可以理解为一种服务，在BLE从机里，通过有多个服务，例如电量信息服务、系统信息服务等。每个service又包含多个characteristic特征值。每个具体的characteristic特征值才是BLE通讯的主体，比如当前电量是80%。所以会通过电量的characteristic特征值特征值保存在从机的profile里，这样主机就可以通过这个characteristic来读取80%这个数。</li>
+<li>characteristic：characteristic特征值，BLE主从机均是通过characteristic来实现，可以理解为一个标签，通过这个标签可以获取或者写入想要的内容。   </li>
+<li><p>UUID：统一标识吗，我们刚提到的characteristic和service，都需要一个唯一的UUID来标识。    </p>
+<p>每个从机都会有个叫做profile的东西存在，不管自定义的还是标准的profile，他们都是由一系列的Service组成，然后每个service又包含多个characteristic，主机和从机之间的通信，均是通过characteristic来实现。<br>BLE协议栈中传输数据分为两方面，一个GATT的client主动向service发送数据。另一个是GATT的service主动向client发送数据。即主从之前相互传数据。<br>主机向从机发送数据，使用GATT_Write<br>从机向主机发送数据，使用GATT_Notification</p>
+</li>
+</ul>
+</li>
+<li><p>GATT有Service和Client，Service作为服务器端，对GATT Client提供read/write接口，一般情况下，Central作为Client，Peripheral作为Service。所以主机会调用read/write来和作为Service端的Peripheral从机通讯。而Peripheral则通过notify的方式即调用GATT_Notifycation发起和主机通讯。 </p>
+</li>
+<li>特征值声明值可以有五种属性：Read(可读)  Write(可靠的可写,带响应)   Write without resp(不可靠的可写,不带响应)  Indicate(可靠通知，带响应)  Notify（不可靠通知，不带响应）   </li>
+</ol>
+<p>更多请查看<a href="http://blog.csdn.net/zhjr1220/article/details/9416617" target="_blank" rel="noopener">蓝牙设计问与答</a> /<a href="http://blog.csdn.net/chaoyue0071/article/details/43450183" target="_blank" rel="noopener">Android 蓝牙4.0 BLE 理解</a></p>
+<p>BLE中主从机建立连接，到配对和绑定的过程如下图。</p>
+<h2 id="QPPS工程"><a href="#QPPS工程" class="headerlink" title="QPPS工程"></a>QPPS工程</h2><p>在此之前，建议先了解一下<a href="http://wiki.t-firefly.com/index.php/FireBLE/QPPS" target="_blank" rel="noopener">Firefly的QPPS介绍</a>/<a href="http://developer.t-firefly.com/thread-2163-1-1.html" target="_blank" rel="noopener">对QPPS profile中服务和特征实现的分析理解</a>/<a href="http://developer.t-firefly.com/thread-1080-1-3.html" target="_blank" rel="noopener">对profile QPPS的分析理解</a>。关于蓝牙的数据收发部分可以看<a href="http://wiki.t-firefly.com/index.php/FireBLE/protocol_stack#.E6.95.B0.E6.8D.AE.E6.94.B6.E5.8F.91" target="_blank" rel="noopener">Firefly的协议栈介绍</a>。数据帧格式如下：</p>
+<blockquote>
+<p><code>Tip</code>：技术案例中串口透传案例，实现的是将蓝牙模组串口所接收到的数据透传到app，并且把app的数据通过蓝牙透传到串口输出，案例本身的实现是针对串口通信和蓝牙透传的结合。</p>
+</blockquote>
+<ol>
+<li>其实BLE完成初始化的条件并不是进入main函数的while（1）中（系统在调度了几个消息之后才完成的初始化，前几次进入while（1）时初始化都是没完成的），真正完成初始化并且可以运行是在打印BLE is Ready这句话的地方。那个地方你可以看到只要开启QN_DEMO_AUTO宏定义就可以上电广播了。     </li>
+<li>设备名默认从NVDS中写入，但是软件也可以修改，可以用app_gap_set_devname_req修改设备名。     </li>
+<li><p>如果你非要用软件指定，参考广播内容设定，取消NVDS读取，直接利用app_gap_set_devname_req函数指定设备名，然后将QN_LOACL_NAME广播出去，那么设备名和广播中的设备名都会是QN_LOCAL_NAME了。</p>
+<p> 具体实施如下</p>
+<p> 修改自动广播，无需向上拨动按键：</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#=&gt; App_config.h中，取消如下的注释即可</span><br><span class="line">#define QN_DEMO_AUTO             <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p> 在广播之前改变设备的名字，注意<code>app_set_adv_data</code>函数</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Set remote device name</span></span><br><span class="line">app_gap_set_devname_req(<span class="string">"nephen"</span>,<span class="number">6</span>);</span><br><span class="line"><span class="comment">// Created DB should has been finished by each profile service,</span></span><br><span class="line"><span class="comment">// Start Adv mode automatically here</span></span><br><span class="line">app_gap_adv_start_req(GAP_GEN_DISCOVERABLE|GAP_UND_CONNECTABLE, </span><br><span class="line">app_env.adv_data, app_set_adv_data(GAP_GEN_DISCOVERABLE), </span><br><span class="line">app_env.scanrsp_data, app_set_scan_rsp_data(app_get_local_service_flag()),</span><br><span class="line">GAP_ADV_FAST_INTV1, GAP_ADV_FAST_INTV2);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>接收手机<a href="http://m.tongbu.com/android/872087823309956894" target="_blank" rel="noopener">app</a>中9600可写属性发送的数据。<br>由下面Qpps_task.c可知，当有数据到达蓝牙时，会触发<code>gatt_write_cmd_ind_handler</code>，同理，发送数据触发<code>qpps_data_send_req_handler</code>，得到通知触发<code>gatt_notify_cmp_evt_handler</code>，app层对应的api是<code>app_qpps_data_send_cfm_handler</code>、<code>app_qpps_data_ind_handler</code>、<code>app_qpps_cfg_indntf_ind_handler</code>，下文会提到，只会对这些做修改</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// Connected State handler definition.</span></span><br><span class="line"><span class="keyword">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">ke_msg_handler</span> <span class="title">qpps_connected</span>[] =</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    &#123;QPPS_DATA_SEND_REQ,    (<span class="keyword">ke_msg_func_t</span>) qpps_data_send_req_handler&#125;,</span><br><span class="line">    &#123;GATT_WRITE_CMD_IND,    (<span class="keyword">ke_msg_func_t</span>) gatt_write_cmd_ind_handler&#125;,</span><br><span class="line">    &#123;GATT_NOTIFY_CMP_EVT,   (<span class="keyword">ke_msg_func_t</span>) gatt_notify_cmp_evt_handler&#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p> 而在<code>gatt_write_cmd_ind_handler</code>函数里，会对QPPS_IDX_RX_DATA_VAL属性进行处理</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (param-&gt;handle == (qpps_env.shdl + QPPS_IDX_RX_DATA_VAL))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (param-&gt;length &lt;= QPP_DATA_MAX_LEN)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//inform APP of configuration change</span></span><br><span class="line">                struct qpps_data_val_ind * ind = KE_MSG_ALLOC_DYN(QPPS_DAVA_VAL_IND,</span><br><span class="line">                                                                  qpps_env.appid,</span><br><span class="line">                                                                  TASK_QPPS,</span><br><span class="line">                                                                  qpps_data_val_ind, param-&gt;length);</span><br><span class="line"></span><br><span class="line">                <span class="built_in">memcpy</span>(&amp;ind-&gt;conhdl, &amp;(qpps_env.conhdl), <span class="keyword">sizeof</span>(<span class="keyword">uint16_t</span>));</span><br><span class="line">                <span class="comment">//Send received data to app value</span></span><br><span class="line">                ind-&gt;length = param-&gt;length;</span><br><span class="line">                <span class="built_in">memcpy</span>(ind-&gt;data, param-&gt;value, param-&gt;length);</span><br><span class="line"></span><br><span class="line">                ke_msg_send(ind);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                status = QPPS_ERR_RX_DATA_EXCEED_MAX_LENGTH;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p> 再由上面的QPPS_DAVA_VAL_IND可知会跳到下面这个函数，在这里对接收到的数据进行处理</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">app_qpps_data_ind_handler</span><span class="params">(<span class="keyword">ke_msg_id_t</span> <span class="keyword">const</span> msgid,</span></span></span><br><span class="line"><span class="function"><span class="params">                              struct qpps_data_val_ind *param,</span></span></span><br><span class="line"><span class="function"><span class="params">                              <span class="keyword">ke_task_id_t</span> <span class="keyword">const</span> dest_id,</span></span></span><br><span class="line"><span class="function"><span class="params">                              <span class="keyword">ke_task_id_t</span> <span class="keyword">const</span> src_id)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	 <span class="keyword">uint8_t</span> i;</span><br><span class="line">    <span class="keyword">if</span> (param-&gt;length &gt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        QPRINTF(<span class="string">"len=%d, I%02X"</span>, param-&gt;length, param-&gt;data[<span class="number">0</span>]);</span><br><span class="line">		 QPRINTF(<span class="string">"\r\n"</span>);</span><br><span class="line">		 QPRINTF(<span class="string">"the receive data is :"</span>);</span><br><span class="line">		 <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;param-&gt;length;i++)</span><br><span class="line">	 	 &#123;</span><br><span class="line">	 		QPRINTF(<span class="string">"%x"</span>,param-&gt;data[i]);</span><br><span class="line">	 	 &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    QPRINTF(<span class="string">"\r\n"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (KE_MSG_CONSUMED);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 当发送数据为29时，CuteCom蓝牙接收数据为</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">QN BLE is ready.</span><br><span class="line">Set device name complete</span><br><span class="line">Advertising start.</span><br><span class="line">Connection with 1FDA7E9F8E30 result is 0x0.</span><br><span class="line">LTK request indication idx is 0, auth_req is 0.</span><br><span class="line">Start encryption complete, idx 0, status 0, key_size 0, sec_prop 1, bonded 0.</span><br><span class="line">Slave update success.</span><br><span class="line">Update parameter complete, interval: 0xc, latency: 0x0, sup to: 0x12c.</span><br><span class="line">len=1, I29</span><br><span class="line">the receive data is :29</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>App收取蓝牙通知。通过点击app上5个特征的通知，能获取蓝牙模块的实时通知。Gatt层与通知相关的函数是qpps_data_send_req_handler，但我们只需要修改app开头的api即可完成相应的开发，现象及分析如下：<br> 当点击app上的通知时，会进入如下的函数，为了调试将其调整为如下：</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">app_qpps_cfg_indntf_ind_handler</span><span class="params">(<span class="keyword">ke_msg_id_t</span> <span class="keyword">const</span> msgid,</span></span></span><br><span class="line"><span class="function"><span class="params">                                    struct qpps_cfg_indntf_ind *param,</span></span></span><br><span class="line"><span class="function"><span class="params">                                    <span class="keyword">ke_task_id_t</span> <span class="keyword">const</span> dest_id,</span></span></span><br><span class="line"><span class="function"><span class="params">                                    <span class="keyword">ke_task_id_t</span> <span class="keyword">const</span> src_id)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (app_qpps_env-&gt;conhdl == param-&gt;conhdl)</span><br><span class="line">    &#123;</span><br><span class="line">    	QPRINTF(<span class="string">"enter app_qpps_cfg_indntf_ind_handler"</span>);</span><br><span class="line">		QPRINTF(<span class="string">"\r\n"</span>);</span><br><span class="line">        <span class="keyword">if</span> (param-&gt;cfg_val == PRF_CLI_START_NTF)</span><br><span class="line">        &#123;</span><br><span class="line">        	QPRINTF(<span class="string">"enter PRF_CLI_START_NTF"</span>);</span><br><span class="line">			QPRINTF(<span class="string">"\r\n"</span>);</span><br><span class="line">			app_qpps_env-&gt;features |= (QPPS_VALUE_NTF_CFG &lt;&lt; param-&gt;char_index);</span><br><span class="line">			QPRINTF(<span class="string">"app_qpps_env-&gt;features is %d, param-&gt;char_index is %d"</span>,app_qpps_env-&gt;features,param-&gt;char_index);</span><br><span class="line">			QPRINTF(<span class="string">"\r\n"</span>);</span><br><span class="line">            <span class="comment">// App send data if all of characteristic have been configured</span></span><br><span class="line">            <span class="keyword">if</span> (get_bit_num(app_qpps_env-&gt;features) == app_qpps_env-&gt;tx_char_num)<span class="comment">//num is 5</span></span><br><span class="line">            &#123;</span><br><span class="line">            	QPRINTF(<span class="string">"enter app_qpps_env-&gt;features"</span>);</span><br><span class="line">				QPRINTF(<span class="string">"\r\n"</span>);</span><br><span class="line">                app_qpps_env-&gt;char_status = app_qpps_env-&gt;features;</span><br><span class="line">                app_test_send_data(app_qpps_env-&gt;tx_char_num - <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            app_qpps_env-&gt;features &amp;= ~(QPPS_VALUE_NTF_CFG &lt;&lt; param-&gt;char_index);</span><br><span class="line">            app_qpps_env-&gt;char_status &amp;= ~(QPPS_VALUE_NTF_CFG &lt;&lt; param-&gt;char_index);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (KE_MSG_CONSUMED);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 其中，param-&gt;char_index代表第几个可通知特征，app_qpps_env-&gt;tx_char_num为特征的数量5，只有当所有特征都进入通知状态时蓝牙模块才会发数据到手机app。     </p>
+<p> 数据发送的过程见如下函数，这个函数中的数据val可以改为项目中的需求，如IO口状态</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">app_test_send_data</span><span class="params">(<span class="keyword">uint8_t</span> max)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">uint8_t</span> cnt;</span><br><span class="line"></span><br><span class="line">	QPRINTF(<span class="string">"enter app_test_send_data"</span>);</span><br><span class="line">	QPRINTF(<span class="string">"\r\n"</span>);</span><br><span class="line">    <span class="keyword">for</span> (cnt = <span class="number">0</span>; (max != <span class="number">0</span>) &amp;&amp; cnt &lt; app_qpps_env-&gt;tx_char_num; cnt++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> ((app_qpps_env-&gt;char_status &gt;&gt; cnt) &amp; QPPS_VALUE_NTF_CFG)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">static</span> <span class="keyword">uint8_t</span> val[] = &#123;<span class="number">0</span>, <span class="string">'0'</span>, <span class="string">'1'</span>, <span class="string">'2'</span>,<span class="string">'3'</span>,<span class="string">'4'</span>,<span class="string">'5'</span>,<span class="string">'6'</span>,<span class="string">'7'</span>,<span class="string">'8'</span>,<span class="string">'9'</span>,<span class="string">'8'</span>,<span class="string">'7'</span>,<span class="string">'6'</span>,<span class="string">'5'</span>,<span class="string">'4'</span>,<span class="string">'3'</span>,<span class="string">'2'</span>,<span class="string">'1'</span>,<span class="string">'0'</span>&#125;;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Increment the first byte for test </span></span><br><span class="line">            val[<span class="number">0</span>]++;</span><br><span class="line"></span><br><span class="line">            max--;</span><br><span class="line">            <span class="comment">// Allow next notify until confirmation received in this characteristic</span></span><br><span class="line">            app_qpps_env-&gt;char_status &amp;= ~(QPPS_VALUE_NTF_CFG &lt;&lt; cnt);</span><br><span class="line">            app_qpps_data_send(app_qpps_env-&gt;conhdl, cnt, <span class="keyword">sizeof</span>(val), val);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 数据发送后，有一个发送确认函数app_qpps_data_send_cfm_handler，发送成功后手机上看到的现象是这样的</p>
+<p> <img src="/images/app_sf.jpg"></p>
+</li>
+</ol>
+<p>至此完成的功能为，实时反应蓝牙通知信息，app发数据控制蓝牙模块。</p>
+<p><br></p>
+<h1 id="QTool使用"><a href="#QTool使用" class="headerlink" title="QTool使用"></a>QTool使用</h1><p>QTool是一个运行在PC端的应用软件，允许用户启动两个BLE设备之间的连接，它能帮助用户分析BLE蓝牙。它是通过串口与BLE设备进行通信，通过ACI命令扮演网络处理器的作用。    </p>
+<p>打开pdf使用文档</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~ $ <span class="built_in">cd</span> /home/nephne/.wine/drive_c/QBlue/QN9020/QBlue-1.3.7/Documents</span><br><span class="line">~ $ evince QBlue\ ISP\ Studio\ Manual\ v1.0.pdf</span><br></pre></td></tr></table></figure>
+<p>插入USB连接蓝牙模块，下载np_controller_B2.bin，然后打开QTool进入设备连接。关于界面说明见系统文档。</p>
+<p>例如：点击Setting-Server-QPPS里的Create DB，然后进入Setting-Mode里点击Advertising，即可实现如上QPPS工程的效果。而在旁边的Local Device Traces窗口可以看到程序的大概运行过程。</p>
+<p><img src="/images/qtool.png"></p>
+<p><br></p>
+<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><ul>
+<li><a href="http://wiki.t-firefly.com/index.php/FireBLE" target="_blank" rel="noopener">FireBLE-wiki</a></li>
+<li><a href="http://www.t-firefly.com/download/FireBLE/docs/QN9020_API_Programming_Guide_v1.0.pdf" target="_blank" rel="noopener">BLE编程API参考手册</a></li>
+<li><a href="http://www.t-firefly.com/download/FireBLE/docs/QN9020_Software_Developer_Guide_v1.4.pdf" target="_blank" rel="noopener">BLE软件开发手册</a></li>
+<li><a href="http://www.t-firefly.com/download/FireBLE/docs/QN902X.pdf" target="_blank" rel="noopener">数据手册</a></li>
+<li><a href="http://www.nxp.com/documents/application_note/AN11664.pdf" target="_blank" rel="noopener">QN9020快速入门</a></li>
+<li><a href="http://www.zlgmcu.com/NXP/Qn902x/pdf/QN902x_fast_um.pdf" target="_blank" rel="noopener">QN902x周立功版</a></li>
+<li><a href="http://blog.csdn.net/q562359345" target="_blank" rel="noopener">防丢器项目</a></li>
+<li><a href="http://www.myir-tech.com/faq.asp?nid=37" target="_blank" rel="noopener">MDK-ARM PRO SET</a></li>
+<li><a href="http://www.qiuzhi5.com/13/2015/1222/200559.html" target="_blank" rel="noopener">总有“一道菜”适合你——BLE</a></li>
+<li><a href="http://bbs.ickey.cn/index.php?app=group&amp;ac=topic&amp;id=56566" target="_blank" rel="noopener">【FireBLE试用体验】体验报告汇总</a></li>
+<li><a href="http://bbs.ickey.cn/group-topic-id-54243.html" target="_blank" rel="noopener">FireBLE 开发板试用汇总贴（2015.11.29更新 共收录145篇）  [板块置顶]  [精华]</a></li>
+<li><a href="http://developer.t-firefly.com/forum.php?mod=viewthread&amp;tid=1000&amp;highlight=FireBLE" target="_blank" rel="noopener">FireBLE驱动第一篇：呼吸灯</a></li>
+<li><a href="http://www.eeboard.com/evaluation/fireble/" target="_blank" rel="noopener">FireBLE低功耗蓝牙开发板评测 &gt; 可穿戴手环+蓝牙防丢器</a></li>
+<li><a href="http://www.arduino.cn/thread-7540-1-1.html" target="_blank" rel="noopener">esp8266</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/16/Moveit在ROS-Kinetic上的搭建与调试/" rel="next" title="Moveit在ROS Kinetic上的搭建与调试">
+                <i class="fa fa-chevron-left"></i> Moveit在ROS Kinetic上的搭建与调试
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/16/linux下sublime-text-2使用技巧/" rel="prev" title="linux下sublime text 2使用技巧">
+                linux下sublime text 2使用技巧 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="nephen">
+            
+              <p class="site-author-name" itemprop="name">nephen</p>
+              <p class="site-description motion-element" itemprop="description">学而不思则罔，思而不学则殆。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#BLE"><span class="nav-number">1.</span> <span class="nav-text">BLE</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#环境搭建"><span class="nav-number">2.</span> <span class="nav-text">环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#wine安装"><span class="nav-number">2.1.</span> <span class="nav-text">wine安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#keil安装"><span class="nav-number">2.2.</span> <span class="nav-text">keil安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MCU-DB库安装"><span class="nav-number">2.3.</span> <span class="nav-text">MCU DB库安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#keil使用"><span class="nav-number">2.4.</span> <span class="nav-text">keil使用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#项目实践"><span class="nav-number">3.</span> <span class="nav-text">项目实践</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#点亮LED"><span class="nav-number">3.1.</span> <span class="nav-text">点亮LED</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UART实验"><span class="nav-number">3.2.</span> <span class="nav-text">UART实验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PWM实验"><span class="nav-number">3.3.</span> <span class="nav-text">PWM实验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#按键广播"><span class="nav-number">3.4.</span> <span class="nav-text">按键广播</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#QTool使用及蓝牙了解"><span class="nav-number">3.5.</span> <span class="nav-text">QTool使用及蓝牙了解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#QPPS工程"><span class="nav-number">3.6.</span> <span class="nav-text">QPPS工程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#QTool使用"><span class="nav-number">4.</span> <span class="nav-text">QTool使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">5.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">nephen</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

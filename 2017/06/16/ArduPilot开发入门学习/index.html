@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="ArduPilot,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="编译pixhawk环境搭建参考原网页进行说明，有两种搭建环境的方式。    第一种为自动执行脚本(推荐)，较为方便，但有问题需解决。    由于使用apt-get update时部分文件无法下载，导致脚本执行不完整，故可将ardupilot/Tools/scripts/install-prereqs-ubuntu.sh文件里的$APT_GET update行用#注释掉。    然后操作如下： 12">
+<meta name="keywords" content="ArduPilot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ArduPilot开发入门学习">
+<meta property="og:url" content="http://nephen.cn/2017/06/16/ArduPilot开发入门学习/index.html">
+<meta property="og:site_name" content="来风的官方网站">
+<meta property="og:description" content="编译pixhawk环境搭建参考原网页进行说明，有两种搭建环境的方式。    第一种为自动执行脚本(推荐)，较为方便，但有问题需解决。    由于使用apt-get update时部分文件无法下载，导致脚本执行不完整，故可将ardupilot/Tools/scripts/install-prereqs-ubuntu.sh文件里的$APT_GET update行用#注释掉。    然后操作如下： 12">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://nephen.cn/images/newpull.png">
+<meta property="og:image" content="http://nephen.cn/images/creatpull.png">
+<meta property="og:updated_time" content="2018-11-23T01:38:49.374Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ArduPilot开发入门学习">
+<meta name="twitter:description" content="编译pixhawk环境搭建参考原网页进行说明，有两种搭建环境的方式。    第一种为自动执行脚本(推荐)，较为方便，但有问题需解决。    由于使用apt-get update时部分文件无法下载，导致脚本执行不完整，故可将ardupilot/Tools/scripts/install-prereqs-ubuntu.sh文件里的$APT_GET update行用#注释掉。    然后操作如下： 12">
+<meta name="twitter:image" content="http://nephen.cn/images/newpull.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://nephen.cn/2017/06/16/ArduPilot开发入门学习/">
+
+
+
+
+
+  <title>ArduPilot开发入门学习 | 来风的官方网站</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">来风的官方网站</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://nephen.cn/2017/06/16/ArduPilot开发入门学习/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nephen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="来风的官方网站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ArduPilot开发入门学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-16T07:43:37+08:00">
+                2017-06-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/飞控/" itemprop="url" rel="index">
+                    <span itemprop="name">飞控</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="编译pixhawk环境搭建"><a href="#编译pixhawk环境搭建" class="headerlink" title="编译pixhawk环境搭建"></a>编译pixhawk环境搭建</h1><p>参考<a href="http://ardupilot.org/dev/docs/building-px4-for-linux-with-make.html" target="_blank" rel="noopener">原网页</a>进行说明，有两种搭建环境的方式。   </p>
+<p>第一种为自动执行脚本(推荐)，较为方便，但有问题需解决。   </p>
+<p>由于使用apt-get update时部分文件无法下载，导致脚本执行不完整，故可将ardupilot/Tools/scripts/install-prereqs-ubuntu.sh文件里的$APT_GET update行用#注释掉。   </p>
+<p>然后操作如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">~ $ sudo apt-get -qq -y install git</span><br><span class="line">~ $ <span class="built_in">cd</span> ~/src</span><br><span class="line"><span class="comment">#下载源代码</span></span><br><span class="line">~ $ git <span class="built_in">clone</span> https://github.com/ArduPilot/ardupilot.git</span><br><span class="line"><span class="comment">#修改脚本后运行</span></span><br><span class="line">~ $ ardupilot/Tools/scripts/install-prereqs-ubuntu.sh -y</span><br><span class="line">~ $ . ~/.profile</span><br><span class="line"><span class="comment">#编译Copter</span></span><br><span class="line">~ $ <span class="built_in">cd</span> ardupilot/ArduCopter</span><br><span class="line">~ $ make px4-v2</span><br><span class="line"><span class="comment">#上传</span></span><br><span class="line">~ $ make px4-v2 upload</span><br></pre></td></tr></table></figure>
+<p>第二种为手动搭建环境，这里只提出一些主要的注意事项。</p>
+<ul>
+<li><p>需要特定的交叉编译器，更多参考搭建px4原生开发环境的<a href="/2015/12/env-build-of-px4#1-4">文章</a>。</p>
+  <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">pushd</span> .</span><br><span class="line"><span class="comment"># =&gt; 卸载新版的gcc-arm-none-eabi</span></span><br><span class="line">~ $ sudo apt-get remove gcc-arm-none-eabi</span><br><span class="line">~ $ wget https://launchpadlibrarian.net/186124160/gcc-arm-none-eabi-4_8-2014q3-20140805-linux.tar.bz2</span><br><span class="line"><span class="comment"># =&gt; 安装下载好的gcc-arm-none-eabi</span></span><br><span class="line">~ $ tar xjvf gcc-arm-none-eabi-4_8-2014q3-20140805-linux.tar.bz2</span><br><span class="line">~ $ sudo mv gcc-arm-none-eabi-4_8-2014q3 /opt</span><br><span class="line">~ $ exportline=<span class="string">"export PATH=/opt/gcc-arm-none-eabi-4_8-2014q3/bin:\$PATH"</span></span><br><span class="line">~ $ <span class="keyword">if</span> grep -Fxq <span class="string">"<span class="variable">$exportline</span>"</span> ~/.profile; <span class="keyword">then</span> <span class="built_in">echo</span> nothing to <span class="keyword">do</span> ; <span class="keyword">else</span> <span class="built_in">echo</span> <span class="variable">$exportline</span> &gt;&gt; ~/.profile; <span class="keyword">fi</span></span><br><span class="line"><span class="comment"># =&gt; 使路径生效</span></span><br><span class="line">~ $ . ~/.profile</span><br><span class="line"><span class="built_in">popd</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装ccache加快编译速度。    </p>
+  <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">	~ $ sudo apt-get install ccache</span><br><span class="line">	~ $ <span class="built_in">cd</span> /usr/lib/ccache</span><br><span class="line">	~ $ sudo ln -s /usr/bin/ccache arm-none-eabi-g++</span><br><span class="line">	~ $ sudo ln -s /usr/bin/ccache arm-none-eabi-gcc</span><br><span class="line">	```    </span><br><span class="line">	然后将`<span class="built_in">export</span> PATH=/usr/lib/ccache:<span class="variable">$PATH</span>`加入到~/.profile中。</span><br><span class="line">- 安装make, gawk，genromfs等linux开发工具。</span><br><span class="line">- 权限：`sudo usermod -a -G dialout <span class="variable">$USER</span>`。</span><br><span class="line"></span><br><span class="line">&gt; `Tip`：编译过程中主要问题：   </span><br><span class="line">&gt;1、考虑更新子模块，所有的子模块都放在modules/目录</span><br><span class="line">&gt; </span><br><span class="line">&gt; 	```sh</span><br><span class="line">&gt;	git submodule init</span><br><span class="line">&gt;	git submodule update --recursive</span><br><span class="line">&gt;	<span class="comment">#或者一行就行</span></span><br><span class="line">&gt;	git submodule update --init --recursive</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>2、如果以前编译正确，更新子模块后出现问题，<code>make px4-clean</code>后重新编译   </p>
+<p>3、如果子模块更新的时候出现如下错误：   </p>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;	fatal: 目标路径 &apos;src/lib/ecl&apos; 已经存在，并且不是一个空目录。</span><br><span class="line">&gt;	无法克隆 &apos;https://github.com/PX4/ecl.git&apos; 到子模组路径 &apos;src/lib/ecl&apos;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>直接删除src/lib/ecl即可。</p>
+</blockquote>
+<p><br></p>
+<h1 id="参与贡献"><a href="#参与贡献" class="headerlink" title="参与贡献"></a>参与贡献</h1><p>wiki知识点：  </p>
+<ol>
+<li><a href="http://dev.ardupilot.com/wiki/where-to-get-the-code/#making_a_branch_and_changing_some_code" target="_blank" rel="noopener">创建分支并改变一些代码</a>：fork源仓库，克隆到本地，更改后推送到fork仓库。</li>
+<li><a href="http://dev.ardupilot.com/wiki/where-to-get-the-code/#rebase-based_workflow_keeping_your_code_up_to_date" target="_blank" rel="noopener">保持代码更新</a>：添加upstream远程官方库；更新<code>git fetch upstream</code>，<a href="http://blog.csdn.net/hudashi/article/details/7664457" target="_blank" rel="noopener">fetch与pull的区别</a>；重置当前的分支<code>git rebase upstream/master</code>，这里可能有冲突需要解决；更新<a href="https://git.kaarsemaker.net/git/blob/a9ce45430b380b982de6f6cf24a96849e4d2feed/po/zh_CN.po" target="_blank" rel="noopener">子模块</a>；推送的fork库<code>git push origin master</code></li>
+<li><a href="http://dev.ardupilot.com/wiki/submitting-patches-back-to-master/" target="_blank" rel="noopener">提交分支到master</a>：确保每次提交只是做了一件事情；简洁易懂的注释；<a href="http://gitready.com/advanced/2009/02/10/squashing-commits-with-rebase.html" target="_blank" rel="noopener">清理本地提交历史</a>；推送到本地分支<code>git push -f origin master</code>；<a href="https://help.github.com/articles/using-pull-requests" target="_blank" rel="noopener">创建上拉请求</a>；在<code>Pull Request</code>页面选择<code>New pull request</code>按钮；选择需要提交的分支然后点击<code>Click to create pull request for this comparison</code>（base branch 是远程官方分支, head branch 是自己要提交的分支，这样做可以在任意时间段进行提交）；每个参与者都会收到新请求消息；管理<code>pull requests</code>；查看<code>proposed changes</code>；<code>Pull request</code>谈论；一段时间后可以查看<code>long-running pull requests</code>   </li>
+</ol>
+<p>下面我以ardupilot这个开源项目为例子做一个实际的演示：</p>
+<ol>
+<li><p>下载源码并设置源，这一步只需进行一次就可以了。</p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#首先进入https://github.com/ArduPilot/ardupilot进行fork</span></span><br><span class="line"><span class="comment">#然后如下下载源码</span></span><br><span class="line">~ $ git <span class="built_in">clone</span> git@github.com:your_github_name/ardupilot.git</span><br><span class="line"><span class="comment">#设置官方更新源，一般origin 默认已经设置</span></span><br><span class="line">~ $ git remote add upstream git@github.com:ArduPilot/ardupilot.git</span><br><span class="line"><span class="comment">#查看设置源效果</span></span><br><span class="line">~ $ git remote -v</span><br><span class="line"><span class="comment">#正常显示如下</span></span><br><span class="line">origin  git@github.com:your_github_name/ardupilot.git (fetch)</span><br><span class="line">origin  git@github.com:your_github_name/ardupilot.git (push)</span><br><span class="line">upstream        https://github.com/diydrones/ardupilot.git (fetch)</span><br><span class="line">upstream        https://github.com/diydrones/ardupilot.git (push)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>更改代码并推送到fork库。</p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#首先添加更改的文件， .代表添加所有更改的文件</span></span><br><span class="line">~ $ git add .</span><br><span class="line"><span class="comment">#查看添加状况</span></span><br><span class="line">~ $ git status</span><br><span class="line"><span class="comment">#添加更改注释</span></span><br><span class="line">~ $ git commit -m <span class="string">"your comment"</span></span><br><span class="line"><span class="comment">#推送到fork库</span></span><br><span class="line">~ $ git push origin master</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>保持与官方源代码同步，这一步一般与步骤2结合，保证推送到fork库时是在最新的代码上进行的更改。</p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">~ $ git fetch upstream master</span><br><span class="line"><span class="comment">#重置当前的分支</span></span><br><span class="line">~ $ git rebase upstream/master</span><br><span class="line"><span class="comment">#一般这里都需要更新子模块</span></span><br><span class="line">~ $ git submodule update --init --recursive</span><br><span class="line"><span class="comment">#查看更新结果</span></span><br><span class="line">~ $ git status</span><br><span class="line"><span class="comment">#如果更新后产生了冲突，先解决冲突再按照步骤2进行add/commit</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在<code>Pull Request</code>页面选择<code>New pull request</code>按钮；选择需要提交的分支然后点击<code>Click to create pull request for this comparison</code>（base branch 是远程官方分支, head branch 是自己要提交的分支，这样做可以在任意时间段进行提交）</p>
+<p> <img src="/images/newpull.png"></p>
+<p> <img src="/images/creatpull.png"></p>
+</li>
+</ol>
+<p><br></p>
+<h1 id="代码库"><a href="#代码库" class="headerlink" title="代码库"></a>代码库</h1><p>原文参考<a href="http://dev.ardupilot.com/wiki/learning-the-ardupilot-codebase/" target="_blank" rel="noopener">这里</a>!!!   </p>
+<p>1、ArduPilot的<a href="http://dev.ardupilot.com/wiki/learning-ardupilot-introduction/#basic_structure" target="_blank" rel="noopener">基本框架</a>分为5个主要部分：    </p>
+<ul>
+<li>vehicle目录</li>
+<li>AP_HAL (Hardware Abstraction Layer)：能使ArduPilot移植到不同的平台；目录为 libraries/AP_HAL；</li>
+<li>libraries</li>
+<li>tools目录</li>
+<li>外部支持代码    </li>
+</ul>
+<p>2、makefiles文件是在<code>mk/directory</code>目录里，为每个类型的支持定义编译规则，这里有一些辅助的make目标：</p>
+<ul>
+<li>make clean – clean the build for non-px4 targets</li>
+<li>make px4-clean – completely clean the build for PX4 targets</li>
+<li>make px4-cleandep – cleanup just dependencies for PX4 targets</li>
+</ul>
+<p>3、探索自己的代码的第一步是使用库的example sketches。知道library API和约定在ArduPilot中的使用对理解代码是至关重要的。你可以看到这些example sketches：</p>
+<ul>
+<li>libraries/AP_GPS/examples/GPS_AUTO_test</li>
+<li>libraries/AP_InertialSensor/examples/INS_generic</li>
+<li>libraries/AP_Compass/examples/AP_Compass_test</li>
+<li>libraries/AP_Baro/examples/BARO_generic</li>
+<li>libraries/AP_AHRS/examples/AHRS_Test</li>
+</ul>
+<p><a href="http://dev.ardupilot.com/wiki/learning-ardupilot-the-example-sketches/#understanding_the_example_sketch_code" target="_blank" rel="noopener">理解example sketch代码</a>：</p>
+<ul>
+<li>每个使用AP_HAL特性的文件都需要声明一个hal引用，hal的实体在AP_HAL_XXX库里，最常用的hal函数：     <ul>
+<li>hal.console-&gt;printf() and hal.console-&gt;printf_P() to print strings (use the _P to use less memory on AVR)</li>
+<li>hal.scheduler-&gt;millis() and hal.scheduler-&gt;micros() to get the time since boot</li>
+<li>hal.scheduler-&gt;delay() and hal.scheduler-&gt;delay_microseconds() to sleep for a short time</li>
+<li>hal.gpio-&gt;pinMode(), hal.gpio-&gt;read() and hal.gpio-&gt;write() for accessing GPIO pins</li>
+<li>I2C access via hal.i2c</li>
+<li>SPI access via hal.spi</li>
+</ul>
+</li>
+<li>setup()函数在板子启动的时候被调用一次，它实际的调用来自每块板子的HAL，所有main函数是在HAL里的，其后就是loop()函数的调用，sketch的主要工作体现在loop()函数里，注意这两个函数只是冰山一角；</li>
+<li><code>AP_HAL_MAIN()</code>是一个HAL宏，用来产生必要的代码声明C++主要函数，以及一些板级的初始化代码，位于<code>AP_HAL_XXX_Main.h</code>。</li>
+</ul>
+<p>4、<a href="http://dev.ardupilot.com/wiki/learning-ardupilot-threading/#understanding_ardupilot_threading" target="_blank" rel="noopener">理解ArduPilot线程</a>：APM1 and APM2不支持线程，所以要做一个简单的定时器和回调；有很多您需要了解的ArduPilot线程相关的关键概念：</p>
+<ul>
+<li><p><a href="http://dev.ardupilot.com/wiki/learning-ardupilot-threading/#the_timer_callbacks" target="_blank" rel="noopener">定时器回调函数</a>：在AP_HAL里每个平台提供了一个1 khz 计时器；可以这样注册定时器回调函数(来自MS5611 barometer driver)：</p>
+  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hal.scheduler-&gt;register_timer_process(AP_HAL_MEMBERPROC(&amp;AP_Baro_MS5611::_update));</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a href="http://dev.ardupilot.com/wiki/learning-ardupilot-threading/#hal_specific_threads" target="_blank" rel="noopener">HAL特定线程</a>：创建一些线程支持基本的操作，这些线程提供了一种调度慢任务而不打断主飞行任务的方法，比如px4上的一些（用USB连接pixhawk，波特率为57600，命令ps，能看到一些固有的线程）：</p>
+<ul>
+<li>The UART thread, for reading and writing UARTs (and USB)</li>
+<li>The timer thread, which supports the 1kHz timer functionality described above</li>
+<li>The IO thread, which supports writing to the microSD card, EEPROM and FRAM</li>
+</ul>
+</li>
+<li><p><a href="http://dev.ardupilot.com/wiki/learning-ardupilot-threading/#driver_specific_threads" target="_blank" rel="noopener">驱动程序特定线程</a>：例程见AP_HAL_Linux/ToneAlarmDriver.cpp</p>
+</li>
+<li><p><a href="http://dev.ardupilot.com/wiki/learning-ardupilot-threading/#ardupilot_drivers_versus_platform_drivers" target="_blank" rel="noopener">ArduPilot驱动和不同平台的驱动</a>：举个例子，MPU6000传感器，non-PX4 平台使用AP_InertialSensor_MPU6000.cpp驱动，而PX4平台使用AP_InertialSensor_PX4.cpp驱动。</p>
+</li>
+<li><p><a href="http://dev.ardupilot.com/wiki/learning-ardupilot-threading/#platform_specific_threads_and_tasks" target="_blank" rel="noopener">平台特定的线程和任务</a>：在某些平台，一些基本的任务和线程将在开机的时候被创建。如PX4：</p>
+<ul>
+<li>idle task – called when there is nothing else to run</li>
+<li>init – used to start up the system</li>
+<li>px4io – handle the communication with the PX4IO co-processor</li>
+<li>hpwork – handle thread based PX4 drivers (mainly I2C drivers)</li>
+<li>lpwork – handle thread based low priority work (eg. IO)</li>
+<li>fmuservo – handle talking to the auxillary PWM outputs on the FMU</li>
+<li><p>uavcan – handle the uavcan CANBUS protocol</p>
+<p>它们是由 <a href="https://github.com/diydrones/ardupilot/blob/master/mk/PX4/ROMFS/init.d/rc.APM" target="_blank" rel="noopener">rc.APM script</a>脚本创建，在启动的时候执行，一个学习启动更加有效的方法是无SD卡启动，因为<a href="https://github.com/diydrones/ardupilot/blob/master/mk/PX4/ROMFS/init.d/rcS" target="_blank" rel="noopener">rcS script</a>是在rc.APM之前执行的。可以用pixhawk启动后在nsh里做如下的练习：    </p>
+<pre><code>tone_alarm stop
+uorb start
+mpu6000 start
+mpu6000 info
+mpu6000 test
+mount -t binfs /dev/null /bin
+ls /bin
+perf
+</code></pre><p>这些的源代码在<a href="https://github.com/diydrones/PX4Firmware/tree/master/src/drivers" target="_blank" rel="noopener">PX4Firmware/src/drivers</a>里，如果你看了mpu6000驱动，你会看到这么一行：</p>
+<pre><code>hrt_call_every(&amp;_call, 1000, _call_interval, (hrt_callout)&amp;MPU6000::measure_trampoline, this);
+</code></pre><p>它跟AP_HAL里的hal.scheduler-&gt;register_timer_process()是等效的，用在操作迅速的常规事件里，如SPI设备驱动。或者你还可以看到hmc5883驱动里的</p>
+<pre><code>work_queue(HPWORK, &amp;_work, (worker_t)&amp;HMC5883::cycle_trampoline, this, 1);
+</code></pre><p>而这个适用于速度慢一点的设备，比如IIC。</p>
+</li>
+</ul>
+</li>
+<li><p><a href="http://dev.ardupilot.com/wiki/learning-ardupilot-threading/#the_ap_scheduler_system" target="_blank" rel="noopener">AP_Scheduler系统</a>：AP_Scheduler 库的作用是在主线程里面划分时间片；可以通过例子<a href="https://github.com/diydrones/ardupilot/blob/master/libraries/AP_Scheduler/examples/Scheduler_test/Scheduler_test.cpp" target="_blank" rel="noopener"> AP_Scheduler/examples/Scheduler_test.cpp</a>学习，这个文件里边有一个表单：</p>
+  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> AP_Scheduler::Task scheduler_tasks[] PROGMEM = &#123;</span><br><span class="line"> &#123; ins_update, <span class="number">1</span>, <span class="number">1000</span> &#125;,</span><br><span class="line"> &#123; one_hz_print, <span class="number">50</span>, <span class="number">1000</span> &#125;,</span><br><span class="line"> &#123; five_second_call, <span class="number">250</span>, <span class="number">1800</span> &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>  函数后面的第一个数字是调用频率，它的单位由ins.init()调用控制，这个例子使用的是RATE_50HZ，即20ms，所以ins_update()调用是20ms一次，one_hz_print()调用是1s一次，five_second_call为5s一次。第三个数字是函数预计花费的最长时间。另一个关键点是 ins.wait_for_sample()函数的调用，它是ArduPilot驱动调度的节拍器，它阻塞主函数的执行直到一个新的IMU采集的到来，而阻塞的时间是由ins.init()控制的。 AP_Scheduler tables必须有如下的属性：</p>
+<ul>
+<li>它们不能被阻塞，除非ins.update()被调用；</li>
+<li>在飞行中不能执行睡眠函数；</li>
+<li><p>它们应该有可预测的最坏情况时间；   </p>
+<p>现在可以在Scheduler_test例子里做练习了。 比如做如下的事情：</p>
+<p>  read the barometer<br>  read the compass<br>  read the GPS<br>  update the AHRS and print the roll/pitch</p>
+</li>
+</ul>
+</li>
+<li><p><a href="http://dev.ardupilot.com/wiki/learning-ardupilot-threading/#semaphores" target="_blank" rel="noopener">信号量</a>：为了防止多个线程访问一个共享的数据结构而产生冲突，这里有三种原理方法：semaphores, lockless data structures and the PX4 ORB；查看libraries/AP_Compass/AP_Compass_HMC5883.cpp里的_i2c_sem变量，自己探索它的工作原理。</p>
+</li>
+<li><p><a href="http://dev.ardupilot.com/wiki/learning-ardupilot-threading/#lockless_data_structures" target="_blank" rel="noopener">无锁的数据结构</a>：ArduPilot两个无锁的数据结构的例子：</p>
+<ul>
+<li>the _shared_data structure in libraries/AP_InertialSensor/AP_InertialSensor_MPU9250.cpp</li>
+<li><p>the ring buffers used in numerous places. A good example is libraries/DataFlash/DataFlash_File.cpp</p>
+<p> DataFlash_File中可以查看 _writebuf_head 和 _writebuf_tail两个变量。</p>
+</li>
+</ul>
+</li>
+<li><p><a href="http://dev.ardupilot.com/wiki/learning-ardupilot-threading/#the_px4_orb" target="_blank" rel="noopener">PX4 ORB</a>：ORB是一种从系统的一部分到系统的另一部分提供数据的方式，它在一个多线程的环境中使用了发布/订阅模型。所有的定义都在<a href="https://github.com/diydrones/PX4Firmware/tree/master/src/modules/uORB/topics" target="_blank" rel="noopener">PX4Firmware/src/modules/uORB/topics</a>；例子有AP_HAL_PX4/RCOutput.cpp里的_publish_actuators()，你将看到它订阅了一个“actuator_direct”主题，它包含了每个电调的设定速度。<br>另外的两种与px4驱动通信的机制为：</p>
+<ul>
+<li>ioctl calls (see the examples in AP_HAL_PX4/RCOutput.cpp)</li>
+<li>/dev/xxx read/write calls (see _timer_tick in AP_HAL_PX4/RCOutput.cpp)</li>
+</ul>
+</li>
+</ul>
+<p>5、<a href="http://dev.ardupilot.com/wiki/learning-ardupilot-uarts-and-the-console/" target="_blank" rel="noopener">uart和控制台</a>：ArduPilot HAL目前有5UARTs：</p>
+<ul>
+<li>uartA – the console (usually USB, runs MAVLink telemetry)</li>
+<li>uartB – the first GPS</li>
+<li>uartC – primary telemetry (telem1 on Pixhawk, 2nd radio on APM2)</li>
+<li>uartD – secondary telemetry (telem2 on Pixhawk)</li>
+<li>uartE – 2nd GPS</li>
+</ul>
+<p>你可以任意使用，但最好是按它原来的方式，因为有现成的代码。有些UARTs有着双重角色，如SERIAL2_PROTOCOL参数使uartD用于MAVLink变为用于Frsky telemetry。可以参看这个例子 <a href="https://github.com/diydrones/ardupilot/blob/master/libraries/AP_HAL/examples/UART_test/UART_test.cpp" target="_blank" rel="noopener">libraries/AP_HAL/examples/UART_test</a>做练习。<br>每个UART有一些基本的IO函数：</p>
+<ul>
+<li>printf – formatted print</li>
+<li>printf_P – formatted print with progmem string (saves memory on AVR boards)</li>
+<li>println – print and line feed</li>
+<li>write – write a bunch of bytes</li>
+<li>read – read some bytes</li>
+<li>available – check if any bytes are waiting</li>
+<li>txspace – check how much outgoing buffer space is available</li>
+<li>get_flow_control – check if the UART has flow control capabilities</li>
+</ul>
+<p>6、<a href="http://dev.ardupilot.com/wiki/learning-ardupilot-rc-input-output/" target="_blank" rel="noopener">RC输入与输出</a>：ArduPilot根据板类支持几种不同类型的RC输入：</p>
+<ul>
+<li>PPMSum – on PX4, Pixhawk, Linux and APM2</li>
+<li>SBUS – on PX4, Pixhawk and Linux</li>
+<li>Spektrum/DSM – on PX4, Pixhawk and Linux</li>
+<li>PWM – on APM1 and APM2</li>
+<li><p>RC Override (MAVLink) – all boards</p>
+<p>  其中SBUS 和 Spektrum/DSM都是串口协议。</p>
+</li>
+</ul>
+<p>RC输出是ArduPilot控制伺服系统和电机，RC输出默认为50 hz PWM值，但是可以更高，通常在400hz。</p>
+<ul>
+<li><p><a href="http://dev.ardupilot.com/wiki/learning-ardupilot-rc-input-output/#ap_hal_rcinput_object" target="_blank" rel="noopener">AP_HAL RCInput对象</a>(hal.rcin)</p>
+<p>  它提供目前板上收到的低级的访问通道值。例子为<a href="https://github.com/diydrones/ardupilot/blob/master/libraries/AP_HAL/examples/RCInput/RCInput.cpp" target="_blank" rel="noopener">libraries/AP_HAL/examples/RCInput/RCInput.cpp</a>。</p>
+</li>
+<li><p><a href="http://dev.ardupilot.com/wiki/learning-ardupilot-rc-input-output/#ap_hal_rcoutput_object" target="_blank" rel="noopener">AP_HAL RCOutput</a>(hal.rcout)</p>
+<p>  hal.rcin 和 hal.rcout 对象都是低级函数，所有用户配置都是通过RC_Channel，例子在 <a href="https://github.com/diydrones/ardupilot/blob/master/libraries/RC_Channel/examples/RC_Channel/RC_Channel.cpp" target="_blank" rel="noopener">libraries/RC_Channel/examples/RC_Channel/RC_Channel.cpp</a>。</p>
+</li>
+<li><p><a href="http://dev.ardupilot.com/wiki/learning-ardupilot-rc-input-output/#the_rc_channel_aux_object" target="_blank" rel="noopener">RC_Channel_aux</a></p>
+<p>  位于libraries/RC_Channel，是RC_Channel的子类，可以由用户指定附加属性。</p>
+</li>
+</ul>
+<p>7、<a href="http://dev.ardupilot.com/wiki/learning-ardupilot-storage-and-eeprom-management/" target="_blank" rel="noopener">存储和eeprom管理</a></p>
+<ul>
+<li><p><a href="http://dev.ardupilot.com/wiki/learning-ardupilot-storage-and-eeprom-management/#the_ap_halstorage_library" target="_blank" rel="noopener">AP_HAL::Storage</a>：hal.storage API有三个主要的函数：</p>
+<ul>
+<li>init() to start up the storage subsystem</li>
+<li>read_block() to read a block of bytes</li>
+<li><p>write_block() to write a block of bytes</p>
+<p>提倡使用API，只有在使用新板子或debug的时候才用hal.storage。可用存储的大小 <a href="https://github.com/diydrones/ardupilot/blob/master/libraries/AP_HAL/AP_HAL_Boards.h" target="_blank" rel="noopener">AP_HAL/AP_HAL_Boards.h</a>里的宏HAL_STORAGE_SIZE定义。所以如果你想使用动态存储只能使用Posix IO。</p>
+</li>
+</ul>
+</li>
+<li><p><a href="http://dev.ardupilot.com/wiki/learning-ardupilot-storage-and-eeprom-management/#the_storagemanager_library" target="_blank" rel="noopener">StorageManager库</a></p>
+<p>  详情见<a href="https://github.com/diydrones/ardupilot/blob/master/libraries/StorageManager/StorageManager.cpp" target="_blank" rel="noopener">libraries/StorageManager/StorageManager.cpp</a>，在板子上做测试的时候注意备份好配置文件。</p>
+</li>
+<li><p><a href="http://dev.ardupilot.com/wiki/learning-ardupilot-storage-and-eeprom-management/#the_dataflash_library" target="_blank" rel="noopener">DataFlash库</a></p>
+<p>  用于板载logs；也提供API从log文件里边取回数据；例子 <a href="https://github.com/diydrones/ardupilot/blob/master/libraries/DataFlash/examples/DataFlash_test/DataFlash_test.cpp" target="_blank" rel="noopener">libraries/DataFlash/examples/DataFlash_test/DataFlash_test.cpp</a>，或者在loop()里可以看到：</p>
+<pre><code>DataFlash.get_log_boundaries(log_num, start, end);
+</code></pre></li>
+<li><p><a href="http://dev.ardupilot.com/wiki/learning-ardupilot-storage-and-eeprom-management/#posix_io" target="_blank" rel="noopener">Posix IO</a></p>
+<p>  一个很好的例子是AP_Terrain库,其中包含地形数据；是否支持可以从 <a href="https://github.com/diydrones/ardupilot/blob/master/libraries/AP_HAL/AP_HAL_Boards.h" target="_blank" rel="noopener">AP_HAL_Boards.h</a>查看HAVE_OS_POSIX_IO macro，还可以定义数据的存储位置；这个操作比较耗时，特别在飞行过程中不宜使用；可以看这个例子 <a href="https://github.com/diydrones/ardupilot/blob/master/libraries/AP_Terrain/TerrainIO.cpp" target="_blank" rel="noopener">libraries/AP_Terrain/TerrainIO.cpp</a>学会怎么使用Posix IO。</p>
+</li>
+</ul>
+<p><hr></p>
+<h1 id="上位机安装"><a href="#上位机安装" class="headerlink" title="上位机安装"></a>上位机安装</h1><p>由于我使用的是Ubuntu, 所以我会想办法使Mission Planner上位机能在linux平台上运行，在pixhawk的官网上也发现了这样的<a href="https://pixhawk.org/users/ground_control_stations/start#apm_mission_planner" target="_blank" rel="noopener">文章</a>以及谷歌搜到的<a href="http://www.rcgroups.com/forums/showthread.php?t=2179591" target="_blank" rel="noopener">文章</a>。</p>
+<p>这里<a href="https://github.com/diydrones/MissionPlanner/blob/master/README.md" target="_blank" rel="noopener">mono</a><a href="http://download.mono-project.com/sources/mono/" target="_blank" rel="noopener">版本</a>下载，参考<a href="http://www.mono-project.com/docs/getting-started/install/linux/" target="_blank" rel="noopener">Install Mono on Linux</a>安装mono</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">~ $ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF</span><br><span class="line"><span class="comment"># =&gt; If for some reason you want to pin an older version of Mono rather than updating to the latest, you can modify the Debian repository to “wheezy/snapshots/X.XX.X” instead of “wheezy”. For example, “wheezy/snapshots/3.10.0” will lock you to that version.</span></span><br><span class="line">~ $ <span class="built_in">echo</span> <span class="string">"deb http://download.mono-project.com/repo/debian wheezy main"</span> | sudo tee /etc/apt/sources.list.d/mono-xamarin.list</span><br><span class="line">~ $ <span class="built_in">echo</span> <span class="string">"deb http://download.mono-project.com/repo/debian wheezy-apache24-compat main"</span> | sudo tee -a /etc/apt/sources.list.d/mono-xamarin.list</span><br><span class="line">~ $ sudo apt-get update</span><br><span class="line">~ $ sudo apt-get install mono-runtime</span><br><span class="line">~ $ sudo apt-get install mono-complete festival</span><br><span class="line"><span class="comment"># =&gt; The package mono-devel should be installed to compile code.</span></span><br><span class="line"><span class="comment"># =&gt; The package mono-complete should be installed to install everything - this should cover most cases of “assembly not found” errors.</span></span><br><span class="line"><span class="comment"># =&gt; The package referenceassemblies-pcl should be installed for PCL compilation support - this will resolve most cases of “Framework not installed: .NETPortable” errors during software compilation.</span></span><br><span class="line"><span class="comment"># =&gt; The package ca-certificates-mono should be installed to get SSL certificates for HTTPS connections. Install this package if you run into trouble making HTTPS connections.</span></span><br><span class="line"><span class="comment"># =&gt; 或者单独安装，这样比较省硬盘</span></span><br><span class="line"><span class="comment"># =&gt; festival 用于MP的语言输出</span></span><br><span class="line">~ $ sudo apt-get install mono-runtime libmono-system-windows-forms4.0-cil libmono-system-xml-linq4.0-cil libmono-system-management4.0-cil libmono-system-web4.0-cil libmono-corlib4.5-cil libmono-system-numerics4.0-cil festival</span><br><span class="line">~ $ mono MissionPlanner.exe</span><br></pre></td></tr></table></figure>
+<p>If the .NET program does run well under Mono then running it with Mono would be a better choice. You can extract the executables from the MSI using something like 7zip.</p>
+<p>It’s like this:</p>
+<p>Program -&gt; Mono (Framework) -&gt; System</p>
+<p>Versus</p>
+<p>Program -&gt; .NET (Framework) -&gt; WINE -&gt; System</p>
+<p>然后下载Mission Planner的<a href="http://ardupilot.com/downloads/?did=83" target="_blank" rel="noopener">ZIP版本</a>，解压运行即可。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~ $ wget http://ardupilot.com/wp-content/plugins/download-monitor/download.php?id=83</span><br></pre></td></tr></table></figure>
+<p>对于apm_planner2可以选择安装<a href="http://ardupilot.com/downloads/?did=111" target="_blank" rel="noopener">linux版</a></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~ $ wget http://firmware.diydrones.com/Tools/APMPlanner/apm_planner2_latest_ubuntu_trusty64.deb</span><br><span class="line">~ $ sudo dpkg -i apm_planner2_latest_ubuntu_trusty64.deb</span><br></pre></td></tr></table></figure>
+<p><hr></p>
+<h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p>User Manual: <a href="http://copter.ardupilot.com/" target="_blank" rel="noopener">http://copter.ardupilot.com/</a><br>Developer Manual: <a href="http://dev.ardupilot.com/" target="_blank" rel="noopener">http://dev.ardupilot.com/</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ArduPilot/" rel="tag"># ArduPilot</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/16/linux下sublime-text-2使用技巧/" rel="next" title="linux下sublime text 2使用技巧">
+                <i class="fa fa-chevron-left"></i> linux下sublime text 2使用技巧
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/16/汇顶科技求职感悟/" rel="prev" title="汇顶科技求职感悟">
+                汇顶科技求职感悟 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="nephen">
+            
+              <p class="site-author-name" itemprop="name">nephen</p>
+              <p class="site-description motion-element" itemprop="description">学而不思则罔，思而不学则殆。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#编译pixhawk环境搭建"><span class="nav-number">1.</span> <span class="nav-text">编译pixhawk环境搭建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参与贡献"><span class="nav-number">2.</span> <span class="nav-text">参与贡献</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码库"><span class="nav-number">3.</span> <span class="nav-text">代码库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#上位机安装"><span class="nav-number">4.</span> <span class="nav-text">上位机安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文章"><span class="nav-number">5.</span> <span class="nav-text">参考文章</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">nephen</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

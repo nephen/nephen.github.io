@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="linux,sublime-text-2,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="由于sublime的多平台性，以及也有很多强悍的插件可供使用，是我不得不将兴趣移植这个编辑器上面来。将查看代码而言，在linux下也可以通过wine安装sourceinsight，但是对于安装跟使用来说不是很方便，特别是有git项目的时候。  安装首先下载安装文件。将下载好的文件解压至/opt，然后创建链接文件。 1$ ln -s /opt/Sublime\ Text\ 2/sublime_tex">
+<meta name="keywords" content="linux,sublime-text-2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux下sublime text 2使用技巧">
+<meta property="og:url" content="http://nephen.cn/2017/06/16/linux下sublime-text-2使用技巧/index.html">
+<meta property="og:site_name" content="来风的官方网站">
+<meta property="og:description" content="由于sublime的多平台性，以及也有很多强悍的插件可供使用，是我不得不将兴趣移植这个编辑器上面来。将查看代码而言，在linux下也可以通过wine安装sourceinsight，但是对于安装跟使用来说不是很方便，特别是有git项目的时候。  安装首先下载安装文件。将下载好的文件解压至/opt，然后创建链接文件。 1$ ln -s /opt/Sublime\ Text\ 2/sublime_tex">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://nephen.cn/images/06235328-cd602dc27fa04924b59c4bb16d33aedd.jpg">
+<meta property="og:image" content="http://www.xuanfengge.com/wp-content/uploads/2013/12/basic.gif">
+<meta property="og:image" content="http://www.xuanfengge.com/wp-content/uploads/2013/12/function-template.gif">
+<meta property="og:image" content="http://nephen.cn/images/markdownedit.png">
+<meta property="og:image" content="http://www.xuanfengge.com/wp-content/uploads/2013/12/git.png">
+<meta property="og:image" content="http://www.xuanfengge.com/wp-content/uploads/2013/12/autofilename.gif">
+<meta property="og:image" content="http://www.xuanfengge.com/wp-content/uploads/2013/12/diff.gif">
+<meta property="og:image" content="http://www.xuanfengge.com/wp-content/uploads/2013/12/cb42e7cddad0c04794b783742ee8f2085e95295a.png">
+<meta property="og:image" content="http://nephen.cn/images/align.gif">
+<meta property="og:image" content="http://nephen.cn/images/cset.png">
+<meta property="og:image" content="http://nephen.cn/images/cimprove.png">
+<meta property="og:image" content="http://nephen.cn/images/cool.gif">
+<meta property="og:image" content="http://nephen.cn/images/coolset.png">
+<meta property="og:image" content="http://nephen.cn/images/formate.png">
+<meta property="og:image" content="http://nephen.cn/images/astyle.gif">
+<meta property="og:image" content="http://nephen.cn/images/mono.png">
+<meta property="og:image" content="http://nephen.cn/images/hex.jpeg">
+<meta property="og:image" content="http://nephen.cn/images/bg.gif">
+<meta property="og:image" content="http://nephen.cn/images/space.jpg">
+<meta property="og:image" content="http://nephen.cn/images/screencast.gif">
+<meta property="og:image" content="https://github.com/standfast/Translate/raw/master/pics/screenshot.png">
+<meta property="og:updated_time" content="2018-11-23T01:38:49.379Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux下sublime text 2使用技巧">
+<meta name="twitter:description" content="由于sublime的多平台性，以及也有很多强悍的插件可供使用，是我不得不将兴趣移植这个编辑器上面来。将查看代码而言，在linux下也可以通过wine安装sourceinsight，但是对于安装跟使用来说不是很方便，特别是有git项目的时候。  安装首先下载安装文件。将下载好的文件解压至/opt，然后创建链接文件。 1$ ln -s /opt/Sublime\ Text\ 2/sublime_tex">
+<meta name="twitter:image" content="http://nephen.cn/images/06235328-cd602dc27fa04924b59c4bb16d33aedd.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://nephen.cn/2017/06/16/linux下sublime-text-2使用技巧/">
+
+
+
+
+
+  <title>linux下sublime text 2使用技巧 | 来风的官方网站</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">来风的官方网站</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://nephen.cn/2017/06/16/linux下sublime-text-2使用技巧/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nephen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="来风的官方网站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">linux下sublime text 2使用技巧</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-16T07:43:37+08:00">
+                2017-06-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/工具/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>由于sublime的多平台性，以及也有很多强悍的插件可供使用，是我不得不将兴趣移植这个编辑器上面来。将查看代码而言，在linux下也可以通过wine安装sourceinsight，但是对于安装跟使用来说不是很方便，特别是有git项目的时候。</p>
+<p><br></p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>首先下载安装<a href="http://www.sublimetext.com/2" target="_blank" rel="noopener">文件</a>。将下载好的文件解压至/opt，然后创建链接文件。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ln -s /opt/Sublime\ Text\ 2/sublime_text /usr/bin/</span><br></pre></td></tr></table></figure>
+<p>下面解决不能输入中文的问题<br>保存下面的代码到文件sublime_imfix.c(位于~目录，即主文件夹目录)</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;gtk/gtkimcontext.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">gtk_im_context_set_client_window</span> <span class="params">(GtkIMContext *context,</span></span></span><br><span class="line"><span class="function"><span class="params">         GdkWindow    *window)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> GtkIMContextClass *klass;</span><br><span class="line"> g_return_if_fail (GTK_IS_IM_CONTEXT (context));</span><br><span class="line"> klass = GTK_IM_CONTEXT_GET_CLASS (context);</span><br><span class="line"></span><br><span class="line"> <span class="keyword">if</span> (klass-&gt;set_client_window)</span><br><span class="line">   klass-&gt;set_client_window (context, window);</span><br><span class="line"></span><br><span class="line"> g_object_set_data(G_OBJECT(context),<span class="string">"window"</span>,window);</span><br><span class="line"></span><br><span class="line"> <span class="keyword">if</span>(!GDK_IS_WINDOW (window))</span><br><span class="line">   <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">int</span> width = gdk_window_get_width(window);</span><br><span class="line"> <span class="keyword">int</span> height = gdk_window_get_height(window);</span><br><span class="line"> <span class="keyword">if</span>(width != <span class="number">0</span> &amp;&amp; height !=<span class="number">0</span>)</span><br><span class="line">   gtk_im_context_focus_in(context);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>将上一步的代码编译成共享库libsublime-imfix.so，命令如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~</span><br><span class="line">$ gcc -shared -o libsublime-imfix.so sublime_imfix.c  pkg-config --libs --cflags gtk+-2.0 -fPIC</span><br><span class="line">$ sudo mv libsublime-imfix.so /usr/lib</span><br></pre></td></tr></table></figure>
+<p>创建/usr/bin/sublcn，输入</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line">LD_PRELOAD=/usr/lib/libsublime-imfix.so <span class="built_in">exec</span> sublime_text <span class="string">"<span class="variable">$@</span>"</span></span><br></pre></td></tr></table></figure>
+<p>之后打开权限</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/bin</span><br><span class="line">sudo chmod 777 ./sublcn</span><br></pre></td></tr></table></figure>
+<p>下面通过sublcn命令打开sublime text 2就可以输入中文了。</p>
+<p><br></p>
+<h1 id="查看代码"><a href="#查看代码" class="headerlink" title="查看代码"></a>查看代码</h1><h2 id="sublime快捷键"><a href="#sublime快捷键" class="headerlink" title="sublime快捷键"></a>sublime快捷键</h2><p>参考文章：<a href="https://immmmm.com/all-about-sublime-text-2.html" target="_blank" rel="noopener">木木木</a></p>
+<ul>
+<li>多行编辑： ctrl+左键 , Ctrl+Shift+L</li>
+<li>文件切换： ctrl+p 搜索项目中的文件，支持模糊匹配</li>
+<li>ctrl+r：列出当前文件中的所有函数，同ctrl+p后按一个@符号一样，其实可以把ctrl+r理解成ctrl+p的快捷键</li>
+<li>全局替换搜索 ： ctrl+shift+f</li>
+<li>函数查找 ctrl+p 然后输入@，加上# 和 @ 分别为变量和函数，其实搜变量也能搜到函数</li>
+<li>跳到指定行 ctrl+p 然后输入’:’</li>
+<li>ctrl+f：当前文件中查找关键字</li>
+<li>跳到某个类某个方法 ctrl+p 输入 类名@函数名</li>
+<li>调出命令面板 ctrl+shift+p</li>
+<li>F11：全屏</li>
+<li>shift+F11：全屏免打扰模式，只编辑当前文件</li>
+<li>Ctrl+M 光标移动至括号内开始或结束的位置</li>
+<li>Ctrl+Shift+M 选择括号内的内容（按住-继续选择父括号）</li>
+<li>Ctrl+D 选中光标所占的文本，继续操作则会选中下一个相同的文本</li>
+<li>Alt+F3 选中文本按下快捷键，即可一次性选择全部的相同文本进行同时编辑。举个栗子：快速选中并更改所有相同的变量名、函数名等</li>
+<li>Alt+Shift+2 窗口两列显示</li>
+<li>Alt+Shift+8 窗口两行显示</li>
+<li>Ctrl+Enter 光标所在行后插入行</li>
+<li>Ctrl+Shift+Enter 光标所在行前插入行</li>
+<li>Ctrl+Shift+↑ 与上行互换</li>
+<li>Ctrl+Shift+↓ 与下行互换</li>
+<li>Ctrl+Shift+K 删除整行</li>
+<li>Ctrl+Shift+D 复制整行</li>
+<li>Ctrl+D 选中光标所在字符串 （按住继续选择下个相同字符串）</li>
+<li>Alt+F3 选中与光标处相同的全部词</li>
+<li>重新打开关闭的标签：和Chrome浏览器一样，如果你不小心关闭了一个页面，你只要按下Shift+Cmd+T（Windows下按住Shift+Ctrl+T）就可以重新打开该页面。如果你连续按这样的组合键，你就可以按照关闭的顺序重新打开它们。</li>
+<li><p>上下移动设置。快捷键为<code>ctrl + up\ctrl + down</code>。如默认为设置，需手动进行用户设置</p>
+  <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123; <span class="string">"keys"</span>: [<span class="string">"ctrl+up"</span>], <span class="string">"command"</span>: <span class="string">"scroll_lines"</span>, <span class="string">"args"</span>: &#123;<span class="string">"amount"</span>: 1.0 &#125; &#125;,</span><br><span class="line">&#123; <span class="string">"keys"</span>: [<span class="string">"ctrl+down"</span>], <span class="string">"command"</span>: <span class="string">"scroll_lines"</span>, <span class="string">"args"</span>: &#123;<span class="string">"amount"</span>: -1.0 &#125; &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>标签页移动。ctrl + PgUp/PgDn</p>
+</li>
+<li>行首/尾。Home/End</li>
+<li>复制至行首/尾。shift + Home/End</li>
+<li>文章的首部/尾部。ctrl + Home/End</li>
+<li><p>工程切换：ctrl + alt + o</p>
+  <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; <span class="string">"keys"</span>: [<span class="string">"ctrl+alt+o"</span>], <span class="string">"command"</span>: <span class="string">"prompt_select_project"</span> &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="高亮设置"><a href="#高亮设置" class="headerlink" title="高亮设置"></a>高亮设置</h2><p>Sublime Text对于一些常见的扩展名的文件都能够识别并选择Sublime Text内置对应的高亮语法，但是对于一些使用频率比较少的扩展名文件就无法识别，Sublime Text打开此类文件后默认显示成普通文本，没有语法高亮。</p>
+<ul>
+<li>打开文件后点击右下角的Plain Text，在出现的文件格式中选择open all with current extension as…  -&gt;”需要显示的语法类型”。这样以后打开这个类型的文件就会自动进行语法高亮了。</li>
+</ul>
+<h2 id="ctags与cscope"><a href="#ctags与cscope" class="headerlink" title="ctags与cscope"></a>ctags与cscope</h2><p>下面就想通过sublime实现类似SI的功能，毕竟这个编辑器是比较强大的。具体方案为采用ctags和cscope插件。<br>下面参考<a href="http://www.cnblogs.com/cchun/p/3794018.html" target="_blank" rel="noopener">sublime添加ctags实现代码跳转</a>进行安装。具体为：  </p>
+<ol>
+<li><p>下载<a href="http://sublime.wbond.net/Package%20Control.sublime-package" target="_blank" rel="noopener">Package Control.sublime-package</a>放入/home/username/.config/sublime-text-2/Installed Packages中，可以用如下命令行实现</p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /home/username/.config/sublime-text-2/Installed\ Packages/</span><br><span class="line">$ wget http://sublime.wbond.net/Package%20Control.sublime-package</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在sublime下快捷键Ctrl+Shift+P，输入install，选择Package Control: Install Package回车，可以点击Ctrl + `查看安装状态。如果要卸载插件， Ctrl+Shift+P 输入 remove， 选择Package Control: Remove Package 然后再选择已安装的插件， 回车即可卸载。</p>
+</li>
+<li><p>现在开始安装ctags的插件，在package control中选择install package，搜索ctags就能找到ctags的插件，安装之。</p>
+<p> <img src="/images/06235328-cd602dc27fa04924b59c4bb16d33aedd.jpg"></p>
+<p> 到这里ctags就安装好了，肯定无法使用，必须系统中有ctags才能用，安装ctags如下：</p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install ctags</span><br></pre></td></tr></table></figure>
+<p> 这时在侧左栏的工程/项目文件上右键会看到CTags: Rebuild Tags菜单项就是可用的了，点击建立.tags文件完成后进行如下操作。 也可以用命令生成.tags文件</p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#=&gt; 进入主目录</span></span><br><span class="line">$ ctags -R -f .tags</span><br><span class="line">```   </span><br><span class="line">这时再选中一个函数，右键打开Navigate to Definition菜单项并执行，当然这里可以用[快捷键](https://github.com/SublimeText/CTags)：  </span><br><span class="line">  </span><br><span class="line">Command          |               Key Binding    |   Alt Binding | Mouse Binding</span><br><span class="line">------------------|---------------------------------|---------------|-------------------</span><br><span class="line">rebuild_ctags          |         ctrl+t, ctrl+r</span><br><span class="line">navigate_to_definition      |    ctrl+t, ctrl+t    |ctrl+&gt;       |ctrl+<span class="built_in">shift</span>+left_click</span><br><span class="line">jump_prev                     |  ctrl+t, ctrl+b   | ctrl+&lt;     |  ctrl+<span class="built_in">shift</span>+right_click</span><br><span class="line">show_symbols               |     alt+s</span><br><span class="line">show_symbols (all files)     |   alt+<span class="built_in">shift</span>+s</span><br><span class="line">show_symbols (suffix)        |   ctrl+alt+<span class="built_in">shift</span>+s</span><br><span class="line"></span><br><span class="line">也可以自定义热键。</span><br><span class="line"></span><br><span class="line">&lt;img src=<span class="string">"/images/ctags.png"</span> alt=<span class="string">""</span>&gt;</span><br><span class="line"></span><br><span class="line">输入如下：</span><br></pre></td></tr></table></figure>
+<pre><code>{
+    &quot;command&quot;: &quot;navigate_to_definition&quot;,
+    &quot;keys&quot;: [&quot;ctrl+shift+period&quot;]
+},
+{
+    &quot;command&quot;: &quot;jump_prev&quot;,
+    &quot;keys&quot;: [&quot;ctrl+shift+comma&quot;]
+}
+</code></pre> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">4. ctags用官方的解释就是产生标记文件，帮助在文件中定位对象。其实就是你可以找到一个对象的定义处。更多请查看[Sublime之Ctags](http://ju.outofmemory.cn/entry/36068)</span><br><span class="line">5. 搜索下载cscope插件。这里参考了[使用Sublime Text3+Ctags+Cscope替代Source Insight](https://www.zybuluo.com/lanxinyuchs/note/33551)。    </span><br><span class="line">下载cscope</span><br><span class="line"></span><br><span class="line">	```sh</span><br><span class="line">	$ sudo apt-get install cscope</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>在工程目录下执行命令</p>
+<pre><code><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#=&gt; R 表示把所有子目录里的文件也建立索引</span></span><br><span class="line"><span class="comment">#=&gt; b 表示cscope不启动自带的用户界面，而仅仅建立符号数据库</span></span><br><span class="line"><span class="comment">#=&gt; q 生成cscope.in.out和cscope.po.out文件，加快cscope的索引速度</span></span><br><span class="line"><span class="comment">#=&gt; k 在生成索引文件时，不搜索/usr/include目录</span></span><br><span class="line">$ cscope -Rbkq</span><br></pre></td></tr></table></figure>
+</code></pre><p>或者如下<br>安装好Ctags和Cscope工具之后，可以在想要导入的工程的根路径下，通过下面命令建立Cscope索引数据库和.tags文件。</p>
+<pre><code><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">find . -name <span class="string">"*.h"</span> -o -name <span class="string">"*.c"</span> -o -name <span class="string">"*.cc"</span> -o -name <span class="string">"*.S"</span> -o -name <span class="string">"*.ch"</span> -o -name <span class="string">"*.cpp"</span> &gt; cscope.files</span><br><span class="line">cscope -bkq -i cscope.files</span><br><span class="line">ctags -R -f .tags</span><br></pre></td></tr></table></figure>
+
+热键：
++ `Ctrl/Super + \`                 - Show Cscope options
++ `Ctrl/Super + L``Ctrl/Super + S` - Look up symbol under cursor
++ `Ctrl/Super + L``Ctrl/Super + D` - Look up definition under cursor
++ `Ctrl/Super + L``Ctrl/Super + E` - Look up functions called by the function under the cursor
++ `Ctrl/Super + L``Ctrl/Super + R` - Look up functions calling the function under the cursor
++ `Ctrl/Super + Shift + [`         - Jump back
++ `Ctrl/Super + Shift + ]`         - Jump forward
+
+进入cscope查找结果后，按回车即可进入结果相应页面。
+</code></pre><h2 id="sublime部分插件"><a href="#sublime部分插件" class="headerlink" title="sublime部分插件"></a>sublime部分插件</h2><p>下面安装的这些插件可有可无，但是安装他们并熟练运用将成为你得力的助手。<br>参考文章：<a href="http://www.xuanfengge.com/practical-collection-of-sublime-plug-in.html" target="_blank" rel="noopener">实用的sublime插件集合 – sublime推荐必备插件</a>/<a href="http://www.jianshu.com/p/595975a2a5f3" target="_blank" rel="noopener">Sublime插件：C语言篇</a></p>
+<blockquote>
+<p><code>Tip</code>:已安装插件具体请查看/home/username/.config/sublime-text-2/Packages</p>
+</blockquote>
+<ol>
+<li>Terminal插件<br> Terminal插件可以允许在Sublime Text2中打开cmd命令窗口，很实用的一个插件，安装好该插件好，打开cmd命令窗口的快捷键是<br> Ctrl+Shift+T。可在Preferences -&gt; Package Setting找到README。</li>
+<li><p>DocBlockr插件<br> 用来生成注释块的插件，安装好之后直接输入”/*”，然后再按回车键，即可生成代码注释块。它会解析函数，变量，和参数，根据它们自动生成文档范式，你的工作就是去填充对应的说明。</p>
+<p> <img src="http://www.xuanfengge.com/wp-content/uploads/2013/12/basic.gif"></p>
+<p> <img src="http://www.xuanfengge.com/wp-content/uploads/2013/12/function-template.gif"></p>
+</li>
+<li>SublimeCodeIntel插件<br> 代码自动提示</li>
+<li><p>MarkDown Editing插件<br>支持Markdown语法高亮；支持Github Favored Markdown语法；自带3个主题。</p>
+<p><img src="/images/markdownedit.png"></p>
+</li>
+<li><p>Git插件<br> 该插件基本上实现了git的所有功能。设置git推送</p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git push --<span class="built_in">set</span>-upstream origin master</span><br><span class="line">git config --global push.default simple</span><br><span class="line"><span class="comment">#=&gt; 先进行绑定</span></span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+<p> <img src="http://www.xuanfengge.com/wp-content/uploads/2013/12/git.png"></p>
+</li>
+<li><p>Emmet插件<br> Emmet作为zen coding的升级版，对于前端来说，可是必备插件，如果你对它还不太熟悉，可以在其<a href="http://docs.emmet.io/" target="_blank" rel="noopener">官网</a>上看下具体的演示视频。</p>
+</li>
+<li><p>BracketHighlighter插件<br> 可匹配[], (), {}, “”, ”, <tag></tag>，高亮标记，便于查看起始和结束标记</p>
+</li>
+<li><p>AutoFileName插件<br> 自动完成文件名的输入，如图片选取</p>
+<p> <img src="http://www.xuanfengge.com/wp-content/uploads/2013/12/autofilename.gif"></p>
+</li>
+<li><p>FileDiffs插件<br> 比较当前文件与选中的代码、剪切板中代码、另一文件、未保存文件之间的差别。可配置为显示差别在外部比较工具，精确到行。</p>
+<p> <img src="http://www.xuanfengge.com/wp-content/uploads/2013/12/diff.gif"></p>
+</li>
+<li><p>Git​Gutter插件<br>指示代码中插入、修改、删除的地方</p>
+<p><img src="http://www.xuanfengge.com/wp-content/uploads/2013/12/cb42e7cddad0c04794b783742ee8f2085e95295a.png"></p>
+</li>
+<li><p>Alignment插件<br>选中并按ctrl+alt+a就可以使其按照等号对齐</p>
+<p><img src="/images/align.gif"></p>
+</li>
+<li><p>C Improved插件<br>更加人性化的C语言着色方案。<br>设置如下：</p>
+<p><img src="/images/cset.png"><br>对比效果：</p>
+<p><img src="/images/cimprove.png"></p>
+</li>
+<li><p>CoolFormat插件<br>简单好用的代码格式化工具，相当于简化版的Astyle，默认ctrl+alt+shift+q格式化当前文件，ctrl+alt+shift+s格式化当前选中。</p>
+<p><img src="/images/cool.gif"></p>
+<p>格式设置</p>
+<p><img src="/images/coolset.png"></p>
+</li>
+<li><p>SublimeAStyleFormatter插件<br>国人做的Astyle Sublime版，蛮不错的。<br>安装完成之后，下面这个配置一定要打开，即保存自动格式化，这个相比于CoolFormat要简单很多。</p>
+<p>配置</p>
+<p><img src="/images/formate.png"></p>
+<p><img src="/images/astyle.gif"></p>
+</li>
+<li><p>All Autocomplete插件<br>Sublime自带的可以对当前文件中的变量和函数名进行自动提示，但是AllAutocomplete可以对打开的所有文件的变量名进行提示，增强版的代码自动提示符。</p>
+<blockquote>
+<p>Extend Sublime autocompletion to find matches in all open files of the current window</p>
+</blockquote>
+</li>
+<li><p>Markdown Extended + Monokai Extended插件<br>不错的Markdown主题，支持对多种语言的高亮</p>
+<p><img src="/images/mono.png"></p>
+</li>
+<li><p>HexViewer插件<br>玩单片机的玩家都懂这个是很重要</p>
+<p><img src="/images/hex.jpeg"></p>
+</li>
+<li><p>TableeEitor插件<br>Markdown中的表格书写体验真心不咋样，所有有人为这个开发了一个插件，具有较好的自适应性，会自动对齐，强迫症患者喜欢。</p>
+<p><img src="/images/bg.gif"></p>
+</li>
+<li><p>TrailingSpaces插件<br>强迫症患者必备</p>
+<p><img src="/images/space.jpg" alt=""></p>
+</li>
+<li>sublimelinter插件<br>sublimelinter是sublime的代码校验插件，它可以帮你找出错误或编写不规范的代码，支持 C/C++、CoffeeScript、CSS、Git Commit Messages、Haml、HTML、Java、JavaScript、Lua、Objective-J、Perl、PHP、Puppet、Python、Ruby 和 XML 语言。当需要对相应的语言进行代码校验的时候，就要下载相应的校验程序，例如：    <ul>
+<li>C/C++ - lint via <code>cppcheck</code><ul>
+<li>CoffeeScript - lint via <code>coffee -s -l</code></li>
+<li>CSS - lint via built-in <a href="http://csslint.net" target="_blank" rel="noopener">csslint</a></li>
+<li>Git Commit Messages - lint via built-in module based on <a href="http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html" target="_blank" rel="noopener">A Note About Git Commit Messages</a>.</li>
+<li>Haml - syntax check via <code>haml -c</code></li>
+<li>HTML - lint via <code>tidy</code> (actually <a href="http://w3c.github.com/tidy-html5/" target="_blank" rel="noopener">tidy for HTML5</a>)</li>
+<li>Java - lint via <code>javac -Xlint</code></li>
+<li>JavaScript - lint via built in <a href="http://jshint.org" target="_blank" rel="noopener">jshint</a>, <a href="http://jslint.com" target="_blank" rel="noopener">jslint</a>, or the <a href="https://developers.google.com/closure/utilities/docs/linter_howto" target="_blank" rel="noopener">closure linter (gjslint)</a> (if installed)</li>
+<li>Lua - syntax check via <code>luac</code></li>
+<li>Objective-J - lint via built-in <a href="https://github.com/aparajita/capp_lint" target="_blank" rel="noopener">capp_lint</a></li>
+<li>Perl - lint via <a href="http://perlcritic.com/" target="_blank" rel="noopener">Perl:Critic</a> or syntax+deprecation check via <code>perl -c</code></li>
+<li>PHP - syntax check via <code>php -l</code></li>
+<li>Puppet - syntax check via <code>puppet parser validate</code></li>
+<li>Python - native, moderately-complete lint</li>
+<li>Ruby - syntax check via <code>ruby -wc</code></li>
+<li>XML - lint via <code>xmllint</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Search in Project插件<br>由于不是c文件的文件不能被ctags和cscope搜索到，所以建议安装这个插件。比较一下速度，选用了<a href="https://github.com/leonid-shevtsov/SearchInProject_SublimeText#installing-search-engines" target="_blank" rel="noopener">pt</a>引擎，需下载安装。快捷键为<code>Ctrl+Alt+Shift+F</code>，这种方法相对sublime 自身的全局搜索<code>Ctrl+Shift+F</code>要快一些。</p>
+<p>用户设置为</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"search_in_project_engine"</span>: <span class="string">"the_platinum_searcher"</span></span><br></pre></td></tr></table></figure>
+<p>效果如下</p>
+<p><img src="/images/screencast.gif" alt=""></p>
+</li>
+<li><p><a href="https://github.com/standfast/Translate" target="_blank" rel="noopener">Translate翻译插件</a><br>直接通过Package Control搜索Translate下载安装。快捷键为”ctrl+1” 和 “ctrl+2”。</p>
+<p><img src="https://github.com/standfast/Translate/raw/master/pics/screenshot.png" alt="trans"></p>
+</li>
+<li><a href="https://packagecontrol.io/packages/ChineseTranslator" target="_blank" rel="noopener">ChineseTranslator</a>(sublime text 3)<br>插件快捷键为Ctrl+shift+c，启动插件后，若此时有文本被选中，则会出现一个面板显示翻译结果。</li>
+</ol>
+<p><br></p>
+<h1 id="工程设置"><a href="#工程设置" class="headerlink" title="工程设置"></a>工程设置</h1><p>建议参考<a href="http://blog.jenux.me/?p=49" target="_blank" rel="noopener">译:Sublime Text 2 项目设置</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;folders&quot;:</span><br><span class="line">	[</span><br><span class="line">		&#123; // theme</span><br><span class="line">			&quot;path&quot;: &quot;/C/wamp/www/wordpress/wp-content/themes/twentyeleven&quot;,</span><br><span class="line">			&quot;name&quot;: &quot;Twenty Eleven Theme&quot;,</span><br><span class="line">			&quot;file_exclude_patterns&quot;:[</span><br><span class="line">			&quot;._*&quot;,</span><br><span class="line">			&quot;*.ico&quot;,</span><br><span class="line">			&quot;*.swf&quot;</span><br><span class="line">			],</span><br><span class="line">			&quot;folder_exclude_patterns&quot;: [</span><br><span class="line">			&quot;images&quot;</span><br><span class="line">			]</span><br><span class="line">		&#125;,</span><br><span class="line">		&#123; // plugins folder</span><br><span class="line">			&quot;path&quot;: &quot;/C/wamp/www/wordpress/wp-content/plugins&quot;,</span><br><span class="line">			&quot;name&quot;: &quot;Plugins Folder&quot;,</span><br><span class="line">			&quot;file_exclude_patterns&quot;:[</span><br><span class="line">			&quot;._*&quot;, // you need to specify this *again*</span><br><span class="line">			&quot;*.bak&quot;,</span><br><span class="line">			&quot;*.sample&quot;,</span><br><span class="line">			&quot;*.tar&quot;,</span><br><span class="line">			&quot;*.tgz&quot;,</span><br><span class="line">			&quot;*.zip&quot;</span><br><span class="line">			],</span><br><span class="line">			&quot;folder_exclude_patterns&quot;: [</span><br><span class="line">			&quot;akismet&quot;//,</span><br><span class="line">			// add any other plugins you wish to exclude</span><br><span class="line">			]</span><br><span class="line">		&#125;</span><br><span class="line">	],</span><br><span class="line">	&quot;settings&quot;:</span><br><span class="line">	&#123;</span><br><span class="line">		&quot;tab_size&quot;: 4</span><br><span class="line">	&#125;</span><br><span class="line">	&quot;build_systems&quot;:</span><br><span class="line">	[</span><br><span class="line">		&#123;</span><br><span class="line">			&quot;name&quot;: &quot;PX4: make all&quot;,</span><br><span class="line">			&quot;working_dir&quot;: &quot;$&#123;project_path&#125;&quot;,</span><br><span class="line">			&quot;file_regex&quot;: &quot;^(..[^:]*):([0-9]+):?([0-9]+)?:? (.*)$&quot;,</span><br><span class="line">			&quot;cmd&quot;: [&quot;make&quot;],</span><br><span class="line">			&quot;shell&quot;: true</span><br><span class="line">		&#125;,</span><br><span class="line">		&#123;</span><br><span class="line">			&quot;name&quot;: &quot;PX4: make and upload&quot;,</span><br><span class="line">			&quot;working_dir&quot;: &quot;$&#123;project_path&#125;&quot;,</span><br><span class="line">			&quot;file_regex&quot;: &quot;^(..[^:]*):([0-9]+):?([0-9]+)?:? (.*)$&quot;,</span><br><span class="line">			&quot;cmd&quot;: [&quot;make upload px4fmu-v2_default -j8&quot;],</span><br><span class="line">			&quot;shell&quot;: true</span><br><span class="line">		&#125;,</span><br><span class="line">		&#123;</span><br><span class="line">			&quot;name&quot;: &quot;PX4: make posix&quot;,</span><br><span class="line">			&quot;working_dir&quot;: &quot;$&#123;project_path&#125;&quot;,</span><br><span class="line">			&quot;file_regex&quot;: &quot;^(..[^:]*):([0-9]+):?([0-9]+)?:? (.*)$&quot;,</span><br><span class="line">			&quot;cmd&quot;: [&quot;make posix&quot;],</span><br><span class="line">			&quot;shell&quot;: true</span><br><span class="line">		&#125;</span><br><span class="line">	]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h1 id="版本升级"><a href="#版本升级" class="headerlink" title="版本升级"></a>版本升级</h1><p>尝试使用新版本<a href="http://www.sublimetext.com/3" target="_blank" rel="noopener">sublime text 3</a>，安装方式如下</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#首先下载安装文件</span></span><br><span class="line">~ $ wget https://download.sublimetext.com/sublime-text_build-3114_amd64.deb</span><br><span class="line"><span class="comment">#安装</span></span><br><span class="line">~ $ sudo dpkg -i sublime-text_build-3114_amd64.deb</span><br></pre></td></tr></table></figure>
+<p>最后程序可以通过subl命令打开，同样解决输入中文问题参考第一节。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+            <a href="/tags/sublime-text-2/" rel="tag"># sublime-text-2</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/16/BLE核心模块FS-QN9021模块开发-linux版/" rel="next" title="BLE核心模块FS-QN9021模块开发-linux版">
+                <i class="fa fa-chevron-left"></i> BLE核心模块FS-QN9021模块开发-linux版
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/16/ArduPilot开发入门学习/" rel="prev" title="ArduPilot开发入门学习">
+                ArduPilot开发入门学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="nephen">
+            
+              <p class="site-author-name" itemprop="name">nephen</p>
+              <p class="site-description motion-element" itemprop="description">学而不思则罔，思而不学则殆。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看代码"><span class="nav-number">2.</span> <span class="nav-text">查看代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sublime快捷键"><span class="nav-number">2.1.</span> <span class="nav-text">sublime快捷键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高亮设置"><span class="nav-number">2.2.</span> <span class="nav-text">高亮设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ctags与cscope"><span class="nav-number">2.3.</span> <span class="nav-text">ctags与cscope</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sublime部分插件"><span class="nav-number">2.4.</span> <span class="nav-text">sublime部分插件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#工程设置"><span class="nav-number">3.</span> <span class="nav-text">工程设置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#版本升级"><span class="nav-number">4.</span> <span class="nav-text">版本升级</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">nephen</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

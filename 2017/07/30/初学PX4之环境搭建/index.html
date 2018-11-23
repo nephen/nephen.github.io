@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="PX4,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="消息：pixhawk网站搬迁至px4.io !!!        前言前段时间linux崩溃了，桌面进去后只有背景，折腾好久没搞定，为了节省时间索性重装了系统，同时也借这个机会从头记载一下作为初学者的学习过程。主要是按PX4的官网初学者教程进行，把其中遇到的一些初学者容易遇到的问题罗列出来，由于对于国内这方面的资料相对缺乏，希望能给大家提供一些帮助，也算是自我学习的一个整理。 如果你还不是很了解">
+<meta name="keywords" content="PX4">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初学PX4之环境搭建">
+<meta property="og:url" content="http://nephen.cn/2017/07/30/初学PX4之环境搭建/index.html">
+<meta property="og:site_name" content="来风的官方网站">
+<meta property="og:description" content="消息：pixhawk网站搬迁至px4.io !!!        前言前段时间linux崩溃了，桌面进去后只有背景，折腾好久没搞定，为了节省时间索性重装了系统，同时也借这个机会从头记载一下作为初学者的学习过程。主要是按PX4的官网初学者教程进行，把其中遇到的一些初学者容易遇到的问题罗列出来，由于对于国内这方面的资料相对缺乏，希望能给大家提供一些帮助，也算是自我学习的一个整理。 如果你还不是很了解">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://nephen.cn/images/makeokay.png">
+<meta property="og:image" content="http://nephen.cn/images/upload.png">
+<meta property="og:image" content="http://nephen.cn/assets/sitl.png">
+<meta property="og:image" content="http://nephen.cn/images/gitter.png">
+<meta property="og:image" content="http://nephen.cn/images/takeoff.png">
+<meta property="og:image" content="http://nephen.cn/images/qgc.png">
+<meta property="og:image" content="http://nephen.cn/images/stick.png">
+<meta property="og:image" content="http://nephen.cn/images/sticks.png">
+<meta property="og:image" content="http://nephen.cn/images/sitl.png">
+<meta property="og:image" content="http://nephen.cn/images/gazebo.png">
+<meta property="og:image" content="http://nephen.cn/images/qtcreator.png">
+<meta property="og:image" content="http://nephen.cn/images/qtb.png">
+<meta property="og:image" content="http://nephen.cn/images/qtcmake.png">
+<meta property="og:image" content="http://nephen.cn/images/qtbuild.png">
+<meta property="og:image" content="http://nephen.cn/images/qt_set.png">
+<meta property="og:image" content="http://nephen.cn/images/buildout.png">
+<meta property="og:image" content="http://nephen.cn/images/binout.png">
+<meta property="og:updated_time" content="2018-11-23T01:38:49.385Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="初学PX4之环境搭建">
+<meta name="twitter:description" content="消息：pixhawk网站搬迁至px4.io !!!        前言前段时间linux崩溃了，桌面进去后只有背景，折腾好久没搞定，为了节省时间索性重装了系统，同时也借这个机会从头记载一下作为初学者的学习过程。主要是按PX4的官网初学者教程进行，把其中遇到的一些初学者容易遇到的问题罗列出来，由于对于国内这方面的资料相对缺乏，希望能给大家提供一些帮助，也算是自我学习的一个整理。 如果你还不是很了解">
+<meta name="twitter:image" content="http://nephen.cn/images/makeokay.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://nephen.cn/2017/07/30/初学PX4之环境搭建/">
+
+
+
+
+
+  <title>初学PX4之环境搭建 | 来风的官方网站</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">来风的官方网站</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://nephen.cn/2017/07/30/初学PX4之环境搭建/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nephen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="来风的官方网站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">初学PX4之环境搭建</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-30T10:15:11+08:00">
+                2017-07-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/飞控/" itemprop="url" rel="index">
+                    <span itemprop="name">飞控</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p><a href="http://px4.io/px4-website-relaunched-online/" target="_blank" rel="noopener">消息</a>：pixhawk网站搬迁至<a href="http://px4.io" target="_blank" rel="noopener">px4.io</a> !!!     </p>
+</blockquote>
+<p><br></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>前段时间linux崩溃了，桌面进去后只有背景，折腾好久没搞定，为了节省时间索性重装了系统，同时也借这个机会从头记载一下作为初学者的学习过程。主要是按PX4的官网初学者教程进行，把其中遇到的一些初学者容易遇到的问题罗列出来，由于对于国内这方面的资料相对缺乏，希望能给大家提供一些帮助，也算是自我学习的一个整理。</p>
+<p>如果你还不是很了解关于飞行器的这个项目PX4，建议迅速跳到PX4的<a href="https://pixhawk.org/start?id=start" target="_blank" rel="noopener">官网</a>一探究竟。简单来说，PX4是一个软、硬件开源项目（遵守BSD协议），目的在于为学术、爱好和工业团体提供一款低成本高性能的高端的自驾仪。这个项目源于 <a href="http://cvg.ethz.ch/" target="_blank" rel="noopener">ETH Zurich (苏黎世联邦理工大学)的计算机视觉与几何实验室</a>的<a href="http://pixhawk.ethz.ch/" target="_blank" rel="noopener">PIXHAWK项目</a>、并得到了<a href="http://www.asl.ethz.ch/" target="_blank" rel="noopener">自主系统实验室</a>和 <a href="http://control.ee.ethz.ch/" target="_blank" rel="noopener">自动控制实验室</a>的支持 ，以及一些出色的个人(<a href="https://pixhawk.org/credits" target="_blank" rel="noopener">Contact and Credits</a>)也参与其中，包括 <a href="http://store.diydrones.com/category_s/63.htm" target="_blank" rel="noopener">3D Robotics</a> 和 <a href="http://diydrones.com/profiles/blogs/list-of-all-diy-drones" target="_blank" rel="noopener">international 3DR distributors</a>的成员。</p>
+<p><br></p>
+<h1 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h1><p>为了让大家能与我的学习保持同步，先介绍一下在搭建这个PX4环境前我已经做好的工作：</p>
+<ol>
+<li>硬件一套，包括DJI F450机架、Pixhawk 2.4.6 mini飞控、好盈乐天20A电调、1045正反桨、银燕电机2216、天地飞6通道遥控器。详情见淘宝链接里的<a href="https://item.taobao.com/item.htm?spm=a1z10.5-c.w4002-8717792970.38.rv3aHa&amp;id=41190426449" target="_blank" rel="noopener">套餐方案</a>。</li>
+<li>软件环境，使用的最新发行版<a href="http://www.ubuntu.org.cn/download/desktop" target="_blank" rel="noopener">Ubuntu 15.10</a>操作系统。</li>
+</ol>
+<p><br></p>
+<h1 id="工具链安装"><a href="#工具链安装" class="headerlink" title="工具链安装"></a>工具链安装</h1><p>在准备工作做好并对PX4有了一定的了解后，从<a href="https://pixhawk.org/dev/quickstart" target="_blank" rel="noopener">开发者快速入门教程</a>开始PX4的环境搭建，对于<code>Linux</code>这里直接跳到了<a href="http://dev.px4.io/starting-installing-linux.html" target="_blank" rel="noopener">工具链</a>的安装。按照教程说的命令去执行就可以了，只要你的网速够好，相信很快就能完成任务。说明一下这里做了哪些事情：</p>
+<ol>
+<li>更新软件包列表并安装所有PX4构建目标的依赖。</li>
+<li>ubuntu自带的串口调制解调器严重的影响到了机器人串口相关的使用，可以没有任何副作用的卸载掉。</li>
+<li>安装模拟工具CLANG 3.5。</li>
+<li><p>添加当前用户到组”dialout“(如果这步没做，会导致很多用户权限问题)。</p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~ $ sudo usermod -a -G dialout <span class="variable">$USER</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
+<p><code>Tip</code>:如果你是Windows用户，可以点击<a href="https://www.youtube.com/watch?v=MBJhVrvWomY" target="_blank" rel="noopener">视频教程</a>，但是不推荐使用Windows进行开发。</p>
+</blockquote>
+<p><br></p>
+<h1 id="代码编译"><a href="#代码编译" class="headerlink" title="代码编译"></a>代码编译</h1><p>然后就到了编译代码的阶段，那么首先得弄到代码，按照<a href="http://dev.px4.io/starting-building.html" target="_blank" rel="noopener">这个</a>里面的步骤去做就好了，经测试ubuntu 14.04编译没有出现问题，建议安装<a href="http://dev.px4.io/starting-installing-linux-boutique.html#ninja-build-system" target="_blank" rel="noopener">ninja</a>，它编译的速度比make要快。   </p>
+<p>想必有不懂Git是个啥的童鞋，那就看看这个<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/" target="_blank" rel="noopener">Git教程-廖雪峰的官方网站</a>/<a href="https://git-scm.com/book/zh/v2" target="_blank" rel="noopener">git BOOK</a>吧，保证有帮助。比如我们的项目可以这么做：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># =&gt; 本地创建文件夹，并关联远程仓库</span></span><br><span class="line">~ $ sudo apt-get install git-all</span><br><span class="line">~ $ makedir YuningFly</span><br><span class="line">~ $ <span class="built_in">cd</span> YuningFly</span><br><span class="line">~/YuningFly $ git init</span><br><span class="line">~/YuningFly $ git add *</span><br><span class="line">~/YuningFly $ git commit -m <span class="string">"Commit message"</span></span><br><span class="line">~/YuningFly $ git remote add origin git@github.com:username/repository</span><br><span class="line">~/YuningFly $ git push -u origin master</span><br></pre></td></tr></table></figure>
+<p>关于下载代码这块，通过ssh支持的原生git协议下载速度最快，但是要先生成SSH keys，更多见<a href="https://help.github.com/articles/generating-ssh-keys/" target="_blank" rel="noopener">教程</a>，例如如采用原生git协议下载开源代码可以用</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~ $ git <span class="built_in">clone</span> git@github.com:PX4/Firmware.git</span><br></pre></td></tr></table></figure>
+<hr>
+<center><code>--------------ubuntu15.10 issues--------------</code></center>
+
+<p>如果你跟我一样用的是ubuntu 15.10，需要进行arm-none-eabi重新安装，默认是最新版，换成4.8版本，官网上的解决办法见<a href="http://dev.px4.io/starting-installing-linux-boutique.html#toolchain-installation" target="_blank" rel="noopener">地址</a>，当然你也可以采用我下面的办法。    </p>
+<p>首先了解见<a href="http://www.veryarm.com/296.html" target="_blank" rel="noopener">博文</a>，然后去GNU官方下载地址：<a href="https://launchpad.net/gcc-arm-embedded/+download" target="_blank" rel="noopener">https://launchpad.net/gcc-arm-embedded/+download</a>下载<code>gcc-arm-none-eabi-4_8-2014q3-20140805-linux.tar.bz2</code>，或者直接使用命令</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget wget https://launchpad.net/gcc-arm-embedded/5.0/5-2016-q2-update/+download/gcc-arm-none-eabi-5_4-2016q2-20160622-linux.tar.bz2</span><br></pre></td></tr></table></figure>
+<p>然后进入下载文件夹，进行如下操作：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">pushd</span> .</span><br><span class="line"><span class="comment"># =&gt; 卸载新版的gcc-arm-none-eabi</span></span><br><span class="line">~ $ sudo apt-get remove gcc-arm-none-eabi</span><br><span class="line"><span class="comment"># =&gt; 安装下载好的gcc-arm-none-eabi</span></span><br><span class="line">~ $ tar xjvf gcc-arm-none-eabi-5_4-2016q2-20160622-linux.tar.bz2</span><br><span class="line">~ $ sudo mv gcc-arm-none-eabi-5_4-2016q2 /opt</span><br><span class="line">~ $ exportline=<span class="string">"export PATH=/opt/gcc-arm-none-eabi-5_4-2016q2/bin:\$PATH"</span></span><br><span class="line">~ $ <span class="keyword">if</span> grep -Fxq <span class="string">"<span class="variable">$exportline</span>"</span> ~/.profile; <span class="keyword">then</span> <span class="built_in">echo</span> nothing to <span class="keyword">do</span> ; <span class="keyword">else</span> <span class="built_in">echo</span> <span class="variable">$exportline</span> &gt;&gt; ~/.profile; <span class="keyword">fi</span></span><br><span class="line"><span class="comment"># =&gt; 使路径生效</span></span><br><span class="line">~ $ . ~/.profile</span><br><span class="line"><span class="built_in">popd</span></span><br></pre></td></tr></table></figure>
+<p>安装ccache，加快编译速度。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install ccache</span><br><span class="line"><span class="built_in">which</span> ccache</span><br><span class="line"><span class="comment">#查看安装路径, /usr/bin/ccache</span></span><br><span class="line"><span class="built_in">cd</span> /opt/gcc-arm-none-eabi-5_4-2016q2/bin/</span><br><span class="line">sudo ln -s /usr/bin/ccache *</span><br><span class="line"><span class="built_in">export</span> PATH=/usr/lib/ccache:<span class="variable">$PATH</span></span><br><span class="line"><span class="comment">#进行确认</span></span><br><span class="line"><span class="built_in">which</span> arm-none-eabi-gcc</span><br></pre></td></tr></table></figure>
+<p>如果PC是ubuntu 64位系统，arm-none-eabi是直接下载人家编译好的32位的话，还需要一个东东：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install lsb-core</span><br></pre></td></tr></table></figure>
+<p>测试安装如下，如果出现如下信息，交叉编译环境搭建就没有什么问题了</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">~/src/Firmware$ arm-none-eabi-g++ -v</span><br><span class="line">Using built-in specs.</span><br><span class="line">COLLECT_GCC=arm-none-eabi-g++</span><br><span class="line">COLLECT_LTO_WRAPPER=/opt/gcc-arm-none-eabi-4_8-2014q3/bin/../lib/gcc/arm-none-eabi/4.8.4/lto-wrapper</span><br><span class="line">Target: arm-none-eabi</span><br><span class="line">Configured with: /home/build/work/GCC-4-8-build/src/gcc/configure --target=arm-none-eabi --prefix=/home/build/work/GCC-4-8-build/install-native --libexecdir=/home/build/work/GCC-4-8-build/install-native/lib --infodir=/home/build/work/GCC-4-8-build/install-native/share/doc/gcc-arm-none-eabi/info --mandir=/home/build/work/GCC-4-8-build/install-native/share/doc/gcc-arm-none-eabi/man --htmldir=/home/build/work/GCC-4-8-build/install-native/share/doc/gcc-arm-none-eabi/html --pdfdir=/home/build/work/GCC-4-8-build/install-native/share/doc/gcc-arm-none-eabi/pdf --<span class="built_in">enable</span>-languages=c,c++ --<span class="built_in">enable</span>-plugins --<span class="built_in">disable</span>-decimal-float --<span class="built_in">disable</span>-libffi --<span class="built_in">disable</span>-libgomp --<span class="built_in">disable</span>-libmudflap --<span class="built_in">disable</span>-libquadmath --<span class="built_in">disable</span>-libssp --<span class="built_in">disable</span>-libstdcxx-pch --<span class="built_in">disable</span>-nls --<span class="built_in">disable</span>-shared --<span class="built_in">disable</span>-threads --<span class="built_in">disable</span>-tls --with-gnu-as --with-gnu-ld --with-newlib --with-headers=yes --with-python-dir=share/gcc-arm-none-eabi --with-sysroot=/home/build/work/GCC-4-8-build/install-native/arm-none-eabi --build=i686-linux-gnu --host=i686-linux-gnu --with-gmp=/home/build/work/GCC-4-8-build/build-native/host-libs/usr --with-mpfr=/home/build/work/GCC-4-8-build/build-native/host-libs/usr --with-mpc=/home/build/work/GCC-4-8-build/build-native/host-libs/usr --with-isl=/home/build/work/GCC-4-8-build/build-native/host-libs/usr --with-cloog=/home/build/work/GCC-4-8-build/build-native/host-libs/usr --with-libelf=/home/build/work/GCC-4-8-build/build-native/host-libs/usr --with-host-libstdcxx=<span class="string">'-static-libgcc -Wl,-Bstatic,-lstdc++,-Bdynamic -lm'</span> --with-pkgversion=<span class="string">'GNU Tools for ARM Embedded Processors'</span> --with-multilib-list=armv6-m,armv7-m,armv7e-m,armv7-r</span><br><span class="line">Thread model: single</span><br><span class="line">gcc version 4.8.4 20140725 (release) [ARM/embedded-4_8-branch revision 213147] (GNU Tools <span class="keyword">for</span> ARM Embedded Processors)</span><br></pre></td></tr></table></figure>
+<p>make成功后如下：</p>
+<p><img src="/images/makeokay.png" style="max-width:100%;"></p>
+<p>一般情况下，make出现<strong>主要问题</strong>有：</p>
+<ul>
+<li>arm-none-eabi路径不对<br>  按如上arm-none-eabi重新安装设置即可。</li>
+<li><p>arm-none-eabi-g++命令存在但报错找不到文件<br>  安装32位的运行库。</p>
+  <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libc6:i386 libgcc1:i386 libstdc++5:i386 libstdc++6:i386 lib32z1 lib32ncurses5</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>没有更新Git子模块</p>
+  <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">~ $ git submodule init</span><br><span class="line">~ $ git submodule update --recursive</span><br><span class="line"><span class="comment">#或者只要一行命令</span></span><br><span class="line">~ $ git submodule update --init --recursive</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>子模组问题<br>  无法在子模组路径 ‘mavlink/include/mavlink/v2.0’ 中检出 ‘914eafd83851c499302aeb6f702da9069006f8f0’，一般删掉mavlink目录重新update就好了。或者先git submodule sync –recursive同步，再git submodule update –init –recursive更新。</p>
+</li>
+<li><p>需要重新编译<br>  如果之前编译是可以的，更新后不能编译，试着删除根目录build_*文件夹，然后重新编译。 </p>
+</li>
+<li><p>找不到/usr/bin/arm-none-eabi-objcopy，或者其它的也可以用类似的方法   </p>
+  <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -s /opt/gcc-arm-none-eabi-4_8-2014q3/bin/arm-none-eabi-objcopy /usr/bin/</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>如果连接不上github，可以先试试这个连通站点</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;~ $ ssh -T git@github.com</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><code>注意</code>：如果你想跟进项目，但不知道怎么参与贡献，建议参考APM的<a href="http://dev.ardupilot.com/wiki/where-to-get-the-code/" target="_blank" rel="noopener">文档</a>，更多请参考<a href="http://www.nephen.com/2016/01/introduction-to-start-ArduPilot#1-2" target="_blank" rel="noopener">这里</a>。</p>
+</blockquote>
+<p>使用<code>make px4fmu-v2_default upload</code>即可将固件上传到pixhawk，这个过程可能需要重新插拔USB线，上传完成如下：</p>
+<p><img src="/images/upload.png" style="max-width:100%;"></p>
+<p>这里要做的事情主要是：</p>
+<ol>
+<li>克隆PX4软件到本地，</li>
+<li>make编译，</li>
+<li>连接USB到无人机硬件，上传固件</li>
+</ol>
+<p><br></p>
+<h1 id="软件在环测试（SITL）"><a href="#软件在环测试（SITL）" class="headerlink" title="软件在环测试（SITL）"></a>软件在环测试（SITL）</h1><p>在直接到硬件之前，建议将模拟运行作为下一步。这个东西看起来很高端，有点摸不着头脑，以前没接触过，也觉得很深奥。跳到<a href="http://dev.px4.io/simulation-sitl.html" target="_blank" rel="noopener">这里</a>，看看赋予它的概念：软件在环仿真运行的主机上的完整系统，并模拟自动驾驶仪。SITL还可以参考Ardupilot的<a href="http://dev.ardupilot.com/wiki/sitl-simulator-software-in-the-loop/" target="_blank" rel="noopener">文档</a>。它通过本地网络连接到模拟器。启动运行如下：</p>
+<p><img src="/assets/sitl.png" style="max-width:100%;"></p>
+<p>下面请将想办法给大家介绍清楚这个东西是什么，怎么用到PX4上，用到它有什么作用：</p>
+<p><em>建议：如果有比较棘手的问题，可以在<a href="https://gitter.im/PX4/Firmware" target="_blank" rel="noopener">这里</a>提问，好多不解的问题可以少走很多路。比如：</em></p>
+<p><img src="/images/gitter.png" style="max-width:100%;"></p>
+<p>可以先了解PX4仿真的一些<a href="https://pixhawk.org/dev/simulation/start" target="_blank" rel="noopener">概念</a>。PX4平台支持软件在环和硬件在环仿真。不同的是，使用SITL时，完整的模拟运行在主机（台式机、笔记本电脑），没有自动驾驶仪的硬件连接。这是测试新的算法和控制的最优办法，但它忽略了类似的硬件时间消耗或类似于堆栈大小的限制的事情。硬件在环仿真解决了这个问题，但是它的建立过程比较费时，因为硬件需要启动和刷新固件。软件在环仿真又分两种：标准软件在环仿真和ROS软件在环仿真。官方推荐使用标准软件在环仿真。标准软件在环仿真在单一的应用程序里以线程的形式最小依赖运行每个控制器和估算器。</p>
+<p>下面是具体该怎么<a href="https://pixhawk.org/dev/simulation/native_sitl" target="_blank" rel="noopener">操作</a>，最新的文档请到<a href="http://dev.px4.io/simulation-sitl.html" target="_blank" rel="noopener">这里</a>，建议参考<a href="https://pixhawk.org/dev/hil/jmavsim" target="_blank" rel="noopener">这篇</a>，但是新的QGC已经不需要这些步骤了，可以自动连接。</p>
+<ol>
+<li><p>安装依赖项。</p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># =&gt; 原网页为sudo apt-get install ant，经测试应该为如下</span></span><br><span class="line">～ $ sudo apt-get install ant openjdk-7-jdk openjdk-7-jre</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动、编译目标。</p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~ $ make posix_sitl_default jmavsim</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>起飞。</p>
+ <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pxh&gt; commander takeoff</span><br></pre></td></tr></table></figure>
+<p> 完成之后如图：</p>
+<p> <img src="/images/takeoff.png" style="max-width:100%;"></p>
+<p> 仿真时需要用到地面站QGroundControl( for short)，然后进行QGC 的<a href="https://github.com/mavlink/qgroundcontrol" target="_blank" rel="noopener">安装</a>，由于它的篇幅较大，可以给它开启新的一节。</p>
+</li>
+</ol>
+<p><br></p>
+<h1 id="地面控制站QGC"><a href="#地面控制站QGC" class="headerlink" title="地面控制站QGC"></a>地面控制站QGC</h1><p>QGC的官网是<a href="http://qgroundcontrol.org" target="_blank" rel="noopener">http://qgroundcontrol.org</a>，可以从这里下载比较稳定的<a href="https://github.com/mavlink/qgroundcontrol/releases/" target="_blank" rel="noopener">安装包</a>解压，建议下载daily build的，里面有一些新的功能后面要用到，但是还是得安装Qt，如果不安装Qt，打开QGC会有缺少动态链接库的问题，从<a href="http://download.qt.io/archive/qt/" target="_blank" rel="noopener">这里</a>可以看到后缀名为.run的文件，点击后面的details，选择一个区域比较近的地址进行下载，下载完成后进行如下操作。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">~ $ chmod 777 qt-opensource-linux-x64-5.7.1.run</span><br><span class="line">~ $ ./qt-opensource-linux-x64-5.7.1.run</span><br><span class="line"><span class="comment"># =&gt; 建议将目标文件夹选为$HOME/Qt($HOME为用户目录，替换为如/home/nephne)</span></span><br><span class="line"><span class="comment"># =&gt; 相关依赖项的安装如下：</span></span><br><span class="line">~ $ sudo apt-get install espeak libespeak-dev libudev-dev libsdl1.2-dev</span><br><span class="line"><span class="comment"># =&gt; Qt配置如下：</span></span><br><span class="line"><span class="comment"># =&gt; 更换qt源，默认为qt4</span></span><br><span class="line">~ $ <span class="built_in">export</span> QT_SELECT=qt5</span><br><span class="line">~ $ qtchooser -<span class="built_in">print</span>-env</span><br><span class="line">QT_SELECT=<span class="string">"default"</span></span><br><span class="line">QTTOOLDIR=<span class="string">"/home/nephne/Qt5.7.1/5.7/gcc_64/bin"</span></span><br><span class="line">QTLIBDIR=<span class="string">"/usr/lib/x86_64-linux-gnu"</span></span><br><span class="line"><span class="comment"># =&gt; 更改文件/usr/lib/x86_64-linux-gnu/qtchooser/5.conf 第一行为：/home/$USER/Qt/5.5/gcc_64/bin(将$USER替换为用户名字)</span></span><br><span class="line">~ $ sudo vi /usr/lib/x86_64-linux-gnu/qtchooser/5.conf </span><br><span class="line"><span class="comment"># =&gt; 我的如下：</span></span><br><span class="line">~ $ cat /usr/lib/x86_64-linux-gnu/qtchooser/5.conf </span><br><span class="line">/home/nephne/Qt5.7.1/5.7/gcc_64/bin</span><br><span class="line">/usr/lib/x86_64-linux-gnu</span><br><span class="line">~ $ qmake -v</span><br><span class="line">QMake version 3.0</span><br><span class="line">Using Qt version 5.7.1 <span class="keyword">in</span> /home/nephne/Qt5.7.1/5.7/gcc_64/lib</span><br><span class="line"><span class="comment"># =&gt; 如果出现如上的结果就可以进入解压后的QGC目录运行了</span></span><br><span class="line">~ $ <span class="built_in">cd</span> <span class="variable">$&#123;QGC_dir&#125;</span></span><br><span class="line"><span class="comment"># =&gt; 运行如下的脚本文件，这个里边加载了动态库，如果你的Qt安装目录跟我的不一样，那样还得修改脚本</span></span><br><span class="line">~ $ ./qgroundcontrol-start.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># =&gt; 如何进行源码编译</span></span><br><span class="line">~ $ git <span class="built_in">clone</span> https://github.com/mavlink/qgroundcontrol.git</span><br><span class="line">~ $ git submodule init &amp;&amp; git submodule update</span><br><span class="line"><span class="comment"># =&gt; 打开Qt Creator，选择qgroundcontrol根目录pro文件,工程设置到qt5.7.1版本进行编译即可</span></span><br></pre></td></tr></table></figure>
+<p>界面如下：</p>
+<p><img src="/images/qgc.png" style="max-width:100%;"></p>
+<p>这里再回归到软件在环仿真上面来。当进行到上一节的commander takeoff命令后，打开QGC，点击又上角的Default UDP Link即可连接模拟器中的无人机，这样就可以通过地面在对模拟器中的无人机进行控制和数据分析，建议：QGC可支持操纵杆，如果想要手动输入，需要把系统置于手动飞行模式 (e.g. POSCTL, position control)。注意：需要下载daily build版的QGC<br>才能启动操纵杆。启动操纵杆如下：</p>
+<p><img src="/images/stick.png" style="max-width:100%;"></p>
+<p>操纵杆如下：</p>
+<p><img src="/images/sticks.png" style="max-width:100%;"></p>
+<p>界面如下：</p>
+<p><img src="/images/sitl.png" style="max-width:100%;"></p>
+<p><br></p>
+<h1 id="Gazebo仿真"><a href="#Gazebo仿真" class="headerlink" title="Gazebo仿真"></a>Gazebo仿真</h1><p>这是另外一种<a href="http://dev.px4.io/simulation-gazebo.html" target="_blank" rel="noopener">软件仿真</a>，是一个自主机器人3D仿真环境。它能够作为一个完整的机器人仿真套件或脱机用于机器人。其中Plugin是自行编译的，过程如下：</p>
+<p><img src="/images/gazebo.png" style="max-width:100%;"></p>
+<p><a href="https://github.com/px4/sitl_gazebo" target="_blank" rel="noopener">安装过程</a>如下:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># =&gt; 安装Gazebo 6仿真器(ubuntu 15.10)&lt;http://gazebosim.org/tutorials?tut=install_ubuntu&amp;ver=6.0&amp;cat=install&gt;</span></span><br><span class="line">~ $ wget -O /tmp/gazebo6_install.sh http://osrf-distributions.s3.amazonaws.com/gazebo/gazebo6_install.sh; sudo sh /tmp/gazebo6_install.sh</span><br><span class="line"><span class="comment"># =&gt; 运行</span></span><br><span class="line">~ $ gazebo</span><br><span class="line"><span class="comment"># =&gt; 安装protobuf 库</span></span><br><span class="line">~ $ sudo apt-get install libprotobuf-dev libprotoc-dev protobuf-compiler libeigen3-dev</span><br><span class="line"><span class="comment"># =&gt; 编译Gazebo插件</span></span><br><span class="line"><span class="comment"># =&gt; 克隆gazebo plugins repository到~/src/sitl_gazebo</span></span><br><span class="line">~ $ git <span class="built_in">clone</span> https://github.com/PX4/sitl_gazebo.git</span><br><span class="line"><span class="comment"># =&gt; 在仓库的顶层建立Build文件夹</span></span><br><span class="line">~ $ mkdir Build </span><br><span class="line"><span class="comment"># =&gt; 把build目录添加到gazebo plugin path，e.g.添加如下到我的.profile 文件</span></span><br><span class="line"><span class="comment"># Set the plugin path so Gazebo finds our model and sim</span></span><br><span class="line"><span class="built_in">export</span> GAZEBO_PLUGIN_PATH=<span class="variable">$&#123;GAZEBO_PLUGIN_PATH&#125;</span>:<span class="variable">$HOME</span>/src/sitl_gazebo/Build</span><br><span class="line"><span class="comment"># Set the model path so Gazebo finds the airframes</span></span><br><span class="line"><span class="built_in">export</span> GAZEBO_MODEL_PATH=<span class="variable">$&#123;GAZEBO_MODEL_PATH&#125;</span>:<span class="variable">$HOME</span>/src/sitl_gazebo/models</span><br><span class="line"><span class="comment"># Disable online model lookup since this is quite experimental and unstable</span></span><br><span class="line"><span class="built_in">export</span> GAZEBO_MODEL_DATABASE_URI=<span class="string">""</span></span><br><span class="line"><span class="comment"># =&gt; 还需要添加仓库的主目录</span></span><br><span class="line"><span class="comment"># Set path to sitl_gazebo repository</span></span><br><span class="line"><span class="built_in">export</span> SITL_GAZEBO_PATH=<span class="variable">$HOME</span>/src/sitl_gazebo</span><br><span class="line"><span class="comment"># =&gt; 使生效</span></span><br><span class="line">~ $ <span class="built_in">source</span> ~/.profile </span><br><span class="line"><span class="comment"># =&gt; 进入Build目录执行make</span></span><br><span class="line">~ $ <span class="built_in">cd</span> ~/src/sitl_gazebo/Build</span><br><span class="line">~ $ cmake ..</span><br><span class="line"><span class="comment"># =&gt; 生成sdf文件</span></span><br><span class="line">~ $ make sdf</span><br><span class="line"><span class="comment"># =&gt; 构建 gazebo plugins</span></span><br><span class="line">~ $ make</span><br><span class="line"><span class="comment"># =&gt; 现在可以运行gazebo了</span></span><br><span class="line">～$ gazebo</span><br></pre></td></tr></table></figure>
+<p>下面可以按照<a href="http://dev.px4.io/simulation-gazebo.html" target="_blank" rel="noopener">教程</a>进入仿真。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~ $ <span class="built_in">cd</span> ~/src/Firmware</span><br><span class="line">~ $ make posix_sitl_default gazebo</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h1 id="QtCreator-IDE建立工程"><a href="#QtCreator-IDE建立工程" class="headerlink" title="QtCreator IDE建立工程"></a>QtCreator IDE建立工程</h1><blockquote>
+<p>参考文章：<a href="https://pixhawk.org/dev/project_setup" target="_blank" rel="noopener">旧版本</a>/<a href="http://dev.px4.io/starting-building.html#qt-creator-on-linux" target="_blank" rel="noopener">新版本</a></p>
+</blockquote>
+<p>Qt Creator是最友好的变体，因此是官方唯一支持的IDE。除非你是Eclipse 或 Sublime方面的专家，否则不推荐使用！</p>
+<p>安装完qmake后，还要安装qtcreator，ubuntu下如下操作：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~ $ sudo apt-get install qtcreator</span><br></pre></td></tr></table></figure>
+<p>常见功能如下：<br><img src="/images/qtcreator.png"></p>
+<p>打开Qt Creator之前, 应该创建<a href="https://cmake.org/Wiki/CMake_Generator_Specific_Information#Code::Blocks_Generator" target="_blank" rel="noopener">project</a>文件:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~/src/Firmware</span><br><span class="line">$ mkdir ../Firmware-build</span><br><span class="line">$ <span class="built_in">cd</span> ../Firmware-build</span><br><span class="line">$ cmake ../Firmware -G <span class="string">"CodeBlocks - Unix Makefiles"</span></span><br><span class="line"><span class="comment">#可以发现Firmware-build目录生成了一些文件</span></span><br></pre></td></tr></table></figure>
+<p>Ubuntu用户只要导入主文件夹里的CMakeLists.txt文件就可以了，打开qtcreator，通过<code>File -&gt; Open File or Project -&gt; 选择CMakeLists.txt</code><br>构建目录选择src/Firmware-build</p>
+<p><img src="/images/qtb.png"></p>
+<p>出现如下现象时点击完成即可</p>
+<p><img src="/images/qtcmake.png"></p>
+<p>点击项目进入配置，配置页面见下图，详细配置见原文视频</p>
+<p><img src="/images/qtbuild.png"></p>
+<p><img src="/images/qt_set.png"></p>
+<p>配置完成后，点击左下角的运行，编译输出如下<br><img src="/images/buildout.png"></p>
+<p>连接USB到pixhawk，点击<code>应用程序输出</code>栏的绿色按钮<code>重新执行此运行配置</code>即可进行上传，输出如下<br><img src="/images/binout.png"></p>
+<p>如果你比较喜欢使用Sublime Text，请按照<a href="/2016/01/sublime-text2-in-linux">linux下sublime text 2使用技巧</a>安装使用，然后进入工程目录，执行命令即可。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cscope -Rbkq</span><br><span class="line">$ ctags -R -f .tags</span><br><span class="line">$ sublime_text Firmware.sublime-project</span><br></pre></td></tr></table></figure>
+<p>编译代码快捷键为：Ctrl + B</p>
+<p><br></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>教程到这里，基本的环境算是搭建好了，接下来应该就是各个模块的学习了，欢迎参考接下来的其它文章。</p>
+<p><hr></p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><ul>
+<li><a href="http://dev.px4.io/" target="_blank" rel="noopener">dev.px4.io</a></li>
+<li><a href="http://px4.io/" target="_blank" rel="noopener">px4.io</a></li>
+<li><a href="https://pixhawk.org/choice" target="_blank" rel="noopener">pixhawk.org</a></li>
+<li><a href="http://dev.ardupilot.com/" target="_blank" rel="noopener">dev.ardupilot.com</a></li>
+<li><a href="http://planner.ardupilot.com/" target="_blank" rel="noopener">planner.ardupilot.com</a></li>
+<li><a href="http://copter.ardupilot.com/" target="_blank" rel="noopener">copter.ardupilot.com</a></li>
+<li><a href="https://travis-ci.org/" target="_blank" rel="noopener">travis-ci.org</a></li>
+<li><a href="http://blog.exbot.net/archives/1169" target="_blank" rel="noopener">exbot资源分享</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/PX4/" rel="tag"># PX4</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/16/pixhawk试飞报告/" rel="next" title="pixhawk试飞报告">
+                <i class="fa fa-chevron-left"></i> pixhawk试飞报告
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/30/初学crazyflie2-0之diy硬件/" rel="prev" title="初学crazyflie2.0之diy硬件">
+                初学crazyflie2.0之diy硬件 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="nephen">
+            
+              <p class="site-author-name" itemprop="name">nephen</p>
+              <p class="site-description motion-element" itemprop="description">学而不思则罔，思而不学则殆。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#前期准备"><span class="nav-number">2.</span> <span class="nav-text">前期准备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#工具链安装"><span class="nav-number">3.</span> <span class="nav-text">工具链安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码编译"><span class="nav-number">4.</span> <span class="nav-text">代码编译</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#软件在环测试（SITL）"><span class="nav-number">5.</span> <span class="nav-text">软件在环测试（SITL）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#地面控制站QGC"><span class="nav-number">6.</span> <span class="nav-text">地面控制站QGC</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Gazebo仿真"><span class="nav-number">7.</span> <span class="nav-text">Gazebo仿真</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#QtCreator-IDE建立工程"><span class="nav-number">8.</span> <span class="nav-text">QtCreator IDE建立工程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">9.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文献"><span class="nav-number">10.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">nephen</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
