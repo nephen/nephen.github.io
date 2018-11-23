@@ -377,16 +377,15 @@
       
         
           
-          Hexo环境搭建
-安装参照https://hexo.io/zh-cn/docs/ 网站，主要包括Node.js、Hexo和Git安装，Node.js、Git可以直接下载安装包安装，Hexo可以在Git Bash命令行里面安装：
- 1$ npm install -g hexo-cli
+          博客使用静态网站生成技术生成，静态网站生成是指静态生成网站的过程，即生成HTML文件，例如，在本地计算机中，然后将网站文件上载到服务器，该服务器在被请求时向用户提供服务。相比动态网站，有以下优点：
 
-建站环境搭建好后就可以开始建站了，同样在Git Bash里面输入命令行进行：
- 123$ hexo init &lt;folder&gt;$ cd &lt;folder&gt;$ npm install hexo --save
- 其中folder为你要建立的博客的文件夹。
+内容存储为平面文件，因此不需要数据库
+静态网站不需要动态服务器端处理
+静态网站比动态网站超快，因为它们不需要服务器端处理或数据库访问
+静态网站比任何动态网站都更安全，因为可以利用的安全漏洞更少
+缓存静态文件比缓存动态页面更有效
 
-相关命令站点建立好后，就可以开始写文章了，可以使用sublime编辑软件打开刚刚建好的folder博客文件夹，找到source/_posts目录即为要写的文章地址。涉及到的一些命令如下：
- 123456789101112#新建文章$ hexo new [layout] &lt;title&gt;#生成静态文件$ hexo generate#启动服务器$ hexo server#部署网站$ hexo deploy#生成完成后部署hexo
+目前网上主流的静态站点生成器有三个，分别为Jekyll、Hugo、Hexo。其中Jekyll由Github用Ruby语言构建，您可以免费使用Github Pages来托管您的静态网站，并使用CNAME文件轻松将其与您的自定义顶级域名链接。它的主要弱点为随着网站内容的增长，构建过程变得非常慢。另外，Hugo是一个用Go构建的静态站点生成器。它被宣传为“世界上最快的网站构建框架”。它最近与Jekyll相比，但在人气方面迅速增长。它的主要缺点为可扩展性差和插件少。而Hexo是基于Node的开源静态生成器，可在MIT许可下使用。借助Node.js平台，Hexo允许您在几秒
           ...
           <!--noindex-->
           <div class="post-button text-center">

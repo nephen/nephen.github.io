@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="Hexo环境搭建 安装参照https://hexo.io/zh-cn/docs/ 网站，主要包括Node.js、Hexo和Git安装，Node.js、Git可以直接下载安装包安装，Hexo可以在Git Bash命令行里面安装：  1$ npm install -g hexo-cli  建站环境搭建好后就可以开始建站了，同样在Git Bash里面输入命令行进行：  123$ hexo init &amp;l">
+<meta name="description" content="博客使用静态网站生成技术生成，静态网站生成是指静态生成网站的过程，即生成HTML文件，例如，在本地计算机中，然后将网站文件上载到服务器，该服务器在被请求时向用户提供服务。相比动态网站，有以下优点：  内容存储为平面文件，因此不需要数据库 静态网站不需要动态服务器端处理 静态网站比动态网站超快，因为它们不需要服务器端处理或数据库访问 静态网站比任何动态网站都更安全，因为可以利用的安全漏洞更少 缓存静">
 <meta name="keywords" content="hexo,next,vps,dns">
 <meta property="og:type" content="article">
 <meta property="og:title" content="怎么快速搭建一个美观实用的博客？">
 <meta property="og:url" content="http://nephen.cn/2018/11/23/怎么快速搭建一个美观实用的博客？/index.html">
 <meta property="og:site_name" content="来风的官方网站">
-<meta property="og:description" content="Hexo环境搭建 安装参照https://hexo.io/zh-cn/docs/ 网站，主要包括Node.js、Hexo和Git安装，Node.js、Git可以直接下载安装包安装，Hexo可以在Git Bash命令行里面安装：  1$ npm install -g hexo-cli  建站环境搭建好后就可以开始建站了，同样在Git Bash里面输入命令行进行：  123$ hexo init &amp;l">
+<meta property="og:description" content="博客使用静态网站生成技术生成，静态网站生成是指静态生成网站的过程，即生成HTML文件，例如，在本地计算机中，然后将网站文件上载到服务器，该服务器在被请求时向用户提供服务。相比动态网站，有以下优点：  内容存储为平面文件，因此不需要数据库 静态网站不需要动态服务器端处理 静态网站比动态网站超快，因为它们不需要服务器端处理或数据库访问 静态网站比任何动态网站都更安全，因为可以利用的安全漏洞更少 缓存静">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://nephen.cn/images/hexo原理.png">
 <meta property="og:image" content="http://nephen.cn/images/钩子.png">
@@ -96,10 +96,10 @@
 <meta property="og:image" content="http://nephen.cn/images/diggui.png">
 <meta property="og:image" content="http://nephen.cn/images/digout.png">
 <meta property="og:image" content="http://nephen.cn/images/nslookup.png">
-<meta property="og:updated_time" content="2018-11-23T04:43:23.025Z">
+<meta property="og:updated_time" content="2018-11-23T06:34:38.104Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="怎么快速搭建一个美观实用的博客？">
-<meta name="twitter:description" content="Hexo环境搭建 安装参照https://hexo.io/zh-cn/docs/ 网站，主要包括Node.js、Hexo和Git安装，Node.js、Git可以直接下载安装包安装，Hexo可以在Git Bash命令行里面安装：  1$ npm install -g hexo-cli  建站环境搭建好后就可以开始建站了，同样在Git Bash里面输入命令行进行：  123$ hexo init &amp;l">
+<meta name="twitter:description" content="博客使用静态网站生成技术生成，静态网站生成是指静态生成网站的过程，即生成HTML文件，例如，在本地计算机中，然后将网站文件上载到服务器，该服务器在被请求时向用户提供服务。相比动态网站，有以下优点：  内容存储为平面文件，因此不需要数据库 静态网站不需要动态服务器端处理 静态网站比动态网站超快，因为它们不需要服务器端处理或数据库访问 静态网站比任何动态网站都更安全，因为可以利用的安全漏洞更少 缓存静">
 <meta name="twitter:image" content="http://nephen.cn/images/hexo原理.png">
 
 
@@ -389,7 +389,26 @@
       
 
       
-        <h3 id="Hexo环境搭建"><a href="#Hexo环境搭建" class="headerlink" title="Hexo环境搭建"></a>Hexo环境搭建</h3><ol>
+        <p>博客使用静态网站生成技术生成，静态网站生成是指静态生成网站的过程，即生成HTML文件，例如，在本地计算机中，然后将网站文件上载到服务器，该服务器在被请求时向用户提供服务。相比动态网站，有以下优点：</p>
+<ul>
+<li>内容存储为平面文件，因此不需要数据库</li>
+<li>静态网站不需要动态服务器端处理</li>
+<li>静态网站比动态网站超快，因为它们不需要服务器端处理或数据库访问</li>
+<li>静态网站比任何动态网站都更安全，因为可以利用的安全漏洞更少</li>
+<li>缓存静态文件比缓存动态页面更有效</li>
+</ul>
+<p>目前网上主流的静态站点生成器有三个，分别为Jekyll、Hugo、Hexo。<br>其中Jekyll由Github用Ruby语言构建，您可以免费使用Github Pages来托管您的静态网站，并使用CNAME文件轻松将其与您的自定义顶级域名链接。<br>它的主要弱点为随着网站内容的增长，构建过程变得非常慢。<br>另外，Hugo是一个用Go构建的静态站点生成器。它被宣传为“世界上最快的网站构建框架”。它最近与Jekyll相比，但在人气方面迅速增长。<br>它的主要缺点为可扩展性差和插件少。<br>而Hexo是基于Node的开源静态生成器，可在MIT许可下使用。借助Node.js平台，Hexo允许您在几秒钟内生成数百个静态文件。<br>主要有以下优点：</p>
+<ul>
+<li>快速而令人难以置信的速度</li>
+<li>使用一个部署命令部署到Github页面或任何其他主机</li>
+<li>强大的Markdown支持</li>
+<li>高度可扩展</li>
+<li>可用的免费和开源主题</li>
+<li>可用的免费插件</li>
+</ul>
+<p>而且它的缺点是：Hexo有一个相对较大的社区，但大多数是非英语人士（来自中国），这个缺点从我们的角度来看就是优点啊。</p>
+<p>根据以上分析，我采用的总体方案为：<strong>采用Hexo进行博客创建，其中使用Next主题进行配置，将生成的博客静态网站部署在自己搭建的vps服务器上，最后采用dnspot对域名进行解析</strong>。具体细节见下文。</p>
+<h3 id="Hexo环境搭建"><a href="#Hexo环境搭建" class="headerlink" title="Hexo环境搭建"></a>Hexo环境搭建</h3><ol>
 <li><p>安装<br>参照<a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/</a> 网站，主要包括Node.js、Hexo和Git安装，Node.js、Git可以直接下载安装包安装，Hexo可以在Git Bash命令行里面安装：</p>
  <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
 </li>
@@ -421,7 +440,7 @@
 <ol>
 <li>什么是vps？<br>VPS（Virtual Private Server 虚拟专用服务器）技术，将一台服务器分割成多个虚拟专享服务器的优质服务。比如搬瓦工VPS是一款性价比较高的便宜VPS主机，且适合入门级网友学习Linux、建站和软件调试用途。搬瓦工VPS目前有洛杉矶MC、洛杉矶QN、凤凰城、佛罗里达、荷兰这8个数据中心，对中文速度较好的是洛杉矶和凤凰城。</li>
 <li>基本原理<br>在服务器上搭建一个Git仓库。在本地Hexo执行deploy后，博客文件会被push到这个Git仓库，然后这个仓库又会通过一个git-hooks的功能把文件同步到VPS的网站根目录，经过Nginx代理服务把网站展现给用户。参考下图<br><img src="/images/hexo原理.png" alt=""></li>
-<li>Git服务器设置<br>使用一个钩子文件：post-receive，注意没有后缀.sample，每当git仓库接收到内容的时候，就会自动调用这个钩子，把内容同步到网站根目录。<br><img src="/images/钩子.png" alt=""><br> debug需要注意的地方，修改post-receive权限使其可执行，chown git:git -R post-update/chmod +x post-update，实际问题通过git push origin master返回log查看即可。</li>
+<li>Git服务器设置<br>在.git/hooks文件夹中创建一个钩子文件：post-receive，注意没有后缀.sample，这样每当git仓库接收到内容的时候，就会自动调用这个钩子，把内容同步到网站根目录。需要修改post-receive权限使其可执行，chown git:git -R post-update/chmod +x post-update。<br><img src="/images/钩子.png" alt=""><br> debug需要注意的地方，实际问题通过git push origin master返回log查看即可。</li>
 <li><p>Nginx设置<br>web服务器选择Nginx，Nginx与Apache比较，有如下优点：</p>
 <ul>
 <li>Nginx轻量级，占用资源少，负载均衡，高并发处理强，静态内容处理高效。</li>
@@ -454,14 +473,21 @@
 </ol>
 <ul>
 <li>计算机查找相应IP地址的第一个位置是其本地DNS缓存，该缓存存储计算机最近检索到的信息，如果没有则进行DNS检索查询。</li>
-<li>dig问8.8.8.8：根区域的名称服务器是什么？<br>8.8.8.8回复：名称服务器为a.root-servers.net…<br>dig随机挑选了k.root-servers.net并解读为193.0.14.129，端口号为53</li>
+<li>dig问8.8.8.8：根区域的名称服务器是什么？<br>8.8.8.8回复：名称服务器为a.root-servers.net…<br>dig随机挑选了k.root-servers.net并解析为193.0.14.129，端口号为53</li>
 <li>dig问193.0.14.129：nephen.cn的地址是多少？<br>193.0.14.129回复：我不知道，你可以问下cn.名称服务器，他们是a.dns.cn. … f.dns.cn.<br>dig随机选择了e.dns.cn，解析地址为203.119.29.1，端口号为53</li>
-<li>dig问203.119.29.1：nephen.cn的地址是多少？<br>203.119.29.1回复：我不知道，可以问下nephen.cn名称服务器，他们是f1g1ns1.dnspod.net.，f1g1ns2.dnspod.net.<br>dig随机选择了<em>f1g1ns1.dnspod.net</em>，解析地址为58.247.212.36，端口号为53</li>
+<li>dig问203.119.29.1：nephen.cn的地址是多少？<br>203.119.29.1回复：我不知道，可以问下nephen.cn名称服务器，他们是f1g1ns1.dnspod.net.，f1g1ns2.dnspod.net.<br>dig随机选择了<strong>f1g1ns1.dnspod.net</strong>，解析地址为58.247.212.36，端口号为53</li>
 <li>dig问58.247.212.36：nephen.cn的地址是多少？<br>58.247.212.36回复：<code>23.106.149.209</code><br>如果使用的是nephen.github.io托管网页，那这里会回答为CNAME为nephen.github.io，重新进行递归查找真正的地址</li>
 <li>递归服务器8.8.8.8从权威名称服务器检索dyn.com的A记录，并将记录存储在其本地缓存中，缓存TTL时间更新一次。<br>如果有其他人请求nephen.cn的主机记录，递归服务器将已经有了答案，不需要再次进行查找过程<br>DNS解析器在查询DNS服务器之前始终检查本地缓存，包括当前DNS解析器缓存内容和从Hosts文件预加载的条目<br>相关命令：C:> ipconfig /displaydns、C:> ipconfig /flushdns</li>
 <li>递归服务器会将A记录返回给您的计算机。您的计算机将记录存储在其缓存中，从记录中读取IP地址，然后将此信息传递给您的浏览器。</li>
 </ul>
 <p>当然windows也有自带的nslookup可以查询，直接就能查出解析后的地址，其中208.67.222.222为手动选择的递归服务器，跟上面例子中的8.8.8.8是一个性质的。<br><img src="/images/nslookup.png" alt=""></p>
+<p>还可以使用一些别的网络工具，随便推荐几个：</p>
+<ul>
+<li><a href="https://dnslookup.online/" target="_blank" rel="noopener">https://dnslookup.online/</a></li>
+<li><a href="https://network-tools.com" target="_blank" rel="noopener">https://network-tools.com</a></li>
+<li><a href="https://www.whatsmydns.net" target="_blank" rel="noopener">https://www.whatsmydns.net</a></li>
+</ul>
+<p>以上就是建站的整个过程，夹杂了一些对问题的思考，希望对你有所启发，每一个技术问题背后其实有很多东西需要弄明白的，当我们搞清楚以后心里才会觉得更加踏实，从另一个层面来讲，弄清楚了底层的技术原理，对出现问题也能更加快速的定位，对出现新的技术也能触类旁通。</p>
 
       
     </div>
