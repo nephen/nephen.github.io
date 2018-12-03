@@ -96,7 +96,7 @@
 <meta property="og:image" content="http://nephen.cn/images/diggui.png">
 <meta property="og:image" content="http://nephen.cn/images/digout.png">
 <meta property="og:image" content="http://nephen.cn/images/nslookup.png">
-<meta property="og:updated_time" content="2018-11-23T06:34:38.104Z">
+<meta property="og:updated_time" content="2018-12-03T07:04:26.546Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="怎么快速搭建一个美观实用的博客？">
 <meta name="twitter:description" content="博客使用静态网站生成技术生成，静态网站生成是指静态生成网站的过程，即生成HTML文件，例如，在本地计算机中，然后将网站文件上载到服务器，该服务器在被请求时向用户提供服务。相比动态网站，有以下优点：  内容存储为平面文件，因此不需要数据库 静态网站不需要动态服务器端处理 静态网站比动态网站超快，因为它们不需要服务器端处理或数据库访问 静态网站比任何动态网站都更安全，因为可以利用的安全漏洞更少 缓存静">
@@ -477,7 +477,7 @@
 <li>dig问193.0.14.129：nephen.cn的地址是多少？<br>193.0.14.129回复：我不知道，你可以问下cn.名称服务器，他们是a.dns.cn. … f.dns.cn.<br>dig随机选择了e.dns.cn，解析地址为203.119.29.1，端口号为53</li>
 <li>dig问203.119.29.1：nephen.cn的地址是多少？<br>203.119.29.1回复：我不知道，可以问下nephen.cn名称服务器，他们是f1g1ns1.dnspod.net.，f1g1ns2.dnspod.net.<br>dig随机选择了<strong>f1g1ns1.dnspod.net</strong>，解析地址为58.247.212.36，端口号为53</li>
 <li>dig问58.247.212.36：nephen.cn的地址是多少？<br>58.247.212.36回复：<code>23.106.149.209</code><br>如果使用的是nephen.github.io托管网页，那这里会回答为CNAME为nephen.github.io，重新进行递归查找真正的地址</li>
-<li>递归服务器8.8.8.8从权威名称服务器检索dyn.com的A记录，并将记录存储在其本地缓存中，缓存TTL时间更新一次。<br>如果有其他人请求nephen.cn的主机记录，递归服务器将已经有了答案，不需要再次进行查找过程<br>DNS解析器在查询DNS服务器之前始终检查本地缓存，包括当前DNS解析器缓存内容和从Hosts文件预加载的条目<br>相关命令：C:> ipconfig /displaydns、C:> ipconfig /flushdns</li>
+<li>递归服务器8.8.8.8从权威名称服务器检索nephen.cn的A记录，并将记录存储在其本地缓存中，缓存TTL时间更新一次。<br>如果有其他人请求nephen.cn的主机记录，递归服务器将已经有了答案，不需要再次进行查找过程<br>DNS解析器在查询DNS服务器之前始终检查本地缓存，包括当前DNS解析器缓存内容和从Hosts文件预加载的条目<br>相关命令：C:> ipconfig /displaydns、C:> ipconfig /flushdns</li>
 <li>递归服务器会将A记录返回给您的计算机。您的计算机将记录存储在其缓存中，从记录中读取IP地址，然后将此信息传递给您的浏览器。</li>
 </ul>
 <p>当然windows也有自带的nslookup可以查询，直接就能查出解析后的地址，其中208.67.222.222为手动选择的递归服务器，跟上面例子中的8.8.8.8是一个性质的。<br><img src="/images/nslookup.png" alt=""></p>
@@ -584,6 +584,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/12/03/看懂医疗险之基础常识/" rel="prev" title="看懂医疗险之基础常识">
+                看懂医疗险之基础常识 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -661,7 +665,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">28</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -683,7 +687,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
