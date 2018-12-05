@@ -357,7 +357,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2017/06/16/C-Plus学习笔记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/06/16/C-Plus学习笔记/" itemprop="commentCount"></span>
+                  <span class="post-comments-count valine-comment-count" data-xid="/2017/06/16/C-Plus学习笔记/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -531,7 +531,7 @@ C++允许在函数的任何地方声明新变量。
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2017/06/16/ArduPilot开发入门学习/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/06/16/ArduPilot开发入门学习/" itemprop="commentCount"></span>
+                  <span class="post-comments-count valine-comment-count" data-xid="/2017/06/16/ArduPilot开发入门学习/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -694,7 +694,7 @@ C++允许在函数的任何地方声明新变量。
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2017/06/16/初识NuttX操作系统之NSH/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/06/16/初识NuttX操作系统之NSH/" itemprop="commentCount"></span>
+                  <span class="post-comments-count valine-comment-count" data-xid="/2017/06/16/初识NuttX操作系统之NSH/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -866,7 +866,7 @@ CONFIG_FS_ROMFS 使能
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2016/04/27/我的大二上学期/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/04/27/我的大二上学期/" itemprop="commentCount"></span>
+                  <span class="post-comments-count valine-comment-count" data-xid="/2016/04/27/我的大二上学期/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1025,7 +1025,7 @@ CONFIG_FS_ROMFS 使能
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2016/04/27/读哲学后感/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/04/27/读哲学后感/" itemprop="commentCount"></span>
+                  <span class="post-comments-count valine-comment-count" data-xid="/2016/04/27/读哲学后感/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1185,7 +1185,7 @@ CONFIG_FS_ROMFS 使能
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2016/04/27/祭奠即将逝去的大一/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/04/27/祭奠即将逝去的大一/" itemprop="commentCount"></span>
+                  <span class="post-comments-count valine-comment-count" data-xid="/2016/04/27/祭奠即将逝去的大一/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1348,7 +1348,7 @@ CONFIG_FS_ROMFS 使能
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2016/04/27/也谈大一/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/04/27/也谈大一/" itemprop="commentCount"></span>
+                  <span class="post-comments-count valine-comment-count" data-xid="/2016/04/27/也谈大一/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1507,7 +1507,7 @@ CONFIG_FS_ROMFS 使能
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2016/04/27/疯狂后的冬天/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/04/27/疯狂后的冬天/" itemprop="commentCount"></span>
+                  <span class="post-comments-count valine-comment-count" data-xid="/2016/04/27/疯狂后的冬天/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1863,14 +1863,6 @@ CONFIG_FS_ROMFS 使能
 
   
 
-    
-      <script id="dsq-count-scr" src="https://nephen-1.disqus.com/count.js" async></script>
-    
-
-    
-
-  
-
 
 
 
@@ -1886,12 +1878,38 @@ CONFIG_FS_ROMFS 使能
 
 
 
+  
 
 
 
 
 
 
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'gFQhzLeyVb1xPHJj6sx7wQQh-gzGzoHsz',
+        appKey: '1IvxtXYSwUVutAGwcvVdGCaJ',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
 
 
 
