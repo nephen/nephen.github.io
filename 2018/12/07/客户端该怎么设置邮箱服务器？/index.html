@@ -79,19 +79,24 @@
 
 
 
-<meta name="description" content="最近发现一个问题，苹果手机在设置邮箱服务器来获取第三方邮件时总是报错，无法正常获取邮件，我思考了一下，这其中肯定是有原因的，不可能是手机软件的的问题，于是决定研究一下邮箱服务器的一些原理，解决这个看起来很基础的问题。 整体架构所谓邮箱服务器即为网络上的客户端保存电子邮件（电子邮件）消息的远程或中央计算机称为邮件服务器。 电子邮件发送协议是一种基于“ 推 ”的协议，主要包括 SMTP；邮件接收协 则">
+<meta name="description" content="最近发现一个问题，苹果手机在设置邮箱服务器来获取第三方邮件时总是报错，无法正常获取邮件，我思考了一下，这其中肯定是有原因的，不可能是手机软件的的问题，于是决定研究一下邮箱服务器的一些原理，解决这个看起来很基础的问题。 什么是邮箱服务器？所谓邮箱服务器即为网络上的客户端保存电子邮件（电子邮件）消息的远程或中央计算机称为邮件服务器。邮件服务器可以分为两大类：传出邮件服务器和传入邮件服务器。传出邮件服务">
 <meta name="keywords" content="POP,SMTP,IMAP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="客户端该怎么设置邮箱服务器？">
 <meta property="og:url" content="http://nephen.cn/2018/12/07/客户端该怎么设置邮箱服务器？/index.html">
 <meta property="og:site_name" content="来风的官方网站">
-<meta property="og:description" content="最近发现一个问题，苹果手机在设置邮箱服务器来获取第三方邮件时总是报错，无法正常获取邮件，我思考了一下，这其中肯定是有原因的，不可能是手机软件的的问题，于是决定研究一下邮箱服务器的一些原理，解决这个看起来很基础的问题。 整体架构所谓邮箱服务器即为网络上的客户端保存电子邮件（电子邮件）消息的远程或中央计算机称为邮件服务器。 电子邮件发送协议是一种基于“ 推 ”的协议，主要包括 SMTP；邮件接收协 则">
+<meta property="og:description" content="最近发现一个问题，苹果手机在设置邮箱服务器来获取第三方邮件时总是报错，无法正常获取邮件，我思考了一下，这其中肯定是有原因的，不可能是手机软件的的问题，于是决定研究一下邮箱服务器的一些原理，解决这个看起来很基础的问题。 什么是邮箱服务器？所谓邮箱服务器即为网络上的客户端保存电子邮件（电子邮件）消息的远程或中央计算机称为邮件服务器。邮件服务器可以分为两大类：传出邮件服务器和传入邮件服务器。传出邮件服务">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1FClIanHuK1RkSndV760VwpXam.png">
-<meta property="og:updated_time" content="2018-12-07T09:43:49.799Z">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1h65IacrrK1Rjy1ze760alFXaS.png">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1xHOBaojrK1RkHFNR761SvpXaD.png">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1.3WEanjxK1Rjy0Fn761BaFXaH.png">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB1H6iyafLsK1Rjy0Fb760SEXXa5.png">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/HTB10M5CacfrK1Rjy0Fm760hEXXai.png">
+<meta property="og:updated_time" content="2018-12-12T00:48:50.304Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="客户端该怎么设置邮箱服务器？">
-<meta name="twitter:description" content="最近发现一个问题，苹果手机在设置邮箱服务器来获取第三方邮件时总是报错，无法正常获取邮件，我思考了一下，这其中肯定是有原因的，不可能是手机软件的的问题，于是决定研究一下邮箱服务器的一些原理，解决这个看起来很基础的问题。 整体架构所谓邮箱服务器即为网络上的客户端保存电子邮件（电子邮件）消息的远程或中央计算机称为邮件服务器。 电子邮件发送协议是一种基于“ 推 ”的协议，主要包括 SMTP；邮件接收协 则">
+<meta name="twitter:description" content="最近发现一个问题，苹果手机在设置邮箱服务器来获取第三方邮件时总是报错，无法正常获取邮件，我思考了一下，这其中肯定是有原因的，不可能是手机软件的的问题，于是决定研究一下邮箱服务器的一些原理，解决这个看起来很基础的问题。 什么是邮箱服务器？所谓邮箱服务器即为网络上的客户端保存电子邮件（电子邮件）消息的远程或中央计算机称为邮件服务器。邮件服务器可以分为两大类：传出邮件服务器和传入邮件服务器。传出邮件服务">
 <meta name="twitter:image" content="https://ae01.alicdn.com/kf/HTB1FClIanHuK1RkSndV760VwpXam.png">
 
 
@@ -392,16 +397,59 @@
 
       
         <p>最近发现一个问题，苹果手机在设置邮箱服务器来获取第三方邮件时总是报错，无法正常获取邮件，我思考了一下，这其中肯定是有原因的，不可能是手机软件的的问题，于是决定研究一下邮箱服务器的一些原理，解决这个看起来很基础的问题。</p>
-<h3 id="整体架构"><a href="#整体架构" class="headerlink" title="整体架构"></a>整体架构</h3><p>所谓邮箱服务器即为网络上的客户端保存电子邮件（电子邮件）消息的远程或中央计算机称为邮件服务器。</p>
-<p><img src="https://ae01.alicdn.com/kf/HTB1FClIanHuK1RkSndV760VwpXam.png" alt=""><br>电子邮件发送协议是一种基于“ 推 ”的协议，主要包括 SMTP；邮件接收协 则是一种基于“ 拉 ”的协议，主要包括POP协议和IMAP协议。邮件发送和接收的流程如上图所示，其中用户代理UA（User Agent ）是一个软件包（程序），它的功能是：撰写、阅读、回复和转发报文，还能处理邮箱（如创建收信箱和发信箱）。共有两种类型的用户代理： 命令驱动 和GUI 。 命令驱动 属于早期的电子邮件，通过命令发送和接收邮件，而GUI 则是包含图形界面，允许用户使用键盘和鼠标与软件进行交互。 </p>
+<h3 id="什么是邮箱服务器？"><a href="#什么是邮箱服务器？" class="headerlink" title="什么是邮箱服务器？"></a>什么是邮箱服务器？</h3><p>所谓邮箱服务器即为网络上的客户端保存电子邮件（电子邮件）消息的远程或中央计算机称为邮件服务器。<br>邮件服务器可以分为两大类：传出邮件服务器和传入邮件服务器。传出邮件服务器称为SMTP或简单邮件传输协议服务器。传入邮件服务器有两种主要类型。POP3或邮局协议版本3服务器以在PC本地硬盘上存储已发送和已接收的消息而闻名。 IMAP或Internet消息访问协议服务器始终在服务器上存储消息副本。</p>
+<h3 id="为什么要有邮箱服务器？"><a href="#为什么要有邮箱服务器？" class="headerlink" title="为什么要有邮箱服务器？"></a>为什么要有邮箱服务器？</h3><p>如果没有这一系列的邮件服务器，您只能向电子邮件地址域与您自己的电子邮件地址匹配的人发送电子邮件。即，您只能将一个example.com帐户的邮件发送到另一个example.com帐户。</p>
+<h3 id="邮件发送的过程是怎样的？"><a href="#邮件发送的过程是怎样的？" class="headerlink" title="邮件发送的过程是怎样的？"></a>邮件发送的过程是怎样的？</h3><p><img src="https://ae01.alicdn.com/kf/HTB1FClIanHuK1RkSndV760VwpXam.png" alt=""><br>如上图，电子邮件发送协议是一种基于“推”的协议，主要包括SMTP；邮件接收协议则是一种基于“拉”的协议，主要包括POP协议和IMAP协议。<br>其中用户代理UA(User Agent)是一个软件包(程序)，它的功能是：撰写、阅读、回复和转发报文，还能处理邮箱（如创建收信箱和发信箱）。<br>共有两种类型的用户代理： 命令驱动和GUI。命令驱动属于早期的电子邮件，通过命令发送和接收邮件，而GUI则是包含图形界面，允许用户使用键盘和鼠标与软件进行交互。 </p>
+<p>再结合下来进一步理解，MTA充当邮局（分拣区域和邮件承运商），处理邮件传输，而MDA充当邮箱，邮箱存储邮件（只要其容量允许），直到收件人拿走它。<br>使用称为MUA（邮件用户代理）的软件程序来检索邮件。当MUA是安装在用户系统上的程序时，它被称为电子邮件客户端。当它是用于与传入邮件服务器交互的Web界面时，它被称为webmail，这里的MUA与上图的UA是一个概念。<br><img src="https://ae01.alicdn.com/kf/HTB1h65IacrrK1Rjy1ze760alFXaS.png" alt=""></p>
 <p>下面来详细看一下用户发送与邮件接收的过程：</p>
 <ol>
-<li><p>当发件人单击“发送”按钮时，电子邮件客户端将使用SMTP协议连接到电子邮件提供商的SMTP服务器（邮件传输代理）。假设您使用的是Gmail，那么您的电子邮件客户端会联系Gmail的SMTP服务器 - smtp.gmail.com。 Gmail上的SMTP服务器会检查您的电子邮件中的收件人电子邮件地址。假设收件人是 <a href="mailto:person@example.com" target="_blank" rel="noopener">person@example.com</a>，则Gmail SMTP服务器会从DNS查找example.com的MX（邮件交换器/Mail eXchange）记录。 MX记录是DNS中的一条记录，用于指定负责接收方域接受电子邮件的邮件服务器。从MX记录中检索example.com的SMTP服务器地址后，Gmail SMTP服务器会将该电子邮件发送到example.com的SMTP服务器。 example.com的SMTP服务器检查该服务器上是否存在“person”收件人。如果该服务器上存在该帐户，则会将该电子邮件转发到其自己的IMAP / POP3服务器（邮件传递代理）以存储此电子邮件。</p>
-</li>
-<li><p>现在，收件人可以使用Outlook（邮件用户代理）等电子邮件客户端连接到此服务器并阅读该电子邮件。有时在发件人和收件人的SMTP服务器之间有多个站点，整体上流程通常是相同的。</p>
+<li>单击“发送”按钮时，电子邮件客户端将使用SMTP协议连接到电子邮件提供商的SMTP服务器（邮件传输代理）。假设你使用的是Gmail，那么你的电子邮件客户端会联系Gmail的SMTP服务器 - smtp.gmail.com。 </li>
+<li>你的电子邮件客户端与SMTP服务器通信，为其提供你的（发件人）电子邮件地址，收件人的电子邮件地址，邮件正文和任何附件。</li>
+<li>SMTP服务器处理收件人的电子邮件地址 - 尤其是其域。如果域名与发件人的域名相同，则邮件将直接路由到域的POP3或IMAP服务器 - 不需要在服务器之间进行路由。但是，如果域不同，则SMTP服务器必须与其他域的服务器通信。<br>比如Gmail上的SMTP服务器会检查您的电子邮件中的收件人电子邮件地址。假设收件人是 <a href="mailto:person@google.com" target="_blank" rel="noopener">person@google.com</a>，则Gmail SMTP服务器会从DNS查找google.com的MX（邮件交换器）记录。 MX记录是DNS中的一条记录，用于指定负责接受该电子邮件的邮件服务器，如 alt1.aspmx.l.google.com、aspmx.l.google.com。从MX记录中检索google.com的SMTP服务器地址后，再查找它的IP地址即A记录，Gmail SMTP服务器根据IP地址将该电子邮件发送到google.com的SMTP服务器，一般选择MX首选项值比较低的服务器aspmx.l.google.com，首选项值代表优先级，如果传递失败，它将尝试返回的MX记录列表中的另一台服务器，依此类推，直到成功为止。<br>如google.com的STMTP服务器为：<br><img src="https://ae01.alicdn.com/kf/HTB1xHOBaojrK1RkHFNR761SvpXaD.png" alt=""></li>
+<li>google.com的SMTP服务器检查该服务器上是否存在“person”收件人。如果该服务器上存在该帐户，则会将该电子邮件转发到其自己的IMAP / POP3服务器（邮件传递代理/MDA）以存储此电子邮件。</li>
+<li>现在，收件人可以使用Outlook（邮件用户代理）等电子邮件客户端连接到此服务器并阅读该电子邮件。为了防止每个人查看其他用户的电子邮件，收件人受到名为登录名和密码的用户名的保护。有时在发件人和收件人的SMTP服务器之间有多个站点，其实流程也是相同的。</li>
+</ol>
+<h3 id="电子邮件协议分类"><a href="#电子邮件协议分类" class="headerlink" title="电子邮件协议分类"></a>电子邮件协议分类</h3><p>上文讲到了邮件服务器可以分为两大类：传出邮件服务器和传入邮件服务器。其中传出服务器采用的协议为SMTP，传入服务器采用的协议有POP3和IMAP两种。下面依次进行介绍。</p>
+<h4 id="SMTP"><a href="#SMTP" class="headerlink" title="SMTP"></a>SMTP</h4><p>SMTP 的全称是“Simple Mail Transfer Protocol”，即简单邮件传输协议。它是一组用于从源地址到目的地址传输邮件的规范，通过它来控制邮件的中转方式。SMTP 协议属于 TCP/IP 协议簇，它帮助每台计算机在发送或中转信件时找到下一个目的地。</p>
+<p>SMTP 服务器就是遵循 SMTP 协议的发送邮件服务器。 </p>
+<p>SMTP通常用于在Internet端口25上运行。在欧洲广泛使用的SMTP的替代方案是X.400。 许多邮件服务器现在支持扩展简单邮件传输协议（ESMTP），它允许多媒体文件作为电子邮件传递。</p>
+<p>SMTP有认证，简单地说就是要求必须在提供了账户名和密码之后才可以登录 SMTP 服务器，这就使得那些垃圾邮件的散播者无可乘之机。</p>
+<p>本质上来说，SMTP（简单邮件传输协议）是用于发送和接收电子邮件的TCP / IP协议。 理论上，SMTP可以通过TCP，UDP或某些第三方协议来处理。但如果你在邮件中间丢失了几个数据包，则收件人可能甚至不会收到该邮件，如果他们这样做，则可能会丢失密钥信息。 这使TCP更合适，因为它确保每个数据包都已传送。</p>
+<p>SMTP的通信端口分为两种，一种是不支持加密的，邮件是明文传输，端口号为25，此端口主要用于SMTP中继。 SMTP中继是从电子邮件服务器到电子邮件服务器的电子邮件传输。<br>另一种是加密端口，这里的加密指的是邮件通信会通过SSL/TLS加密传输，关于SSL/TLS更多请查看<a href="http://www.nephen.cn/2018/12/10/ssl-tls%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E6%98%AF%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F/" target="_blank" rel="noopener">ssl/tls是什么？是怎么工作的？</a>，此端口一般使用465端口，虽然端口465从未作为IETF的官方SMTP传输或提交渠道发布，但互联网号码分配机构（IANA）负责维护大部分核心互联网基础设施，为SMTPS注册了465端口。</p>
+<h4 id="POP3"><a href="#POP3" class="headerlink" title="POP3"></a>POP3</h4><p>POP3是Post Office Protocol 3的简称，即邮局协议的第3个版本,它规定怎样将个人计算机连接到Internet的邮件服务器和下载电子邮件的电子协议。它是因特网电子邮件的第一个离线协议标准,POP3允许用户从服务器上把邮件存储到本地主机（即自己的计算机）上。就像邮局职员的实体版本一样，POP3接收并保留个人的电子邮件，直到他们拿走它为止。</p>
+<p>POP3服务器则是遵循POP3协议的接收邮件服务器，用来接收电子邮件的。</p>
+<p>POP3有两种工作方式：删除方式和保存方式，可以在客户端进行设置。删除方式就在每一次读取邮件后就把邮箱中的这个邮件删除， 保存方式就是在读取邮件后仍然在邮箱中保存这个邮件，该方式是通过对之前的POP3工作方式（即删除）的缺点进行弥补，对功能进行扩充。</p>
+<p>POP3的优点在于它很简洁，可以以最少的错误来完成工作，但同时缺点就是它只适合那些使用单个设备检索邮件的人，如果使用删除模式服务端是没有备份邮件的，单个设备下载后其余登陆的设备就无法再进行下载了，如果设置了保存模式可以弥补这个缺点。</p>
+<p>POP3端口也分为SSL/TLS加密端口995，和不加密端口110。</p>
+<h4 id="IMAP"><a href="#IMAP" class="headerlink" title="IMAP"></a>IMAP</h4><p>IMAP全称是Internet Mail Access Protocol，即交互式邮件存取协议，它是跟POP3类似邮件访问标准协议之一。</p>
+<p>IMAP4服务器则是遵循IMAP协议的接收邮件服务器，用来接收电子邮件的。</p>
+<p>不同的是，开启了IMAP后，你在电子邮件客户端收取的邮件仍然保留在服务器上，同时在客户端上的操作都会反馈到服务器上，如：删除邮件，标记已读等，服务器上的邮件也会做相应的动作。所以无论从浏览器登录邮箱或者客户端软件登录邮箱，看到的邮件以及状态都是一致的。</p>
+<p>还有一个就是，如果选择阅读邮件，则会快速下载，以便可以看到 - 因为除非你需要打开电子邮件，否则不会下载电子邮件的，这样也就可以快速的查阅邮件列表了，不需要等所有邮件内容更新后才可以查看。</p>
+<p>所以，相比POP3而言，IMAP有以下优点：</p>
+<ul>
+<li>它允许你通过任意数量的设备从任何地方访问你的电子邮件。</li>
+<li>它只会在你单击时下载邮件，无需等待所有新消息从服务器下载，然后才能阅读它们。</li>
+<li>IMAP不会自动下载附件。因此，您可以更快地检查邮件，并可以更好地控制打开哪些附件。</li>
+<li>IMAP可以像POP一样离线使用 - 您基本上可以享受两种协议的优势。</li>
+</ul>
+<p>最后，IMAP端口也分为SSL/TLS加密端口993，和不加密端口143。</p>
+<h3 id="相关问题"><a href="#相关问题" class="headerlink" title="相关问题"></a>相关问题</h3><p>这里有一些问题，可能你也会遇到，我把它列举一下。</p>
+<ol>
+<li>我的邮件服务器地址是什么？<br>你的邮件服务器地址和其他信息应由你的电子邮件提供商提供。 通常，此信息可以在电子邮件提供商支持页面上找到，也可以在电子邮件提供商的文档中找到。 在你的电子邮件提供商的网站上，该信息可能会列为SMTP和POP3地址。</li>
+<li>我可以在互联网上使用我想要的任何邮件服务器吗？<br>不可以。在浏览Internet时使用的Internet服务提供商（ISP）通常会有可以访问电子邮件的邮件服务器（传入和传出电子邮件），但通常无法访问其他互联网服务提供商拥有的邮件服务器，原因是邮件服务器只接受某些IP地址（ISP提供的IP地址），如果你的IP地址超出此范围，你将被拒绝访问服务器。<br>但是也有例外。 在某些情况下，你可以从其他ISP提供的POP3服务器下载电子邮件。 他们只会检查您的用户名和密码是否正确。<br>并且Internet上还存在独立于Internet服务提供商的独立电子邮件服务器，如果你有访问用户名和密码，则可以通过它们发送和接收电子邮件。 许多Web托管服务提供这种独立的邮件服务器。</li>
+<li>自己是否可以自己搭建？缺点是什么？<br>可以自己搭建，缺点是涉及的模块比较多，比如MTA、MDA、IMAP或者POP3服务器等，自己搭建比较复杂，维护比较耗时。</li>
+<li>MX记录是怎么查询的？<br>可以先查阅<a href="http://www.nephen.cn/2018/11/23/%E6%80%8E%E4%B9%88%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BE%8E%E8%A7%82%E5%AE%9E%E7%94%A8%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%9F/" target="_blank" rel="noopener">怎么快速搭建一个美观实用的博客？</a>了解一下DNS的基本原理和工作过程，发送邮件服务器将按照以下的顺序查找DNS中的MX记录。<ul>
+<li>查找goodix.com的权威名称服务器(如果挂在dnspod上,则会给出dnspod的服务器地址)</li>
+<li>查询goodix.com名称服务器以获取MX记录</li>
+<li>在DNS中查找MX记录服务器的A地址以获取其IP地址<br>可以使用Windows自带工具查询SMTP服务器IP地址如下图：<br><img src="https://ae01.alicdn.com/kf/HTB1.3WEanjxK1Rjy0Fn761BaFXaH.png" alt=""></li>
+</ul>
 </li>
 </ol>
-<h3 id="电子邮件协议分类"><a href="#电子邮件协议分类" class="headerlink" title="电子邮件协议分类"></a>电子邮件协议分类</h3>
+<h3 id="怎么设置客户端？"><a href="#怎么设置客户端？" class="headerlink" title="怎么设置客户端？"></a>怎么设置客户端？</h3><p>绕了这么多，终于回到了正题，其实如果真正弄懂了邮件传输的原理以及相关一些协议的作用，这样就比较简单了。<br>如下图，收件服务器采用可以与服务器进行交互的IMAP协议，毕竟比较有优势，也可以查看163的网站查看主机名为imap.163.com,而发送服务器没得选，直接写smtp.163.com就可以了，这里的端口后不需要填，基本上都是默认的端口号。<br><img src="https://ae01.alicdn.com/kf/HTB1H6iyafLsK1Rjy0Fb760SEXXa5.png" alt=""></p>
+<p>端口号也是可以修改的，见下图，基本上设置都是差不多的，反过头来看，设置比较简单，要知道其中的原理还是要花一定时间的。<br><img src="https://ae01.alicdn.com/kf/HTB10M5CacfrK1Rjy0Fm760hEXXai.png" alt=""></p>
+<h3 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h3><p>最后再仔细想想，其实邮件收发的过程跟我们现实生活中寄快递是一样的逻辑，先把东西打包后交给快递公司接收点，然后快递公司派单送到中间的其他站点，这些接收点，中间点就相当于SMTP服务器，快递寄到了以后往往会存到某个附件的代收点，这个代收点就相当于POP3服务器或者IMAP服务器，用户接收到了短信就可以自己凭短信取件码去领，也可以过一段时间去领。</p>
+<p>真是技术源于生活呀，我想创新也需要勤于对生活的思考吧。</p>
+
       
     </div>
     
@@ -634,7 +682,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#整体架构"><span class="nav-number">1.</span> <span class="nav-text">整体架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#电子邮件协议分类"><span class="nav-number">2.</span> <span class="nav-text">电子邮件协议分类</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是邮箱服务器？"><span class="nav-number">1.</span> <span class="nav-text">什么是邮箱服务器？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要有邮箱服务器？"><span class="nav-number">2.</span> <span class="nav-text">为什么要有邮箱服务器？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#邮件发送的过程是怎样的？"><span class="nav-number">3.</span> <span class="nav-text">邮件发送的过程是怎样的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#电子邮件协议分类"><span class="nav-number">4.</span> <span class="nav-text">电子邮件协议分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SMTP"><span class="nav-number">4.1.</span> <span class="nav-text">SMTP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#POP3"><span class="nav-number">4.2.</span> <span class="nav-text">POP3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IMAP"><span class="nav-number">4.3.</span> <span class="nav-text">IMAP</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相关问题"><span class="nav-number">5.</span> <span class="nav-text">相关问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#怎么设置客户端？"><span class="nav-number">6.</span> <span class="nav-text">怎么设置客户端？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结束语"><span class="nav-number">7.</span> <span class="nav-text">结束语</span></a></li></ol></div>
             
 
           </div>
