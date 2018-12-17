@@ -88,7 +88,7 @@
 <meta property="og:description" content="博客使用静态网站生成技术生成，静态网站生成是指静态生成网站的过程，即生成HTML文件，例如，在本地计算机中，然后将网站文件上载到服务器，该服务器在被请求时向用户提供服务。相比动态网站，有以下优点：  内容存储为平面文件，因此不需要数据库 静态网站不需要动态服务器端处理 静态网站比动态网站超快，因为它们不需要服务器端处理或数据库访问 静态网站比任何动态网站都更安全，因为可以利用的安全漏洞更少 缓存静">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://nephen.cn/images/hexo原理.png">
-<meta property="og:image" content="http://nephen.cn/images/钩子.png">
+<meta property="og:image" content="https://ww1.sinaimg.cn/large/007iUjdily1fy9tdo5obbj30h9055jr9.jpg">
 <meta property="og:image" content="http://nephen.cn/images/Nginx.png">
 <meta property="og:image" content="http://nephen.cn/images/basicdns.png">
 <meta property="og:image" content="http://nephen.cn/images/dnspot.png">
@@ -96,7 +96,7 @@
 <meta property="og:image" content="http://nephen.cn/images/diggui.png">
 <meta property="og:image" content="http://nephen.cn/images/digout.png">
 <meta property="og:image" content="http://nephen.cn/images/nslookup.png">
-<meta property="og:updated_time" content="2018-12-03T07:04:26.546Z">
+<meta property="og:updated_time" content="2018-12-17T08:19:41.055Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="怎么快速搭建一个美观实用的博客？">
 <meta name="twitter:description" content="博客使用静态网站生成技术生成，静态网站生成是指静态生成网站的过程，即生成HTML文件，例如，在本地计算机中，然后将网站文件上载到服务器，该服务器在被请求时向用户提供服务。相比动态网站，有以下优点：  内容存储为平面文件，因此不需要数据库 静态网站不需要动态服务器端处理 静态网站比动态网站超快，因为它们不需要服务器端处理或数据库访问 静态网站比任何动态网站都更安全，因为可以利用的安全漏洞更少 缓存静">
@@ -350,8 +350,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-03T15:04:26+08:00">
-                2018-12-03
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T16:19:41+08:00">
+                2018-12-17
               </time>
             
           </span>
@@ -472,7 +472,7 @@
 <ol>
 <li>什么是vps？<br>VPS（Virtual Private Server 虚拟专用服务器）技术，将一台服务器分割成多个虚拟专享服务器的优质服务。比如搬瓦工VPS是一款性价比较高的便宜VPS主机，且适合入门级网友学习Linux、建站和软件调试用途。搬瓦工VPS目前有洛杉矶MC、洛杉矶QN、凤凰城、佛罗里达、荷兰这8个数据中心，对中文速度较好的是洛杉矶和凤凰城。</li>
 <li>基本原理<br>在服务器上搭建一个Git仓库。在本地Hexo执行deploy后，博客文件会被push到这个Git仓库，然后这个仓库又会通过一个git-hooks的功能把文件同步到VPS的网站根目录，经过Nginx代理服务把网站展现给用户。参考下图<br><img src="/images/hexo原理.png" alt=""></li>
-<li>Git服务器设置<br>在.git/hooks文件夹中创建一个钩子文件：post-receive，注意没有后缀.sample，这样每当git仓库接收到内容的时候，就会自动调用这个钩子，把内容同步到网站根目录。需要修改post-receive权限使其可执行，chown git:git -R post-update/chmod +x post-update。<br><img src="/images/钩子.png" alt=""><br> debug需要注意的地方，实际问题通过git push origin master返回log查看即可。</li>
+<li>Git服务器设置<br>在.git/hooks文件夹中创建一个钩子文件：post-receive，注意没有后缀.sample，这样每当git仓库接收到内容的时候，就会自动调用这个钩子，把内容同步到网站根目录。需要修改post-receive权限使其可执行，chown git:git -R post-update/chmod +x post-update，需要保证TARGET已经创建，并且该目录以及子目录的权限属于git，这点很重要，否则会报<code>Permission denied</code>的错误。<br><img src="https://ww1.sinaimg.cn/large/007iUjdily1fy9tdo5obbj30h9055jr9.jpg" alt=""><br> debug需要注意的地方，实际问题通过git push origin master返回log查看即可。</li>
 <li><p>Nginx设置<br>web服务器选择Nginx，Nginx与Apache比较，有如下优点：</p>
 <ul>
 <li>Nginx轻量级，占用资源少，负载均衡，高并发处理强，静态内容处理高效。</li>
