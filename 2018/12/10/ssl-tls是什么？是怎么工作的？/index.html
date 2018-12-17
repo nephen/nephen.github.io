@@ -90,7 +90,7 @@
 <meta property="og:image" content="https://ww1.sinaimg.cn/large/007iUjdily1fy1ezpieclj30fw09emz8.jpg">
 <meta property="og:image" content="https://ww1.sinaimg.cn/large/007iUjdily1fy1e8nq5lej30i20fi0vs.jpg">
 <meta property="og:image" content="https://ww1.sinaimg.cn/large/007iUjdily1fy1ex9bpxkj30fz08lwho.jpg">
-<meta property="og:updated_time" content="2018-12-17T07:21:58.549Z">
+<meta property="og:updated_time" content="2018-12-17T07:24:13.430Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ssl&#x2F;tls是什么？是怎么工作的？">
 <meta name="twitter:description" content="最近在思考一个关于邮箱服务器的问题，其中涉及到了SSL/TLS加密传输，于是想研究一下什么，到底是怎么实现加密的，通过查找各方面的资料，发现这个涉及到的东西还蛮多的，可以单独写一篇文章整理一下自己的理解。 SSL/TLS是什么？SSL（安全套接字层）是一种标准安全协议，用于在在线通信中建立Web服务器和浏览器之间的加密链接。 那TLS又是什么？Transport Layer Security (T">
@@ -344,7 +344,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:21:58+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:24:13+08:00">
                 2018-12-17
               </time>
             
@@ -440,7 +440,7 @@
 <li>CA认证<br>域名认证，一般通过对管理员邮箱认证的方式，这种方式认证速度快，但是签发的证书中没有企业的名称；<br>企业文档认证，需要提供企业的营业执照。一般需要3-5个工作日。 也有需要同时认证以上2种方式的证书，叫EV证书，这种证书可以使IE7以上的浏览器地址栏变成绿色，所以认证也最严格。</li>
 <li>证书的安装<br>在收到CA的证书后，可以将证书部署上服务器，一般APACHE文件直接将KEY+CER复制到文件上，然后修改HTTPD.CONF文件。</li>
 </ol>
-<p>注意：证书分为单域证书、通配符证书、多域证书及 扩展验证证书，申请证书的时候要看是申请那一类了。</p>
+<p>注意：证书分为单域证书、通配符证书、多域证书及扩展验证证书，申请证书的时候要看是申请那一类了。</p>
 <p>证书在什么情况下被使用？是怎么使用的？</p>
 <ol>
 <li>我们在点击web站点的时候，比如输入<a href="https://www.domain.com" target="_blank" rel="noopener">https://www.domain.com</a> ，进行dns解析后web服务器进行响应，web服务器自动传送<a href="https://www.domain.com" target="_blank" rel="noopener">https://www.domain.com</a> 网站的数字证书给用户，上文说到了，证书是安装在web服务器里面的，证书里面含有公钥，所以这里相当于服务器把公钥传递给了客户端，当然服务器那里还有自己的私钥，具体过程如下图。<br><img src="https://ww1.sinaimg.cn/large/007iUjdily1fy1ezpieclj30fw09emz8.jpg" alt=""></li>
