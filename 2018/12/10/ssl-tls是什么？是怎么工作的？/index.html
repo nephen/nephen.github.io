@@ -90,7 +90,7 @@
 <meta property="og:image" content="https://ww1.sinaimg.cn/large/007iUjdily1fy1ezpieclj30fw09emz8.jpg">
 <meta property="og:image" content="https://ww1.sinaimg.cn/large/007iUjdily1fy1e8nq5lej30i20fi0vs.jpg">
 <meta property="og:image" content="https://ww1.sinaimg.cn/large/007iUjdily1fy1ex9bpxkj30fz08lwho.jpg">
-<meta property="og:updated_time" content="2018-12-13T11:31:47.867Z">
+<meta property="og:updated_time" content="2018-12-17T06:56:40.377Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ssl&#x2F;tls是什么？是怎么工作的？">
 <meta name="twitter:description" content="最近在思考一个关于邮箱服务器的问题，其中涉及到了SSL/TLS加密传输，于是想研究一下什么，到底是怎么实现加密的，通过查找各方面的资料，发现这个涉及到的东西还蛮多的，可以单独写一篇文章整理一下自己的理解。 SSL/TLS是什么？SSL（安全套接字层）是一种标准安全协议，用于在在线通信中建立Web服务器和浏览器之间的加密链接。 那TLS又是什么？Transport Layer Security (T">
@@ -344,8 +344,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-13T19:31:47+08:00">
-                2018-12-13
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T14:56:40+08:00">
+                2018-12-17
               </time>
             
           </span>
@@ -454,7 +454,7 @@
 </ol>
 <p>那么会话密钥和公钥有什么区别呢？</p>
 <ol>
-<li>会话加密是非对称加密，服务器和客户端协商后生产一个会话密钥，所以服务器和客户端是共享一个相同的密钥的，当然不是服务器和所有客户端共享一个相同的密钥，而是每个客户端都有自己的密钥，比较这个会话密钥是客户端（浏览器）随机生成的，所以服务器需要维护多个密钥。</li>
+<li>会话加密是对称加密，服务器和客户端协商后生产一个会话密钥，所以服务器和客户端是共享一个相同的密钥的，当然不是服务器和所有客户端共享一个相同的密钥，而是每个客户端都有自己的密钥，比较这个会话密钥是客户端（浏览器）随机生成的，所以服务器需要维护多个密钥。</li>
 <li>公钥是采用的非对称加密，服务器把证书（公钥）下发给每个用户正在使用的客户端（浏览器），所以是客户端共享公钥，服务器只掌控私钥，服务端与客户端密钥是一个1对多的关系，客户端发送的加密信息只能服务端解密，安全级别也更高，但是由于非对称加密太慢了，才采用了不同客户端不同密钥的“会话密钥”来解决这个问题。</li>
 </ol>
 <p>具体TLS/SSL里面涉及到的非对称加密和对称加密的区别以及算法如下图所示：<br><img src="https://ww1.sinaimg.cn/large/007iUjdily1fy1ex9bpxkj30fz08lwho.jpg" alt=""></p>
