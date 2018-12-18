@@ -644,7 +644,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://nephen.cn/2017/06/16/初学PX4之大体构架/">
+    <link itemprop="mainEntityOfPage" href="http://nephen.cn/2017/06/16/初学PX4之飞控算法/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nephen">
@@ -663,7 +663,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/06/16/初学PX4之大体构架/" itemprop="url">初学PX4之大体构架</a></h1>
+                <a class="post-title-link" href="/2017/06/16/初学PX4之飞控算法/" itemprop="url">初学PX4之飞控算法</a></h1>
         
 
         <div class="post-meta">
@@ -728,8 +728,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/06/16/初学PX4之大体构架/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2017/06/16/初学PX4之大体构架/" itemprop="commentCount"></span>
+                <a href="/2017/06/16/初学PX4之飞控算法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2017/06/16/初学PX4之飞控算法/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -759,40 +759,19 @@
       
         
           
-          PX4源代码PX4项目建立在这些主要软件模块:
+          
+注意：基于参考原因，本文参杂了APM的算法分析。
 
-PX4 Flight Stack (estimation and control, cross-platform)
-PX4 Middleware (IPC / ORB, *nix (NuttX, Linux, MacOS, etc))
-PX4 ESC Firmware (for motor controllers)
-PX4 Bootloader (for STM32 boards)
-Operating System (NuttX or Linux/Mac OS)
+本篇文章首先简述了下px4和apm调用姿态相关应用程序出处，然后对APM的DCM姿态解算算法参考的英文文档进行了翻译与概括，并结合源代码予以分析，在此之前，分析了starlino的DCM，并进行了matlab的实现，因为它更加利于理解。后段时间会对px4的四元数姿态解算进行分析。姿态控制部分描述了串级PID在APM里的实现流程，同样后期会完善对px4的分析。最后针对自己平时使用的一些调试技巧进行了总结。    
 
-项目地址：
+姿态出处分析
+下面看下重要的一个脚本/etc/init.d/rc.mc_apps，可以知道姿态估计用的是attitude_estimator_q和position_estimator_inav，用户也可以选择local_position_estimator、ekf2，而姿态控制应用为mc_att_control和mc_pos_control。
 
-PX4 Firmware source
-
-PX4飞行栈
-PX4飞行栈能控制多轴飞行器，航模，直升机，实验飞机和地面车辆的飞行。它由一组单独的应用程序/节点组成。
-
-flight control modules
-
-PX4中间件
-PX4中间件提供了硬件接口和进程间通信。
-
-drivers
-uORB
-
-PX4电调固件
-PX4电调固件控制无刷电机，可以通过UAV CAN进行交互。
-
-PX4 ESC source
-
-PX4 Bootloader
-PX4引导装载程序是用于S
+1234567891011121314151617181920212223242526272829#!nshif param compare INAV_ENABLED 1then	
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/06/16/初学PX4之大体构架/#more" rel="contents">
+            <a class="btn" href="/2017/06/16/初学PX4之飞控算法/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -843,7 +822,7 @@ PX4引导装载程序是用于S
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://nephen.cn/2017/06/16/BLE核心模块FS-QN9021模块开发-linux版/">
+    <link itemprop="mainEntityOfPage" href="http://nephen.cn/2017/06/16/汇顶科技求职感悟/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nephen">
@@ -862,7 +841,7 @@ PX4引导装载程序是用于S
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/06/16/BLE核心模块FS-QN9021模块开发-linux版/" itemprop="url">BLE核心模块FS-QN9021模块开发-linux版</a></h1>
+                <a class="post-title-link" href="/2017/06/16/汇顶科技求职感悟/" itemprop="url">汇顶科技求职感悟</a></h1>
         
 
         <div class="post-meta">
@@ -897,6 +876,28 @@ PX4引导装载程序是用于S
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/感悟/" itemprop="url" rel="index">
+                    <span itemprop="name">感悟</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -905,8 +906,8 @@ PX4引导装载程序是用于S
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/06/16/BLE核心模块FS-QN9021模块开发-linux版/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2017/06/16/BLE核心模块FS-QN9021模块开发-linux版/" itemprop="commentCount"></span>
+                <a href="/2017/06/16/汇顶科技求职感悟/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2017/06/16/汇顶科技求职感悟/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -936,18 +937,14 @@ PX4引导装载程序是用于S
       
         
           
-          这段时间又参与了一个新的小项目，简单概括为蓝牙、智能、家居吧，虽然时间有点紧，还是希望能把这一些东西记录下来。
-
-BLE什么是BLE？参考这篇文章做如下总结。中文名称为蓝牙低功耗。主要特点为低成本、超低功耗、短距离、标准接口和可互操作性强，并且工作在免许可的2.4GHz ISM射频段，需要支持蓝牙4.0（系统为Android4.3及以上）的主机设备才能与其连接。    
-目前生产BLE芯片的厂家主要有CSR、TI、Nodic和NXP（QN902x），各个厂家芯片对比如下图
-
-从如上图对比可以看出，NXP的QN902x在功耗方面比CSR和TI更省电，在接收灵敏度和模式方面比Nodic的胜一筹，它的从设备相比其它几家可以连接的更多，共有8个，这也算是蓝牙4.0的一大特色吧，并且NXP的芯片已经过了MFI认证，直接能与苹果设备相连接，因为这种认证也是挺贵的。    
-因为BLE的低功耗、低成本及强大的处理能力，并且随着iPhone的设备支持蓝牙4.0，BLE的终端设备在我们的生活当中将会越来越多，在未来将会有爆发式增长。
-QN902X是一款内核为M0的蓝牙BLE SOC芯片，其SDK对蓝牙B
+          大家好，非常高兴能够在这里跟大家分享我的求职经历，希望能够对大家有所启发和帮助。
+说到汇顶科技肯定很多人要问了，这是个什么公司？怎么从来没听过。借此我想为我们公司做个小广告，欢迎志同道合的小伙伴们。
+公司简介指纹识别哪家强，中国深圳找汇顶——汇顶科技成立于2002年，作为全球领先的人机交互技术与解决方案提供商，目前已在包括手机、平板电脑和可穿戴产品在内的智能移动终端人机交互技术领域构筑了领先优势。陆续推出拥有自主知识产权的单层多点触控技术、基于电容检测的近场通信技术、具有蓝宝石面板的指纹识别技术及触控与指纹识别一体化的 IFSTM技术。目前，产品和解决方案广泛应用在华为、中兴、联想、OPPO、VIVO、魅族、三星显示、JDI、诺基亚、东芝、松下等国际国内知名终端 品牌，服务全球数亿人群。2016年应届毕业生薪酬待遇：本科月薪8000元，年薪14万起；硕士月薪10000元，年薪17万起；博士月薪18000元，年薪30万起。
+汇顶大事件2014年11月魅族MX 4 Pro发布，魅族MX4 Pro是全球首款采用前置蓝宝石按压式解锁方案的安卓手机，该技术完全来自一家深圳的本土IC企业——深圳市
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/06/16/BLE核心模块FS-QN9021模块开发-linux版/#more" rel="contents">
+            <a class="btn" href="/2017/06/16/汇顶科技求职感悟/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1182,7 +1179,7 @@ CONFIG_FS_ROMFS 使能
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://nephen.cn/2016/04/27/疯狂后的冬天/">
+    <link itemprop="mainEntityOfPage" href="http://nephen.cn/2017/06/16/BLE核心模块FS-QN9021模块开发-linux版/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nephen">
@@ -1201,7 +1198,7 @@ CONFIG_FS_ROMFS 使能
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/04/27/疯狂后的冬天/" itemprop="url">疯狂后的冬天</a></h1>
+                <a class="post-title-link" href="/2017/06/16/BLE核心模块FS-QN9021模块开发-linux版/" itemprop="url">BLE核心模块FS-QN9021模块开发-linux版</a></h1>
         
 
         <div class="post-meta">
@@ -1213,8 +1210,8 @@ CONFIG_FS_ROMFS 使能
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-27T01:42:47+08:00">
-                2016-04-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-16T07:43:37+08:00">
+                2017-06-16
               </time>
             
 
@@ -1236,28 +1233,6 @@ CONFIG_FS_ROMFS 使能
           </span>
 
           
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/感悟/" itemprop="url" rel="index">
-                    <span itemprop="name">感悟</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -1266,8 +1241,8 @@ CONFIG_FS_ROMFS 使能
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2016/04/27/疯狂后的冬天/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2016/04/27/疯狂后的冬天/" itemprop="commentCount"></span>
+                <a href="/2017/06/16/BLE核心模块FS-QN9021模块开发-linux版/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2017/06/16/BLE核心模块FS-QN9021模块开发-linux版/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1297,193 +1272,18 @@ CONFIG_FS_ROMFS 使能
       
         
           
-          开心的片段里，恨不得马上告诉全世界，看到的东西都是欢乐的色彩，烦闷的时候，有些事，宁愿烂在心里，也不愿意向别人透露半句，所以我更加喜欢上了这个平台，既满足了发泄，或许还会留下点点回忆。
-2014年这一年，是我步入大三的第一年，也是我初步觉得紧张与彷徨不安的一年，在这一年里，发生了好多事情，但是也想说没发生什么大事情，总的看来，一切的一切，都最终归于平淡的流年。
-愤慨加无聊之中突然想到了自己的梦想，一些有关很近的未来的打算，我的第一个五年计划是什么样子的，每一年我该实现些什么？按照表哥的话，人生其实就是那样，每个阶段干好每个阶段的事就行了，该干嘛干嘛去。如果不忘初心，我的梦想是很简单的，我期待有一个LOFT，周末的时间，兄弟们了好好聚聚，就当成自己的酒吧，续续旧也是好的，作为科技爱好者，我希望能有自己的一间工作室，里面各种开发板、元器件及相关设备齐全，安静祥和的日子了，做个真正的技术宅，我还会把它打扮的非常像个样子，比如这些样子的：
+          这段时间又参与了一个新的小项目，简单概括为蓝牙、智能、家居吧，虽然时间有点紧，还是希望能把这一些东西记录下来。
 
+BLE什么是BLE？参考这篇文章做如下总结。中文名称为蓝牙低功耗。主要特点为低成本、超低功耗、短距离、标准接口和可互操作性强，并且工作在免许可的2.4GHz ISM射频段，需要支持蓝牙4.0（系统为Android4.3及以上）的主机设备才能与其连接。    
+目前生产BLE芯片的厂家主要有CSR、TI、Nodic和NXP（QN902x），各个厂家芯片对比如下图
 
-
-
-开始工作的时间，我渴望有那么一间租房，这里边种满了花花草草，贴上了各种萌画，都是我跟她精心设计的。我想象着有一个地方，在那里我们谁也不认识，只属于我
+从如上图对比可以看出，NXP的QN902x在功耗方面比CSR和TI更省电，在接收灵敏度和模式方面比Nodic的胜一筹，它的从设备相比其它几家可以连接的更多，共有8个，这也算是蓝牙4.0的一大特色吧，并且NXP的芯片已经过了MFI认证，直接能与苹果设备相连接，因为这种认证也是挺贵的。    
+因为BLE的低功耗、低成本及强大的处理能力，并且随着iPhone的设备支持蓝牙4.0，BLE的终端设备在我们的生活当中将会越来越多，在未来将会有爆发式增长。
+QN902X是一款内核为M0的蓝牙BLE SOC芯片，其SDK对蓝牙B
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/04/27/疯狂后的冬天/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://nephen.cn/2016/04/27/祭奠即将逝去的大一/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nephen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="来风的官方网站">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/04/27/祭奠即将逝去的大一/" itemprop="url">祭奠即将逝去的大一</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-27T01:42:47+08:00">
-                2016-04-27
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-23T09:38:49+08:00">
-                2018-11-23
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/感悟/" itemprop="url" rel="index">
-                    <span itemprop="name">感悟</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/04/27/祭奠即将逝去的大一/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2016/04/27/祭奠即将逝去的大一/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          要想真正的有所成就，就必须学会付出，忍受失去，必须去投入大量的时间，有失必有得。
-每一个成功的人或者团队在达到成功之前难得有一段辛酸的过去，慢慢的要学会去奉献，而不是不停的索取，让自己慢慢地去感受，体验这个过程，也许也是一个成长的过程。
-大学我如果没进这基地，我也是想过去缀学的，确实在大学如果你不主动去学，就那点考试根本不能学到什么，何必浪费四年才去找工作，但进这基地总的来说，还是兴趣支撑了我，如果我没有兴趣，我就不会去发现这个基地，更不会进这个基地，的确这兴趣我也费了好大的劲，慢慢才发现的，进这基地后，我就一直的坚持，甚至哪天如果我失去了它我会感觉到空虚，人生失去了动力，不知道下一步要去干嘛，我觉得有句话总结的挺好的，梦想是你坚持了而感到幸福的事情，所以我现在我倍感幸福，我庆幸我在迷茫的大一找到了自己人生的方向。
-听学长们说了基地的大小年，我这一届恰好逢大年，所以带点迷信的想法我们必须去努力，甚至超过学长他们，从另外一个角度讲，基地也要一年比一年强，慢慢的越不越强大，这一直都是我们最希望的。
-这一天，你成功地感染到了我，不久以后我就要不断地去影响他人，改变他人，传播好情绪，好思想。
-
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/04/27/祭奠即将逝去的大一/#more" rel="contents">
+            <a class="btn" href="/2017/06/16/BLE核心模块FS-QN9021模块开发-linux版/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1656,6 +1456,183 @@ CONFIG_FS_ROMFS 使能
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2016/04/27/读哲学后感/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://nephen.cn/2016/04/27/疯狂后的冬天/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nephen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="来风的官方网站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/04/27/疯狂后的冬天/" itemprop="url">疯狂后的冬天</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-27T01:42:47+08:00">
+                2016-04-27
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-23T09:38:49+08:00">
+                2018-11-23
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/感悟/" itemprop="url" rel="index">
+                    <span itemprop="name">感悟</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/04/27/疯狂后的冬天/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2016/04/27/疯狂后的冬天/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          开心的片段里，恨不得马上告诉全世界，看到的东西都是欢乐的色彩，烦闷的时候，有些事，宁愿烂在心里，也不愿意向别人透露半句，所以我更加喜欢上了这个平台，既满足了发泄，或许还会留下点点回忆。
+2014年这一年，是我步入大三的第一年，也是我初步觉得紧张与彷徨不安的一年，在这一年里，发生了好多事情，但是也想说没发生什么大事情，总的看来，一切的一切，都最终归于平淡的流年。
+愤慨加无聊之中突然想到了自己的梦想，一些有关很近的未来的打算，我的第一个五年计划是什么样子的，每一年我该实现些什么？按照表哥的话，人生其实就是那样，每个阶段干好每个阶段的事就行了，该干嘛干嘛去。如果不忘初心，我的梦想是很简单的，我期待有一个LOFT，周末的时间，兄弟们了好好聚聚，就当成自己的酒吧，续续旧也是好的，作为科技爱好者，我希望能有自己的一间工作室，里面各种开发板、元器件及相关设备齐全，安静祥和的日子了，做个真正的技术宅，我还会把它打扮的非常像个样子，比如这些样子的：
+
+
+
+
+开始工作的时间，我渴望有那么一间租房，这里边种满了花花草草，贴上了各种萌画，都是我跟她精心设计的。我想象着有一个地方，在那里我们谁也不认识，只属于我
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/04/27/疯狂后的冬天/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2039,7 +2016,7 @@ CONFIG_FS_ROMFS 使能
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2087,7 +2064,7 @@ CONFIG_FS_ROMFS 使能
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2109,7 +2086,7 @@ CONFIG_FS_ROMFS 使能
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
