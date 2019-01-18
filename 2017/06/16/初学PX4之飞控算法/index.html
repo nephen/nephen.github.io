@@ -83,7 +83,7 @@
 <meta name="keywords" content="PX4,飞控算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="初学PX4之飞控算法">
-<meta property="og:url" content="http://nephen.cn/2017/06/16/初学PX4之飞控算法/index.html">
+<meta property="og:url" content="http://www.nephen.cn/2017/06/16/初学PX4之飞控算法/index.html">
 <meta property="og:site_name" content="来风的官方网站">
 <meta property="og:description" content="注意：基于参考原因，本文参杂了APM的算法分析。  本篇文章首先简述了下px4和apm调用姿态相关应用程序出处，然后对APM的DCM姿态解算算法参考的英文文档进行了翻译与概括，并结合源代码予以分析，在此之前，分析了starlino的DCM，并进行了matlab的实现，因为它更加利于理解。后段时间会对px4的四元数姿态解算进行分析。姿态控制部分描述了串级PID在APM里的实现流程，同样后期会完善对">
 <meta property="og:locale" content="zh-Hans">
@@ -97,53 +97,53 @@
 <meta property="og:image" content="http://www.starlino.com/wp-content/uploads/2011/11/clip_image0164.jpg">
 <meta property="og:image" content="http://www.starlino.com/wp-content/uploads/2011/11/clip_image0204.gif">
 <meta property="og:image" content="http://www.starlino.com/wp-content/uploads/2011/11/clip_image0224.jpg">
-<meta property="og:image" content="http://nephen.cn/images/dcm.png">
-<meta property="og:image" content="http://nephen.cn/images/R.png">
-<meta property="og:image" content="http://nephen.cn/images/RR.png">
-<meta property="og:image" content="http://nephen.cn/images/lean.png">
-<meta property="og:image" content="http://nephen.cn/images/cons.png">
-<meta property="og:image" content="http://nephen.cn/images/anti.png">
-<meta property="og:image" content="http://nephen.cn/images/frame.png">
-<meta property="og:image" content="http://nephen.cn/images/body.png">
-<meta property="og:image" content="http://nephen.cn/images/rotate.png">
-<meta property="og:image" content="http://nephen.cn/images/L1.png">
-<meta property="og:image" content="http://nephen.cn/images/方向余弦矩阵R.png">
-<meta property="og:image" content="http://nephen.cn/images/正交矩阵.png">
-<meta property="og:image" content="http://nephen.cn/images/矩阵推理.png">
-<meta property="og:image" content="http://nephen.cn/images/060231194231745.png">
-<meta property="og:image" content="http://nephen.cn/images/061036414865256.png">
-<meta property="og:image" content="http://nephen.cn/images/L2.png">
-<meta property="og:image" content="http://nephen.cn/images/L3.png">
-<meta property="og:image" content="http://nephen.cn/images/endl.png">
-<meta property="og:image" content="http://nephen.cn/images/eqn1.png">
-<meta property="og:image" content="http://nephen.cn/images/eqn2.png">
-<meta property="og:image" content="http://nephen.cn/images/LLL.png">
-<meta property="og:image" content="http://nephen.cn/images/3r.png">
-<meta property="og:image" content="http://nephen.cn/images/eqn3.png">
-<meta property="og:image" content="http://nephen.cn/images/eqn4.png">
-<meta property="og:image" content="http://nephen.cn/images/eqn5.png">
-<meta property="og:image" content="http://nephen.cn/images/eqn6.png">
-<meta property="og:image" content="http://nephen.cn/images/eqn7.png">
-<meta property="og:image" content="http://nephen.cn/images/eqn8.png">
-<meta property="og:image" content="http://nephen.cn/images/eqn9.png">
-<meta property="og:image" content="http://nephen.cn/images/eqn10.png">
-<meta property="og:image" content="http://nephen.cn/images/eqn11.png">
-<meta property="og:image" content="http://nephen.cn/images/eqn12.png">
+<meta property="og:image" content="http://www.nephen.cn/images/dcm.png">
+<meta property="og:image" content="http://www.nephen.cn/images/R.png">
+<meta property="og:image" content="http://www.nephen.cn/images/RR.png">
+<meta property="og:image" content="http://www.nephen.cn/images/lean.png">
+<meta property="og:image" content="http://www.nephen.cn/images/cons.png">
+<meta property="og:image" content="http://www.nephen.cn/images/anti.png">
+<meta property="og:image" content="http://www.nephen.cn/images/frame.png">
+<meta property="og:image" content="http://www.nephen.cn/images/body.png">
+<meta property="og:image" content="http://www.nephen.cn/images/rotate.png">
+<meta property="og:image" content="http://www.nephen.cn/images/L1.png">
+<meta property="og:image" content="http://www.nephen.cn/images/方向余弦矩阵R.png">
+<meta property="og:image" content="http://www.nephen.cn/images/正交矩阵.png">
+<meta property="og:image" content="http://www.nephen.cn/images/矩阵推理.png">
+<meta property="og:image" content="http://www.nephen.cn/images/060231194231745.png">
+<meta property="og:image" content="http://www.nephen.cn/images/061036414865256.png">
+<meta property="og:image" content="http://www.nephen.cn/images/L2.png">
+<meta property="og:image" content="http://www.nephen.cn/images/L3.png">
+<meta property="og:image" content="http://www.nephen.cn/images/endl.png">
+<meta property="og:image" content="http://www.nephen.cn/images/eqn1.png">
+<meta property="og:image" content="http://www.nephen.cn/images/eqn2.png">
+<meta property="og:image" content="http://www.nephen.cn/images/LLL.png">
+<meta property="og:image" content="http://www.nephen.cn/images/3r.png">
+<meta property="og:image" content="http://www.nephen.cn/images/eqn3.png">
+<meta property="og:image" content="http://www.nephen.cn/images/eqn4.png">
+<meta property="og:image" content="http://www.nephen.cn/images/eqn5.png">
+<meta property="og:image" content="http://www.nephen.cn/images/eqn6.png">
+<meta property="og:image" content="http://www.nephen.cn/images/eqn7.png">
+<meta property="og:image" content="http://www.nephen.cn/images/eqn8.png">
+<meta property="og:image" content="http://www.nephen.cn/images/eqn9.png">
+<meta property="og:image" content="http://www.nephen.cn/images/eqn10.png">
+<meta property="og:image" content="http://www.nephen.cn/images/eqn11.png">
+<meta property="og:image" content="http://www.nephen.cn/images/eqn12.png">
 <meta property="og:image" content="http://www.starlino.com/wp-content/uploads/2011/11/clip_image0144_thumb.jpg">
-<meta property="og:image" content="http://nephen.cn/images/eqn13.png">
-<meta property="og:image" content="http://nephen.cn/images/eqn14.png">
-<meta property="og:image" content="http://nephen.cn/images/eqn15.png">
-<meta property="og:image" content="http://nephen.cn/images/eqn16.png">
-<meta property="og:image" content="http://nephen.cn/images/eqn17.png">
-<meta property="og:image" content="http://nephen.cn/images/eqn18.png">
-<meta property="og:image" content="http://nephen.cn/images/eqn19.png">
-<meta property="og:image" content="http://nephen.cn/images/eqn20.png">
-<meta property="og:image" content="http://nephen.cn/images/eqn21.png">
-<meta property="og:image" content="http://nephen.cn/images/ahrs.png">
-<meta property="og:image" content="http://nephen.cn/images/ek.png">
-<meta property="og:image" content="http://nephen.cn/images/ekfenable.png">
+<meta property="og:image" content="http://www.nephen.cn/images/eqn13.png">
+<meta property="og:image" content="http://www.nephen.cn/images/eqn14.png">
+<meta property="og:image" content="http://www.nephen.cn/images/eqn15.png">
+<meta property="og:image" content="http://www.nephen.cn/images/eqn16.png">
+<meta property="og:image" content="http://www.nephen.cn/images/eqn17.png">
+<meta property="og:image" content="http://www.nephen.cn/images/eqn18.png">
+<meta property="og:image" content="http://www.nephen.cn/images/eqn19.png">
+<meta property="og:image" content="http://www.nephen.cn/images/eqn20.png">
+<meta property="og:image" content="http://www.nephen.cn/images/eqn21.png">
+<meta property="og:image" content="http://www.nephen.cn/images/ahrs.png">
+<meta property="og:image" content="http://www.nephen.cn/images/ek.png">
+<meta property="og:image" content="http://www.nephen.cn/images/ekfenable.png">
 <meta property="og:image" content="http://ardupilot.org/dev/_images/Pixhawk_FTDICable_NSH.jpg">
-<meta property="og:image" content="http://nephen.cn/images/gcslog.png">
+<meta property="og:image" content="http://www.nephen.cn/images/gcslog.png">
 <meta property="og:updated_time" content="2018-11-23T01:38:49.387Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初学PX4之飞控算法">
@@ -178,7 +178,7 @@
 
 
 
-  <link rel="canonical" href="http://nephen.cn/2017/06/16/初学PX4之飞控算法/">
+  <link rel="canonical" href="http://www.nephen.cn/2017/06/16/初学PX4之飞控算法/">
 
 
 
@@ -353,7 +353,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://nephen.cn/2017/06/16/初学PX4之飞控算法/">
+    <link itemprop="mainEntityOfPage" href="http://www.nephen.cn/2017/06/16/初学PX4之飞控算法/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nephen">
@@ -858,7 +858,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://nephen.cn/2017/06/16/初学PX4之飞控算法/" title="初学PX4之飞控算法">http://nephen.cn/2017/06/16/初学PX4之飞控算法/</a>
+    <a href="http://www.nephen.cn/2017/06/16/初学PX4之飞控算法/" title="初学PX4之飞控算法">http://www.nephen.cn/2017/06/16/初学PX4之飞控算法/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
