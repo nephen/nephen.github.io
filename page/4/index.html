@@ -294,7 +294,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.nephen.cn/2017/06/16/初学PX4之大体构架/">
+    <link itemprop="mainEntityOfPage" href="http://www.nephen.cn/2017/06/16/ArduPilot之代码概述/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nephen">
@@ -313,7 +313,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/06/16/初学PX4之大体构架/" itemprop="url">初学PX4之大体构架</a></h1>
+                <a class="post-title-link" href="/2017/06/16/ArduPilot之代码概述/" itemprop="url">ArduPilot之代码概述</a></h1>
         
 
         <div class="post-meta">
@@ -378,8 +378,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/06/16/初学PX4之大体构架/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2017/06/16/初学PX4之大体构架/" itemprop="commentCount"></span>
+                <a href="/2017/06/16/ArduPilot之代码概述/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2017/06/16/ArduPilot之代码概述/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -409,215 +409,29 @@
       
         
           
-          PX4源代码PX4项目建立在这些主要软件模块:
+          代码调用关系可使用doxygen工具，cmake中使用doxygen，总体的代码结果图如下：具体可参考APM飞控浅析
 
-PX4 Flight Stack (estimation and control, cross-platform)
-PX4 Middleware (IPC / ORB, *nix (NuttX, Linux, MacOS, etc))
-PX4 ESC Firmware (for motor controllers)
-PX4 Bootloader (for STM32 boards)
-Operating System (NuttX or Linux/Mac OS)
+ArduPilot编程库这些库是和Copter, Plane and Rover共享的，具体的库及功能可见原文。
 
-项目地址：
+核心库
+AP_AHRS —— 使用DCM或扩展卡尔曼滤波姿态估计
+AP_Common —— 所有草图和库所需要的核心包括
+AP_math —— 各种数学函数尤其对向量操作有用
+AC_PID —— PID控制器库
+AP_InertialNav —— 惯性导航库，用于融合加速度计、gps和气压计的数据输入
+AC_AttitudeControl —— 姿态控制库
+AP_WPNav —— 航点导航库
+AP_Motors —— 多轴和传统的直升机电机混合
+RC_Channel —— 这个库将更多的转换为PWM输入/输出，将来自APM_RC的数据转换为内部单位，如角度
+AP_HAL, AP_HAL_AVR, AP_HAL_PX4 —— 这库实现“硬件抽象层”，这向高级别代码提供了一个相同的接口，以便它可更容易地移植到不同的板
 
-PX4 Firmware source
 
-PX4飞行栈
-PX4飞行栈能控制多轴飞行器，航模，直升机，实验飞机和地面车辆的飞行。它由一组单独的应用程序/节点组成。
-
-flight control modules
-
-PX4中间件
-PX4中间件提供了硬件接口和进程间通信。
-
-drivers
-uORB
-
-PX4电调固件
-PX4电调固件控制无刷电机，可以通过UAV CAN进行交互。
-
-PX4 ESC source
-
-PX4 Bootloader
-PX4引导装载程序是用于S
+传感器库
+AP_InertialSe
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/06/16/初学PX4之大体构架/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.nephen.cn/2017/06/16/linux下sublime-text-2使用技巧/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nephen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="来风的官方网站">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/06/16/linux下sublime-text-2使用技巧/" itemprop="url">linux下sublime text 2使用技巧</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-16T07:43:37+08:00">
-                2017-06-16
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-23T09:38:49+08:00">
-                2018-11-23
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/工具/" itemprop="url" rel="index">
-                    <span itemprop="name">工具</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/06/16/linux下sublime-text-2使用技巧/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2017/06/16/linux下sublime-text-2使用技巧/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          由于sublime的多平台性，以及也有很多强悍的插件可供使用，是我不得不将兴趣移植这个编辑器上面来。将查看代码而言，在linux下也可以通过wine安装sourceinsight，但是对于安装跟使用来说不是很方便，特别是有git项目的时候。
-
-安装首先下载安装文件。将下载好的文件解压至/opt，然后创建链接文件。
-1$ ln -s /opt/Sublime\ Text\ 2/sublime_text /usr/bin/
-下面解决不能输入中文的问题保存下面的代码到文件sublime_imfix.c(位于~目录，即主文件夹目录)
-12345678910111213141516171819202122#include &lt;gtk/gtkimcontext.h&gt;void gtk_im_context_set_client_window (GtkIMContext *context,         GdkWindow    *window)&#123; GtkIMContextClass *klass; g_return_if_fail (GTK_IS_IM_CONTEXT (con
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/06/16/linux下sublime-text-2使用技巧/#more" rel="contents">
+            <a class="btn" href="/2017/06/16/ArduPilot之代码概述/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -843,7 +657,7 @@ PX4引导装载程序是用于S
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.nephen.cn/2017/06/16/BLE核心模块FS-QN9021模块开发-linux版/">
+    <link itemprop="mainEntityOfPage" href="http://www.nephen.cn/2017/06/16/linux下sublime-text-2使用技巧/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nephen">
@@ -862,7 +676,7 @@ PX4引导装载程序是用于S
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/06/16/BLE核心模块FS-QN9021模块开发-linux版/" itemprop="url">BLE核心模块FS-QN9021模块开发-linux版</a></h1>
+                <a class="post-title-link" href="/2017/06/16/linux下sublime-text-2使用技巧/" itemprop="url">linux下sublime text 2使用技巧</a></h1>
         
 
         <div class="post-meta">
@@ -897,6 +711,28 @@ PX4引导装载程序是用于S
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/工具/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -905,8 +741,8 @@ PX4引导装载程序是用于S
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/06/16/BLE核心模块FS-QN9021模块开发-linux版/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2017/06/16/BLE核心模块FS-QN9021模块开发-linux版/" itemprop="commentCount"></span>
+                <a href="/2017/06/16/linux下sublime-text-2使用技巧/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2017/06/16/linux下sublime-text-2使用技巧/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -936,18 +772,16 @@ PX4引导装载程序是用于S
       
         
           
-          这段时间又参与了一个新的小项目，简单概括为蓝牙、智能、家居吧，虽然时间有点紧，还是希望能把这一些东西记录下来。
+          由于sublime的多平台性，以及也有很多强悍的插件可供使用，是我不得不将兴趣移植这个编辑器上面来。将查看代码而言，在linux下也可以通过wine安装sourceinsight，但是对于安装跟使用来说不是很方便，特别是有git项目的时候。
 
-BLE什么是BLE？参考这篇文章做如下总结。中文名称为蓝牙低功耗。主要特点为低成本、超低功耗、短距离、标准接口和可互操作性强，并且工作在免许可的2.4GHz ISM射频段，需要支持蓝牙4.0（系统为Android4.3及以上）的主机设备才能与其连接。    
-目前生产BLE芯片的厂家主要有CSR、TI、Nodic和NXP（QN902x），各个厂家芯片对比如下图
-
-从如上图对比可以看出，NXP的QN902x在功耗方面比CSR和TI更省电，在接收灵敏度和模式方面比Nodic的胜一筹，它的从设备相比其它几家可以连接的更多，共有8个，这也算是蓝牙4.0的一大特色吧，并且NXP的芯片已经过了MFI认证，直接能与苹果设备相连接，因为这种认证也是挺贵的。    
-因为BLE的低功耗、低成本及强大的处理能力，并且随着iPhone的设备支持蓝牙4.0，BLE的终端设备在我们的生活当中将会越来越多，在未来将会有爆发式增长。
-QN902X是一款内核为M0的蓝牙BLE SOC芯片，其SDK对蓝牙B
+安装首先下载安装文件。将下载好的文件解压至/opt，然后创建链接文件。
+1$ ln -s /opt/Sublime\ Text\ 2/sublime_text /usr/bin/
+下面解决不能输入中文的问题保存下面的代码到文件sublime_imfix.c(位于~目录，即主文件夹目录)
+12345678910111213141516171819202122#include &lt;gtk/gtkimcontext.h&gt;void gtk_im_context_set_client_window (GtkIMContext *context,         GdkWindow    *window)&#123; GtkIMContextClass *klass; g_return_if_fail (GTK_IS_IM_CONTEXT (con
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/06/16/BLE核心模块FS-QN9021模块开发-linux版/#more" rel="contents">
+            <a class="btn" href="/2017/06/16/linux下sublime-text-2使用技巧/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -998,7 +832,7 @@ QN902X是一款内核为M0的蓝牙BLE SOC芯片，其SDK对蓝牙B
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.nephen.cn/2017/06/16/ArduPilot之代码概述/">
+    <link itemprop="mainEntityOfPage" href="http://www.nephen.cn/2017/06/16/pixhawk试飞报告/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nephen">
@@ -1017,7 +851,7 @@ QN902X是一款内核为M0的蓝牙BLE SOC芯片，其SDK对蓝牙B
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/06/16/ArduPilot之代码概述/" itemprop="url">ArduPilot之代码概述</a></h1>
+                <a class="post-title-link" href="/2017/06/16/pixhawk试飞报告/" itemprop="url">pixhawk试飞报告</a></h1>
         
 
         <div class="post-meta">
@@ -1082,8 +916,8 @@ QN902X是一款内核为M0的蓝牙BLE SOC芯片，其SDK对蓝牙B
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/06/16/ArduPilot之代码概述/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2017/06/16/ArduPilot之代码概述/" itemprop="commentCount"></span>
+                <a href="/2017/06/16/pixhawk试飞报告/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2017/06/16/pixhawk试飞报告/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1113,29 +947,198 @@ QN902X是一款内核为M0的蓝牙BLE SOC芯片，其SDK对蓝牙B
       
         
           
-          代码调用关系可使用doxygen工具，cmake中使用doxygen，总体的代码结果图如下：具体可参考APM飞控浅析
+          本文将一个新手学习px4入门，装机，PID调节过程，以及试飞注意事项陈述如下：
 
-ArduPilot编程库这些库是和Copter, Plane and Rover共享的，具体的库及功能可见原文。
+器件准备硬件一套，包括DJI F450机架、Pixhawk 2.4.6 mini飞控、好盈乐天20A电调、1045正反桨、银燕电机2216、天地飞6通道遥控器。详情见淘宝链接里的套餐方案。
+这些是PX4自动驾驶仪的元件要求：   
 
-核心库
-AP_AHRS —— 使用DCM或扩展卡尔曼滤波姿态估计
-AP_Common —— 所有草图和库所需要的核心包括
-AP_math —— 各种数学函数尤其对向量操作有用
-AC_PID —— PID控制器库
-AP_InertialNav —— 惯性导航库，用于融合加速度计、gps和气压计的数据输入
-AC_AttitudeControl —— 姿态控制库
-AP_WPNav —— 航点导航库
-AP_Motors —— 多轴和传统的直升机电机混合
-RC_Channel —— 这个库将更多的转换为PWM输入/输出，将来自APM_RC的数据转换为内部单位，如角度
-AP_HAL, AP_HAL_AVR, AP_HAL_PX4 —— 这库实现“硬件抽象层”，这向高级别代码提供了一个相同的接口，以便它可更容易地移植到不同的板
+1x Pixhawk 或者 FMU + IO Kit (Pixhawk 和FMU + IO是一样的)
+1x u-blox GPS模块
+1x RC 接收器
+1x 无线数传
+多块3300 mAh LiPo电池，至少能提供25A/30A电流。最好是买几个相同的电池为了保持直升飞机更换电池的重量恒定。
 
 
-传感器库
-AP_InertialSe
+装机 这里有多达200页的超详细图文教程，一步一步教您装机，学不会都很难！ 更多查询EXUAV-mini测评报告产品介绍、产品开箱、飞控接线与安装、飞行测试（视频来源：EXUAV）如下
+         
+
+ pix4 mini主要装机图文概览（注：图片来源于模友之吧，如有不妥，请提出）： 
+ 前排插针   后排插针 蜂鸣器PM 电源电压电流计  PPM 转接板 安全开关 迷你OS
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/06/16/ArduPilot之代码概述/#more" rel="contents">
+            <a class="btn" href="/2017/06/16/pixhawk试飞报告/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.nephen.cn/2017/06/16/Moveit在ROS-Kinetic上的搭建与调试/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nephen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="来风的官方网站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/16/Moveit在ROS-Kinetic上的搭建与调试/" itemprop="url">Moveit在ROS Kinetic上的搭建与调试</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-16T07:43:37+08:00">
+                2017-06-16
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-23T09:38:49+08:00">
+                2018-11-23
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器人/" itemprop="url" rel="index">
+                    <span itemprop="name">机器人</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/06/16/Moveit在ROS-Kinetic上的搭建与调试/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2017/06/16/Moveit在ROS-Kinetic上的搭建与调试/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          环境搭建参考官网，注意这里需要采用Ubuntu15.10或者16.04。具体命令简写如下：
+123456789sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" &gt; /etc/apt/sources.list.d/ros-latest.list'sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116sudo apt-get updatesudo apt-get install ros-kinetic-desktop-fullsudo rosdep initrosdep updateecho "source /opt/ros/kinetic/setup.bash" &gt;&gt; ~/.bashrcsource ~/.bashrcsudo apt-get install python-rosin
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/06/16/Moveit在ROS-Kinetic上的搭建与调试/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1370,177 +1373,6 @@ CONFIG_FS_ROMFS 使能
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.nephen.cn/2016/04/27/也谈大一/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nephen">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="来风的官方网站">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/04/27/也谈大一/" itemprop="url">也谈大一</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-27T01:42:47+08:00">
-                2016-04-27
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-23T09:38:49+08:00">
-                2018-11-23
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/感悟/" itemprop="url" rel="index">
-                    <span itemprop="name">感悟</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/04/27/也谈大一/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2016/04/27/也谈大一/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          都回来这么多天时间了，也去做了一些事情，也有一些事情没去做。每次回来就是这样，在学校就想着在家要怎么的怎么的，在家里就时间一天一天过去了，结果没怎么着，我想这一方面的原因很多，最主要的是自制力的因素，这也是以后的生活要慢慢去做好的。其实这次写日记是预谋已久的，主要是想总结一下，大学一年以来的所得所想，确实在这一年中收获了许多，而且每次写日记我都会有新的体悟，我不想失去这次感悟的机会，我要从中厚积薄发，以后回头看来时的路也是一种美好，或许以后在迷茫中又找回了曾经的清醒。
-首先说说写日记吧，还记得以前的我老是喜欢一有事没事就发说说表明一下自己目前的心情，我现在也不知道这种习惯好不好，但我能清醒的意识到，一个成就一番大事业并取得事业上的成功的人，是应该耐得住寂寞的，况且当你取得成功时，别人看到的是你最光鲜的一面，或者也是当你取得成功时，别人才会慢慢去发觉你一路走过来的艰辛。是的，可以说道理就是这样，我们目前要做的就是好好把握时间，而没必要去花费一些时间在抱怨上，应该为了取得成功努力去走好每一步路，为自己走向成功做好铺垫。所以换了一种方式，我把心里所想所感悟的都写在日记里，因为有时候能找到一个
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/04/27/也谈大一/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.nephen.cn/2016/04/27/读哲学后感/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1713,7 +1545,7 @@ CONFIG_FS_ROMFS 使能
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.nephen.cn/2016/04/27/我的大二上学期/">
+    <link itemprop="mainEntityOfPage" href="http://www.nephen.cn/2016/04/27/祭奠即将逝去的大一/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nephen">
@@ -1732,7 +1564,7 @@ CONFIG_FS_ROMFS 使能
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/04/27/我的大二上学期/" itemprop="url">我的大二上学期</a></h1>
+                <a class="post-title-link" href="/2016/04/27/祭奠即将逝去的大一/" itemprop="url">祭奠即将逝去的大一</a></h1>
         
 
         <div class="post-meta">
@@ -1797,8 +1629,8 @@ CONFIG_FS_ROMFS 使能
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2016/04/27/我的大二上学期/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2016/04/27/我的大二上学期/" itemprop="commentCount"></span>
+                <a href="/2016/04/27/祭奠即将逝去的大一/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2016/04/27/祭奠即将逝去的大一/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1828,12 +1660,16 @@ CONFIG_FS_ROMFS 使能
       
         
           
-          这个学期已经结束了，回过头来想好好理清一下思绪，也不枉我即将逝去的青春年华，不管它是平淡无奇还是充满激情，未来的日子还很长，我知道它总是充满希望的，也许生命的快乐源于创造，不断去反省总结自己的过去，美好的未来掌控在自己的手中。
-总的看来，时间可过的真快，仿佛眨眼间一学期就过去了，可是回头看来我的感觉又是怎么样的呢，我又学了多少东西，有哪些收获，对下学期又有什么打算呢，面对这些问题，我能感觉到有些悲伤，因为我做的并不是很好，还有很多值得我改进的地方，我想好好总结一下自己觉得不好的地方。一、自我控制力不强，这是我这学期做得特别失败的一件事，来来回回多少次，必须得下苦功夫必才行。二、学习效率不高，这样的结果是，看起来是时间花了一大把，结果没能干成什么事。三、执行能力过低，直接导致信任度降低，这是我第一次干也是我做得还不到位的事情，必须想办法去改进它。四、情感遇到挫折，沟通做的不到位，以及涉及到各方各面的综合能力还亟待提高。五、发现问题解决问题能力不灵活，以前我过老是这们要求别人，现在才发现自己做的并不够，这里我是用了一个是否灵活，因为我发现有时候并不是你自己执行的力度不够，而是执行的方式根本
+          要想真正的有所成就，就必须学会付出，忍受失去，必须去投入大量的时间，有失必有得。
+每一个成功的人或者团队在达到成功之前难得有一段辛酸的过去，慢慢的要学会去奉献，而不是不停的索取，让自己慢慢地去感受，体验这个过程，也许也是一个成长的过程。
+大学我如果没进这基地，我也是想过去缀学的，确实在大学如果你不主动去学，就那点考试根本不能学到什么，何必浪费四年才去找工作，但进这基地总的来说，还是兴趣支撑了我，如果我没有兴趣，我就不会去发现这个基地，更不会进这个基地，的确这兴趣我也费了好大的劲，慢慢才发现的，进这基地后，我就一直的坚持，甚至哪天如果我失去了它我会感觉到空虚，人生失去了动力，不知道下一步要去干嘛，我觉得有句话总结的挺好的，梦想是你坚持了而感到幸福的事情，所以我现在我倍感幸福，我庆幸我在迷茫的大一找到了自己人生的方向。
+听学长们说了基地的大小年，我这一届恰好逢大年，所以带点迷信的想法我们必须去努力，甚至超过学长他们，从另外一个角度讲，基地也要一年比一年强，慢慢的越不越强大，这一直都是我们最希望的。
+这一天，你成功地感染到了我，不久以后我就要不断地去影响他人，改变他人，传播好情绪，好思想。
+
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/04/27/我的大二上学期/#more" rel="contents">
+            <a class="btn" href="/2016/04/27/祭奠即将逝去的大一/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2011,6 +1847,177 @@ CONFIG_FS_ROMFS 使能
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2016/04/27/疯狂后的冬天/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.nephen.cn/2016/04/27/我的大二上学期/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nephen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="来风的官方网站">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/04/27/我的大二上学期/" itemprop="url">我的大二上学期</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-27T01:42:47+08:00">
+                2016-04-27
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-23T09:38:49+08:00">
+                2018-11-23
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/感悟/" itemprop="url" rel="index">
+                    <span itemprop="name">感悟</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/04/27/我的大二上学期/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2016/04/27/我的大二上学期/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          这个学期已经结束了，回过头来想好好理清一下思绪，也不枉我即将逝去的青春年华，不管它是平淡无奇还是充满激情，未来的日子还很长，我知道它总是充满希望的，也许生命的快乐源于创造，不断去反省总结自己的过去，美好的未来掌控在自己的手中。
+总的看来，时间可过的真快，仿佛眨眼间一学期就过去了，可是回头看来我的感觉又是怎么样的呢，我又学了多少东西，有哪些收获，对下学期又有什么打算呢，面对这些问题，我能感觉到有些悲伤，因为我做的并不是很好，还有很多值得我改进的地方，我想好好总结一下自己觉得不好的地方。一、自我控制力不强，这是我这学期做得特别失败的一件事，来来回回多少次，必须得下苦功夫必才行。二、学习效率不高，这样的结果是，看起来是时间花了一大把，结果没能干成什么事。三、执行能力过低，直接导致信任度降低，这是我第一次干也是我做得还不到位的事情，必须想办法去改进它。四、情感遇到挫折，沟通做的不到位，以及涉及到各方各面的综合能力还亟待提高。五、发现问题解决问题能力不灵活，以前我过老是这们要求别人，现在才发现自己做的并不够，这里我是用了一个是否灵活，因为我发现有时候并不是你自己执行的力度不够，而是执行的方式根本
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/04/27/我的大二上学期/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
